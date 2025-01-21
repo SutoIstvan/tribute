@@ -4,7 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,5 +33,25 @@ Route::get('/auth/google/callback', function (Request $request) {
     dd($request);
     $user = Socialite::driver('google')->user();
  
-    // $user->token
+    try {
+        $googleUser = Socialite::driver('google')->user();
+
+        $user = User::updateOrCreate(
+            [
+                'email' => $googleUser->getEmail(),
+            ],
+            [
+                'name' => $googleUser->getName(),
+                'google_id' => $googleUser->getId(),
+                'password' => bcrypt('google'),
+                'email_verified_at' => now()
+            ]
+        );
+
+        Auth::login($user);
+
+        return redirect()->route('home');
+    } catch (\Exception $e) {
+        return redirect()->route('login')->withErrors(['error' => 'Failed to sign in with Google']);
+    }
 });
