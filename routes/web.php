@@ -30,7 +30,7 @@ Route::get('/auth/google/redirect', function (Request $request) {
 });
  
 Route::get('/auth/google/callback', function (Request $request) {
-    dd($request);
+    // dd($request);
     $user = Socialite::driver('google')->user();
  
     try {
