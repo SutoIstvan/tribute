@@ -1,1 +1,1 @@
-<img src="/scan-qr-code.png" alt="">
+<img src="/scan-qr-code.png" width="23" alt="">
