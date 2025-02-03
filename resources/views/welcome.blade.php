@@ -62,7 +62,7 @@
 
 
                     <main class="mt-6">
-                        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(256)->merge('/public/scan-qr-code.png', .4)->generate('https://google.com')) !!} ">
+                        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(256)->merge('/public/scan-qr-code.png', 1.4)->generate('https://google.com')) !!} ">
 
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                             <a
