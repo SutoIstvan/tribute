@@ -26,6 +26,8 @@ Route::get('/dashboard', function () {
 // Route::get('/memorial/attach/{token}', [QrCodeController::class, 'showAttachForm']);
 // Route::post('/memorial/attach', [QrCodeController::class, 'attach']);
 
+Route::get('/memorials', [MemorialController::class, 'showall'])->name('memorial.showall');
+
 Route::get('/memorial/{id}', [MemorialController::class, 'show'])->name('memorial.show');
 
 Route::get('/memorial/attach/{token}', [QrCodeController::class, 'showAttachForm'])->name('memorial.attach.form');
