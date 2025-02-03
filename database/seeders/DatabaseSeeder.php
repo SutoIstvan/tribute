@@ -3,8 +3,8 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use App\Models\QrCodes;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DatabaseSeeder extends Seeder
 {
