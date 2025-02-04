@@ -62,6 +62,24 @@
 
 
                     <main class="mt-6">
+
+                        <div style="position: relative; display: inline-block;">
+                            {{-- Сначала рамка --}}
+                            <img src="{{ asset('png.png') }}" style="width: 300px; height: 300px;">
+                            
+                            {{-- QR-код поверх рамки --}}
+                            <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')
+                                ->size(256)
+                                ->merge('/public/scan-qr-code.png', 0.5)
+                                ->margin(10)
+                                ->generate('https://google.com')) !!}" 
+                                style="position: absolute; 
+                                       top: 50%; 
+                                       left: 50%; 
+                                       transform: translate(-50%, -50%);
+                                       width: 256px;">
+                        </div>
+
                         <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(256)->merge('/public/scan-qr-code.png', 0.5)->margin(10)->generate('https://google.com')) !!} ">
 
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
