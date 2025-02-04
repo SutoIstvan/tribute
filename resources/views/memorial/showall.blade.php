@@ -63,7 +63,7 @@
 
                 <form action="{{ route('run.seed') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-primary mt-2">DB Seed</button>
+                    <button type="submit" class="btn btn-primary mt-2">Generate 10 qr code - DB Seed</button>
                 </form>
             </div>
         </div>
