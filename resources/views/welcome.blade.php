@@ -64,31 +64,31 @@
                     <main class="mt-6">
 
                         @php
-
-use Intervention\Image\Facades\Image;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
-// Генерируем QR-код
-$qrCode = QrCode::format('png')
-    ->size(256)
-    ->merge('/public/scan-qr-code.png', 0.5)
-    ->margin(10)
-    ->generate('https://google.com');
-
-// Создаем изображение из QR-кода
-$qrImage = Image::make($qrCode);
-
-// Загружаем рамку
-$frameImage = Image::make(public_path('png.png'));
-
-// Вставляем QR-код в центр рамки
-$frameImage->insert($qrImage, 'center');
-
-// Конвертируем в base64
-$combinedImage = base64_encode($frameImage->encode('png'));
-@endphp
-
-<img src="data:image/png;base64, {{ $combinedImage }}">
+                        // Генерируем QR-код
+                        $qrCode = QrCode::format('png')
+                            ->size(256)
+                            ->merge('/public/scan-qr-code.png', 0.5)
+                            ->margin(10)
+                            ->generate('https://google.com');
+                        
+                        // Создаем новый объект Imagick
+                        $image = new Imagick();
+                        $image->readImageBlob($qrCode);
+                        
+                        // Создаем фоновое изображение с рамкой
+                        $background = new Imagick(public_path('images/frame.png'));
+                        
+                        // Центрируем QR-код на фоне
+                        $background->compositeImage($image, Imagick::COMPOSITE_DEFAULT, 
+                            ($background->getImageWidth() - $image->getImageWidth()) / 2,
+                            ($background->getImageHeight() - $image->getImageHeight()) / 2
+                        );
+                        
+                        // Конвертируем в base64
+                        $combinedImage = base64_encode($background->getImageBlob());
+                        @endphp
+                        
+                        <img src="data:image/png;base64, {{ $combinedImage }}">
 
                         <div style="position: relative; display: inline-block;">
                             {{-- Сначала рамка --}}
