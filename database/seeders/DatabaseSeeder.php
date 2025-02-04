@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             // Настраиваем параметры текста
             $draw = new ImagickDraw();
             $draw->setFontSize(20);
-            $draw->setFontWeight(400);
+            $draw->setFontWeight(500);
             $draw->setGravity(Imagick::GRAVITY_SOUTH);
             $draw->setFillColor(new ImagickPixel('#000000'));
 
