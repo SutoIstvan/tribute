@@ -31,16 +31,16 @@ Route::post('/run-seed', function () {
     return back()->with('success', 'Add 10 qr code!');
 })->name('run.seed');
 
-// Route::get('/memorial/{id}', [MemorialController::class, 'show']);
-// Route::get('/memorial/attach/{token}', [QrCodeController::class, 'showAttachForm']);
-// Route::post('/memorial/attach', [QrCodeController::class, 'attach']);
 
 Route::get('/memorials', [MemorialController::class, 'showall'])->name('memorial.showall');
 
 Route::get('/memorial/{id}', [MemorialController::class, 'show'])->name('memorial.show');
 
-Route::get('/memorial/attach/{token}', [QrCodeController::class, 'showAttachForm'])->name('memorial.attach.form');
-Route::post('/memorial/attach', [QrCodeController::class, 'attach'])->name('memorial.attach');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/memorial/attach/{token}', [QrCodeController::class, 'showAttachForm'])->name('memorial.attach.form');
+    Route::post('/memorial/attach', [QrCodeController::class, 'attach'])->name('memorial.attach');
+});
 
 
 Route::middleware('auth')->group(function () {
