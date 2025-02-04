@@ -12,7 +12,6 @@ use App\Http\Controllers\QrCodeController;
 use App\Models\QrCodes;
 use Illuminate\Support\Facades\Artisan;
 
-use ZipArchive;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 
@@ -95,8 +94,8 @@ Route::post('/download/bulk', function (Request $request) {
 
     $zipFileName = 'qrcodes_' . time() . '.zip';
     $zipPath = storage_path("app/public/{$zipFileName}");
+    $zip = new \ZipArchive;
 
-    $zip = new ZipArchive;
     if ($zip->open($zipPath, ZipArchive::CREATE) === true) {
         foreach ($memorials as $memorial) {
             $filePath = storage_path("app/public/{$memorial->qr_code}");
