@@ -6,11 +6,15 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+// use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\MemorialController;
 use App\Http\Controllers\QrCodeController;
-
+use App\Models\QrCodes;
 use Illuminate\Support\Facades\Artisan;
+
+use ZipArchive;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 
 Route::get('/', function () {
@@ -25,7 +29,7 @@ Route::get('/dashboard', function () {
 
 Route::post('/run-seed', function () {
     Artisan::call('db:seed');
-    return back()->with('success', 'База данных успешно заполнена!');
+    return back()->with('success', 'Add 10 qr code!');
 })->name('run.seed');
 
 // Route::get('/memorial/{id}', [MemorialController::class, 'show']);
@@ -80,3 +84,33 @@ Route::get('/auth/google/callback', function (Request $request) {
         return redirect()->route('login')->withErrors(['error' => 'Failed to sign in with Google']);
     }
 });
+
+
+Route::post('/download/bulk', function (Request $request) {
+    $memorials = QrCodes::whereIn('id', $request->ids)->get();
+
+    if ($memorials->isEmpty()) {
+        return back()->with('error', 'Файлы не найдены');
+    }
+
+    $zipFileName = 'qrcodes_' . time() . '.zip';
+    $zipPath = storage_path("app/public/{$zipFileName}");
+
+    $zip = new ZipArchive;
+    if ($zip->open($zipPath, ZipArchive::CREATE) === true) {
+        foreach ($memorials as $memorial) {
+            $filePath = storage_path("app/public/{$memorial->qr_code}");
+            if (file_exists($filePath)) {
+                $zip->addFile($filePath, basename($filePath));
+            }
+        }
+        $zip->close();
+    } else {
+        return back()->with('error', 'Не удалось создать архив');
+    }
+
+    // Обновляем статус файлов
+    QrCodes::whereIn('id', $request->ids)->update(['status' => 'downloaded']);
+
+    return Response::download($zipPath)->deleteFileAfterSend(true);
+})->name('download.bulk');

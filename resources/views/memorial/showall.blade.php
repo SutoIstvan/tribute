@@ -19,60 +19,40 @@
 
         <div class="card">
             <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">Qr code list {{ count($memorials) }}</h4>
+                <h4 class="mb-0">Qr code list - Qty:{{ count($memorials) }}</h4>
             </div>
             <div class="card-body">
-                <form id="memorials-form" action="" method="POST">
+                <form action="{{ route('download.bulk') }}" method="POST">
                     @csrf
-
-                    <table class="table table-bordered table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>
-                                    <input type="checkbox" id="select-all">
-                                </th>
-                                <th>#</th>
-                                <th>QR-код</th>
-                                <th>Token</th>
-                                <th>Memorial ID</th>
-                                <th>Status</th>
-                                <th>Download</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($memorials as $index => $memorial)
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="selected[]" value="{{ $memorial->id }}"
-                                            class="select-checkbox">
-                                    </td>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>
-                                        <img src="{{ asset('storage/' . $memorial->qr_code) }}" height="100"
-                                            alt="QR Code">
-                                    </td>
-                                    <td>{{ $memorial->token }}</td>
-                                    <td>{{ $memorial->memorial_id }}</td>
-                                    <td>{{ $memorial->status }}</td>
-                                    <td>
-                                        <a href="{{ asset('storage/' . $memorial->qr_code) }}" download
-                                            class="btn btn-success btn-sm">
-                                            Download
-                                        </a>
-
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-                    <button type="submit" class="btn btn-danger mt-2">
-                        Download All
-                    </button>
-
-
-
+                    <div class="container mt-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" id="select-all"></th>
+                                            <th>QR Code</th>
+                                            <th>Token</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($memorials as $memorial)
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="ids[]" value="{{ $memorial->id }}" class="select-checkbox">
+                                                </td>
+                                                <td><img src="{{ asset('storage/' . $memorial->qr_code) }}" height="50"></td>
+                                                <td>{{ $memorial->token }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-primary mt-3">Скачать выбранные</button>
+                            </div>
+                        </div>
+                    </div>
                 </form>
+                
 
                 <form action="{{ route('run.seed') }}" method="POST">
                     @csrf
