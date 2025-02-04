@@ -1,77 +1,82 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
-use App\Models\QrCodes;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Intervention\Image\Facades\Image;
+use App\Models\QrCodes;
+use Imagick;
+use ImagickDraw;
+use ImagickPixel;
 
-
-class DatabaseSeeder extends Seeder
+class QrCodeSeeder extends Seeder
 {
     public function run()
     {
+        // Убедимся, что директория существует
+        Storage::disk('public')->makeDirectory('qrcodes');
+
         for ($i = 0; $i < 10; $i++) {
-
-            // $token = Str::random(12); // Генерируем уникальный токен
-
+            // Генерируем 12-значный номер с ведущими нулями
             $token = str_pad(rand(0, 999999999999), 12, '0', STR_PAD_LEFT);
 
-            // Создаем запись в базе данных
+            // Создаем запись в БД
             $qrCode = QrCodes::create([
                 'token' => $token
             ]);
 
-            // Генерируем QR-код
-            $qrImage = QrCode::format('svg')
-                ->size(300)
+            // Генерируем QR-код с логотипом
+            $qrImage = QrCode::format('png')
+                ->size(340)
+                ->merge('/public/scan-qr-code2.png', 0.3)
+                ->margin(1)
                 ->generate(url("/memorial/attach/$token"));
 
-            // Сохраняем QR-код в хранилище
-            $filePath = "qrcodes/{$token}.svg";
-            Storage::disk('public')->put($filePath, $qrImage);
+            // Создаем объект Imagick для QR-кода
+            $image = new Imagick();
+            $image->readImageBlob($qrImage);
 
-            // Можно добавить поле `qr_path` в БД, если хочешь хранить путь
+            // Загружаем фоновое изображение
+            $background = new Imagick(public_path('png.png'));
+
+            // Центрируем QR-код на фоне
+            $background->compositeImage(
+                $image, 
+                Imagick::COMPOSITE_DEFAULT,
+                ($background->getImageWidth() - $image->getImageWidth()) / 2,
+                ($background->getImageHeight() - $image->getImageHeight()) / 2
+            );
+
+            // Настраиваем параметры текста
+            $draw = new ImagickDraw();
+            $draw->setFontSize(20);
+            $draw->setFontWeight(400);
+            $draw->setGravity(Imagick::GRAVITY_SOUTH);
+            $draw->setFillColor(new ImagickPixel('#000000'));
+
+            // Добавляем токен как текст внизу изображения
+            $background->annotateImage(
+                $draw,
+                0,    // x
+                10,   // y - отступ от нижнего края
+                0,    // угол
+                $token // текст (токен)
+            );
+
+            // Сохраняем готовое изображение
+            $filePath = "qrcodes/{$token}.png";
+            Storage::disk('public')->put(
+                $filePath, 
+                $background->getImageBlob()
+            );
+
+            // Обновляем запись в БД с путем к файлу
             $qrCode->update(['qr_code' => $filePath]);
+
+            // Очищаем память
+            $image->clear();
+            $background->clear();
         }
-
-
-
-        // for ($i = 0; $i < 10; $i++) {
-        //     $token = str_pad(rand(0, 999999999999), 12, '0', STR_PAD_LEFT);
-
-        //     // Создаем запись в базе данных
-        //     $qrCode = QrCodes::create([
-        //         'token' => $token
-        //     ]);
-
-        //     // Генерируем QR-код
-        //     $qrCodeImage = QrCode::format('png')
-        //         ->size(300)
-        //         ->generate(url("/memorial/attach/$token"));
-
-        //     // Загружаем рамку
-        //     $frameImage = Image::make(public_path('images/frame.png'));
-
-        //     // Создаем холст размером с рамку
-        //     $image = Image::make($frameImage);
-
-        //     // Вставляем QR-код поверх рамки
-        //     $qrCodeImageObj = Image::make($qrCodeImage);
-        //     $image->insert(
-        //         $qrCodeImageObj, 
-        //         'center', 
-        //         0, 
-        //         50  // Отступ сверху, чтобы QR-код был в нужном месте рамки
-        //     );
-
-        //     // Сохраняем изображение
-        //     $filePath = "qrcodes/{$token}.png";
-        //     $image->save(storage_path("app/public/{$filePath}"));
-
-        //     // Обновляем путь в базе данных
-        //     $qrCode->update(['qr_code' => $filePath]);
-        // }
     }
 }
