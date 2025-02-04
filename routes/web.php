@@ -10,6 +10,9 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\MemorialController;
 use App\Http\Controllers\QrCodeController;
 
+use Illuminate\Support\Facades\Artisan;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,7 +23,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-
+Route::post('/run-seed', function () {
+    Artisan::call('db:seed');
+    return back()->with('success', 'База данных успешно заполнена!');
+})->name('run.seed');
 
 // Route::get('/memorial/{id}', [MemorialController::class, 'show']);
 // Route::get('/memorial/attach/{token}', [QrCodeController::class, 'showAttachForm']);
