@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
             $background->annotateImage(
                 $draw,
                 0,    // x
-                10,   // y - отступ от нижнего края
+                8,   // y - отступ от нижнего края
                 0,    // угол
                 $token // текст (токен)
             );
