@@ -46,7 +46,7 @@
                                                             value="{{ $memorial->id }}" class="select-checkbox">
                                                     </td>
                                                     <td><img src="{{ asset('storage/' . $memorial->qr_code) }}"
-                                                            height="50"></td>
+                                                            height="150"></td>
                                                     <td>{{ $memorial->token }}</td>
                                                     <td>{{ $memorial->status }}</td>
                                                 </tr>
