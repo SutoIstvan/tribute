@@ -63,6 +63,51 @@
 
                     <main class="mt-6">
 
+
+                        @php
+// Генерируем QR-код
+$qrCode = QrCode::format('png')
+    ->size(256)
+    ->merge('/public/scan-qr-code2.png', 0.3)
+    ->margin(10)
+    ->generate('https://google.com');
+
+// Создаем новый объект Imagick
+$image = new Imagick();
+$image->readImageBlob($qrCode);
+
+// Создаем фоновое изображение
+$background = new Imagick(public_path('png.png'));
+
+// Центрируем QR-код на фоне
+$background->compositeImage($image, Imagick::COMPOSITE_DEFAULT, 
+    ($background->getImageWidth() - $image->getImageWidth()) / 2,
+    ($background->getImageHeight() - $image->getImageHeight()) / 2
+);
+
+// Добавляем текст
+$draw = new ImagickDraw();
+$draw->setFontSize(20);
+$draw->setFontWeight(400);
+$draw->setGravity(Imagick::GRAVITY_SOUTH); // Текст внизу
+$draw->setFillColor(new ImagickPixel('#000000')); // Черный цвет
+
+// Добавляем текст внизу изображения
+$background->annotateImage($draw, 
+    0, // x
+    40, // y - отступ от нижнего края
+    0,  // угол
+    '123456789' // текст
+);
+
+// Конвертируем в base64
+$combinedImage = base64_encode($background->getImageBlob());
+@endphp
+
+<img src="data:image/png;base64, {{ $combinedImage }}">
+
+
+
                         @php
                         // Генерируем QR-код
                         $qrCode = QrCode::format('png')
