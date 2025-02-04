@@ -54,7 +54,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <button type="submit" class="btn btn-primary mt-3">Скачать выбранные</button>
+                                <button type="submit" class="btn btn-primary mt-3">Download select qr code</button>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
 
                 <form action="{{ route('run.seed') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-primary">DB Seed</button>
+                    <button type="submit" class="btn btn-primary mt-2">DB Seed</button>
                 </form>
             </div>
         </div>
