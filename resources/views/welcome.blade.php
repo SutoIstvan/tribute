@@ -63,6 +63,29 @@
 
                     <main class="mt-6">
 
+                        @php
+// Генерируем QR-код
+$qrCode = QrCode::format('png')
+    ->size(256)
+    ->merge('/public/scan-qr-code.png', 0.5)
+    ->margin(10)
+    ->generate('https://google.com');
+
+// Создаем изображение из QR-кода
+$qrImage = Image::make($qrCode);
+
+// Загружаем рамку
+$frameImage = Image::make(public_path('png.png'));
+
+// Вставляем QR-код в центр рамки
+$frameImage->insert($qrImage, 'center');
+
+// Конвертируем в base64
+$combinedImage = base64_encode($frameImage->encode('png'));
+@endphp
+
+<img src="data:image/png;base64, {{ $combinedImage }}">
+
                         <div style="position: relative; display: inline-block;">
                             {{-- Сначала рамка --}}
                             <img src="{{ asset('png.png') }}" style="width: 300px; height: 300px;">
