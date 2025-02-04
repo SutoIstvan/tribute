@@ -76,7 +76,7 @@
                         $image->readImageBlob($qrCode);
                         
                         // Создаем фоновое изображение с рамкой
-                        $background = new Imagick(public_path('images/frame.png'));
+                        $background = new Imagick(public_path('png.png'));
                         
                         // Центрируем QR-код на фоне
                         $background->compositeImage($image, Imagick::COMPOSITE_DEFAULT, 
