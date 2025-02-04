@@ -10,7 +10,7 @@ use Imagick;
 use ImagickDraw;
 use ImagickPixel;
 
-class QrCodeSeeder extends Seeder
+class DatabaseSeeder extends Seeder
 {
     public function run()
     {
