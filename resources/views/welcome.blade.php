@@ -66,9 +66,9 @@
                         @php
                         // Генерируем QR-код
                         $qrCode = QrCode::format('png')
-                            ->size(356)
-                            ->merge('/public/scan-qr-code.png', 0.3)
-                            ->margin(3)
+                            ->size(340)
+                            ->merge('/public/scan-qr-code.png', 0.2)
+                            ->margin(1)
                             ->generate('https://google.com');
                         
                         // Создаем новый объект Imagick
