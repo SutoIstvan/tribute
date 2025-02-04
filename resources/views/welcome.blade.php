@@ -67,7 +67,7 @@
                         // Генерируем QR-код
                         $qrCode = QrCode::format('png')
                             ->size(340)
-                            ->merge('/public/scan-qr-code.png', 0.2)
+                            ->merge('/public/scan-qr-code2.png', 0.2)
                             ->margin(1)
                             ->generate('https://google.com');
                         
