@@ -111,5 +111,7 @@ Route::post('/download/bulk', function (Request $request) {
     // Обновляем статус файлов
     QrCodes::whereIn('id', $request->ids)->update(['status' => 'downloaded']);
 
-    return Response::download($zipPath)->deleteFileAfterSend(true);
+    return redirect()->route('memorial.showall')->with('success', 'qr code download'); // Замените 'your.route.name' на нужный маршрут
+
+    // return Response::download($zipPath)->deleteFileAfterSend(true);
 })->name('download.bulk');

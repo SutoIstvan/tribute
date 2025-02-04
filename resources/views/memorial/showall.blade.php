@@ -74,42 +74,6 @@
             let checkboxes = document.querySelectorAll('.select-checkbox');
             checkboxes.forEach(checkbox => checkbox.checked = this.checked);
         });
-
-        document.getElementById('download-form').addEventListener('submit', function(event) {
-        // Отключаем кнопку, чтобы избежать повторной отправки
-        document.getElementById('download-button').disabled = true;
-        
-        // Начинаем загрузку
-        var form = this;
-        
-        // Используем Fetch API для отправки формы
-        fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                // Переход на страницу (или обновление)
-                location.reload(); // Обновляет страницу
-            } else {
-                // Обработка ошибки, если нужно
-                alert('Произошла ошибка при скачивании файлов.');
-                document.getElementById('download-button').disabled = false; // Включаем кнопку снова
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            alert('Произошла ошибка при скачивании файлов.');
-            document.getElementById('download-button').disabled = false; // Включаем кнопку снова
-        });
-        
-        // Отменяем стандартное поведение формы
-        event.preventDefault();
-    });
-    
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
