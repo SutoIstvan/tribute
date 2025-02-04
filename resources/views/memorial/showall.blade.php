@@ -38,15 +38,19 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($memorials as $memorial)
-                                            <tr>
-                                                <td>
-                                                    <input type="checkbox" name="ids[]" value="{{ $memorial->id }}" class="select-checkbox">
-                                                </td>
-                                                <td><img src="{{ asset('storage/' . $memorial->qr_code) }}" height="50"></td>
-                                                <td>{{ $memorial->token }}</td>
-                                                <td>{{ $memorial->status }}</td>
-
-                                            </tr>
+                                            @if ($memorial->status !== 'downloaded')
+                                                <!-- Проверяем статус -->
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="ids[]"
+                                                            value="{{ $memorial->id }}" class="select-checkbox">
+                                                    </td>
+                                                    <td><img src="{{ asset('storage/' . $memorial->qr_code) }}"
+                                                            height="50"></td>
+                                                    <td>{{ $memorial->token }}</td>
+                                                    <td>{{ $memorial->status }}</td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -55,7 +59,7 @@
                         </div>
                     </div>
                 </form>
-                
+
 
                 <form action="{{ route('run.seed') }}" method="POST">
                     @csrf
