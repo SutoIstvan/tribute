@@ -64,6 +64,10 @@
                     <main class="mt-6">
 
                         @php
+
+use Intervention\Image\Facades\Image;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 // Генерируем QR-код
 $qrCode = QrCode::format('png')
     ->size(256)
