@@ -33,6 +33,7 @@
                                             <th><input type="checkbox" id="select-all"></th>
                                             <th>QR Code</th>
                                             <th>Token</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,6 +44,8 @@
                                                 </td>
                                                 <td><img src="{{ asset('storage/' . $memorial->qr_code) }}" height="50"></td>
                                                 <td>{{ $memorial->token }}</td>
+                                                <td>{{ $memorial->status }}</td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
