@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-5">
                     <a href="#" class="logo md-mb80">
-                        Tribute Hub
+                        MBook.hu
                     </a>
                 </div>
                 <div class="col-lg-6">
@@ -59,7 +59,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="copy sub-color md-mb50">
-                        <p>© 2024 <a href="#0">TributeHub</a>. Minden jog fenntartva.</p>
+                        <p>© 2024 <a href="#0">MBook.hu</a>. Minden jog fenntartva.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 d-flex justify-content-end">

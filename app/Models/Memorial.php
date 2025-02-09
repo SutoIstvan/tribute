@@ -22,4 +22,9 @@ class Memorial extends Model
         'qr_code',
         'users',
     ];
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

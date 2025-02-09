@@ -1,4 +1,5 @@
-@extends('layouts.home')
+@extends('layouts.attach')
+
 @section('css')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -7,56 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
 
     <style>
-        /*
-        @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700,700i');
-
-
-        *,
-        *:before,
-        *:after {
-          margin: 0;
-          padding: 0;
-          word-break: break-all;
-          box-sizing: border-box;
-          scroll-behavior: smooth;
-        } */
-
-        /* html {
-          font-size: 10px;
-        } */
-
-        /* body {
-          font-family: 'Ubuntu', sans-serif;
-          color: #6e6e6e;
-          font-size: 1.6rem;
-          background: black;
-        } */
-
-        /* header,
-        footer {
-          display: block;
-        }
-
-        a,
-        a:link,
-        a:visited {
-          text-decoration: none;
-        }
-
-        img {
-          border: 0;
-        }
-
-        ul {
-          list-style: none;
-        } */
-
-        /* .center {
-          width: 1170px;
-          margin: 20px auto 0;
-        } */
-
-
         :before,
         :after {
             margin: 0;
@@ -67,19 +18,12 @@
         }
 
         .holder {
-            /* Вариант 1: Через background-image */
-            background-image: url('circle.png');
+            background-image: url('../../circle.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-
-            /* или Вариант 2: Можно использовать сокращенную запись */
-            /* background: url('путь_к_вашему_изображению.jpg') center/cover no-repeat; */
-
-            /* Добавьте размеры контейнера */
             width: 100%;
             height: 100vh;
-            /* На всю высоту viewport */
         }
 
         .holder {
@@ -99,7 +43,7 @@
         .candle {
             bottom: 243px;
             width: 150px;
-            background-image: url('circle.png');
+            /* background-image: url('circle.png'); */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -202,108 +146,40 @@
     </style>
 @endsection
 
-@section('title', 'Bejelentkezés - mbook.hu')
+@section('title', 'Adat mentés - mbook.hu')
 
 @section('content')
 
 
 
 
-    <div class="container">
-        <div class=" text-secondary text-center">
 
 
 
-            <div class="py-5">
-                <div class="d-flex justify-content-center">
-                    <div class="holder">
-                        <div class="candle">
-                            <div class="blinking-glow"></div>
-                            <div class="thread"></div>
-                            <div class="glow"></div>
-                            <div class="flame"></div>
-                        </div>
-                    </div>
-                </div>
-                <h4>
-                    <span class="sub-color inline">Köszönjük, hogy minket választott.</span>
-                </h4>
 
-                <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1>
-                <div class="col-lg-6 mx-auto">
-                    <p class="fs-5 mt-4 mb-4">
-                        Az alábbiakban rögzítheti az elhunyt adatait, amelyeket később bármikor módosíthat vagy kiegészíthet.
-                         Töltse fel a fő fotót és néhány emlékezetes fényképét.
-                    </p>
+
+
+
+    <div class="container mt-100 mb-50">
+
+        <!--Avatar-->
+        <div>
+            <div class="d-flex justify-content-center mt-100 mb-50">
+                <img id="selectedAvatar" src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                    class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;"
+                    alt="example placeholder" />
+            </div>
+            <div class="d-flex justify-content-center">
+                <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
+                    <label class="form-label text-white m-1" for="customFile2">Choose file</label>
+                    <input type="file" class="form-control d-none" id="customFile2"
+                        onchange="displaySelectedImage(event, 'selectedAvatar')" />
                 </div>
             </div>
         </div>
+
     </div>
 
-
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-
-
-            <div class="col-12 col-md-3 p-4">
-                <h3>Elhunyt adatai</h3>
-                <p class="mt-2">Kérjük, tüntesd fel a következő információkat: Teljes név, Születési dátum, Elhalálozás dátum.</p>
-            </div>
-
-            <div class="col-12 col-md-7 p-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="mb-35">
-                            <label for="fullName" class="form-label text-white">Teljes név</label>
-                            <input type="text" class="form-control bg-dark text-white border-secondary py-2"
-                                id="fullName" placeholder="Teljes név">
-                        </div>
-                        <div class="col-12 col-md-6 mb-3">
-                            <label for="birthDate" class="form-label text-white">Születési dátum</label>
-                            <input type="text" class="form-control bg-dark text-white border-secondary py-2 datepicker"
-                                id="birthDate" placeholder="00.00.0000">
-                        </div>
-                        <div class="col-12 col-md-6 mb-3">
-                            <label for="deathDate" class="form-label text-white">Elhalálozás dátuma</label>
-                            <input type="text" class="form-control bg-dark text-white border-secondary py-2"
-                                id="deathDate" placeholder="00.00.0000">
-                        </div>
-                        <div class="mt-30">
-                            <label for="memorial" class="form-label text-white">Emlékezés, tiszteletadás</label>
-                            <textarea class="form-control bg-dark text-white border-secondary" id="memorial" rows="3"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-    </div>
-
-
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-
-
-            <div class="col-12 col-md-3 p-4 mt-50">
-                <h3>Életrajz</h3>
-                <p class="mt-2">Oszd meg velünk kedves emlékeidet, a számára fontos pillanatokat vagy azt, amit szerettél benne a legjobban.</p>
-            </div>
-
-            <div class="col-12 col-md-7 p-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="mt-30">
-                            <label for="memorial" class="form-label text-white">Emlékezés, tiszteletadás</label>
-                            <textarea class="form-control bg-dark text-white border-secondary" id="memorial" rows="8"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
 
 
@@ -311,14 +187,16 @@
         <div class="row d-flex justify-content-center mt-4 mb-50">
             <div class="col-12 col-md-3 p-4">
                 <h3 class="text-white">Fényképek</h3>
-                <p class="mt-2 text-white-50">Töltsön fel néhány fényképet, később dátumot és további adatokat is megadhat.</p>
+                <p class="mt-2 text-white-50">Töltsön fel néhány fényképet, később dátumot és további adatokat is megadhat.
+                </p>
             </div>
 
             <div class="col-12 col-md-7 p-3 ">
                 <div class="container">
                     <div class="card bg-dark border-warning">
-                        <form method="post" action="{{url('images/store')}}" enctype="multipart/form-data"
+                        <form method="post" action="{{ url('images/store') }}" enctype="multipart/form-data"
                             class="dropzone bg-dark text-white" id="dropzone">
+                            <input name="id" type="hidden" value="{{ $id }}">
                             @csrf
                         </form>
                     </div>
@@ -331,11 +209,13 @@
     <div class="text-center mb-70">
         <a href="../inner_pages/about.html" class="butn butn-md butn-bord butn-rounded">
             <div class="d-flex align-items-center">
-                <span>Adatok mentése</span>
+                <span>Open memorial page</span>
                 <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
             </div>
         </a>
     </div>
+
+
 
     </html>
 
@@ -371,5 +251,21 @@
             dictRemoveFile: "Fájl törlése",
             dictMaxFilesExceeded: "Nem tölthetsz fel több fájlt.",
         };
+
+        function displaySelectedImage(event, elementId) {
+            const selectedImage = document.getElementById(elementId);
+            const fileInput = event.target;
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    selectedImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
     </script>
 @endsection

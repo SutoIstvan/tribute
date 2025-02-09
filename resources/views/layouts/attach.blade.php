@@ -75,7 +75,7 @@
 
     <!-- ==================== Start Navbar ==================== -->
 
-    @include('layouts.nav')
+    @include('layouts.navattach')
 
     <!-- ==================== End Navbar ==================== -->
 

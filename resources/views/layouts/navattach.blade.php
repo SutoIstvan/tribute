@@ -10,7 +10,7 @@
         </a>
 
         <!-- navbar links -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 300px;">
+        {{-- <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 300px;">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Címlap</a>
@@ -28,7 +28,7 @@
                     <a class="nav-link" href="#">Hozzászólások</a>
                 </li>
             </ul>
-        </div>
+        </div> --}}
         <div class="topnav d-flex align-items-center">
             @guest
                 {{-- Показываем только кнопку входа для гостей --}}
@@ -43,7 +43,7 @@
             @else
                 {{-- Показываем кнопки профиля и выхода для авторизованных пользователей --}}
                 <div class="text-end me-2">
-                    <button type="button" class="butn butn-rounded" onclick="window.location.href='{{ route('profile.edit') }}'">
+                    <button type="button" class="butn butn-rounded" style="background-color: #0e0f11; color:#e9e9e9" onclick="window.location.href='{{ route('profile.edit') }}'">
                         {{ __('Profile') }}
                     </button>
                 </div>
@@ -51,7 +51,7 @@
                 <div class="text-end">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="button" class="butn butn-rounded" style="background-color: #ffbebe" onclick="event.preventDefault(); this.closest('form').submit();">
+                        <button type="button" class="butn butn-rounded" style="background-color: #e9e9e9" onclick="event.preventDefault(); this.closest('form').submit();">
                             {{ __('Log Out') }}
                         </button>
                     </form>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -36,10 +37,17 @@ Route::get('/memorials', [MemorialController::class, 'showall'])->name('memorial
 
 Route::get('/memorial/{id}', [MemorialController::class, 'show'])->name('memorial.show');
 
+Route::post('/images/store', [ImageController::class, 'store'])->name('image.store');
+
+Route::post('/images/upload-temp', [ImageController::class, 'uploadTempImage'])->name('image.uploadTempImage');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/memorial/attach/{token}', [QrCodeController::class, 'showAttachForm'])->name('memorial.attach.form');
     Route::post('/memorial/attach', [QrCodeController::class, 'attach'])->name('memorial.attach');
+    Route::post('/memorial/save', [MemorialController::class, 'saveMemorial'])->name('memorial.save');
+    Route::get('/memorial/images/{id}', [MemorialController::class, 'imagesMemorial'])->name('memorial.images');
+
+    
 });
 
 
