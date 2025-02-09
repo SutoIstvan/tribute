@@ -1,77 +1,78 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.home')
+@section('css')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@endsection
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@section('title', 'Bejelentkezés - mbook.hu')
+
+@section('content')
+
+    <section class="vh-100 mt-30">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                        <div class="row g-0">
+                            <div class="col-md-6 col-lg-5 d-none d-md-block fit-img img" style="padding-left:0px !important">
+                                <img src="{{ asset('assets/imgs/works/6.png') }}" alt="login form" class="img-fluid"
+                                    style="border-radius: 1rem 0 0 1rem;" />
+                            </div>
+                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-5">
+
+                                    <form method="POST" action="{{ route('login') }}">
+                                        @csrf
+                                        <div class="d-flex align-items-center mb-3 pb-1">
+                                            {{-- <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i> --}}
+                                            {{-- <span class="h1 fw-bold mb-0">Logo</span> --}}
+                                        </div>
+
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Jelentkezzen be fiókjába
+                                        </h5>
+
+                                        <div class="form-outline mb-4">
+                                            <input name="email" placeholder="E-mail" type="email" id="form2Example17"
+                                                class="form-control form-control-lg bg-dark text-white" />
+                                            {{-- <label class="form-label" for="form2Example17">Email address</label> --}}
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input name="password" placeholder="Jelszó" type="password" id="form2Example27"
+                                                class="form-control form-control-lg bg-dark text-white" />
+                                            {{-- <label class="form-label" for="form2Example27">Password</label> --}}
+                                        </div>
+
+                                        <div class="pt-1 mb-4">
+                                            <button type="submit" class="btn btn-light btn-lg btn-block" type="button">Bejelentkezés</button>
+                                        </div>
+
+                                        <a class="small text-light" href="{{ route('password.request') }}">Elfelejtetted a jelszavad?</a>
+                                        <p class="mb-5 pb-lg-2 text-white-50 mt-10">Nincs fiókod? 
+                                            <a href="{{ route('register') }}" class="text-white-50">Regisztrálj itt</a></p>
+                                    </form>
+
+                                    <hr class="my-4">
+
+                                    <a data-mdb-button-init data-mdb-ripple-init
+                                        href="{{ route('google.login') }}"
+                                        class="btn btn-lg btn-block btn-primary mt-5"
+                                        style="background-color: #dd4b39; border-color: #dd4b39;" type="submit"><i
+                                            class="fab fa-google me-2"></i> Jelentkezzen be google -al</a>
+                                    <button data-mdb-button-init data-mdb-ripple-init
+                                        class="btn btn-lg btn-block btn-primary mb-2 mt-20"
+                                        style="background-color: #3b5998; border-color: #3b5998;" type="submit"><i
+                                            class="fab fa-facebook-f me-2"></i>Jelentkezzen be facebook -al</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
+@endsection
 
 
-        <div class="flex w-full items-center gap-2 py-6 text-sm text-slate-600">
-            <div class="h-px w-full bg-slate-600"></div>
-            OR
-            <div class="h-px w-full bg-slate-600"></div>
-        </div>
-
-        <div class="flex items-center justify-center ">
-            <a href="{{ route('google.login') }}" class="flex items-center bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                <svg class="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1">
-                    <defs></defs>
-                    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="Color-" transform="translate(-401.000000, -860.000000)">
-                            <g id="Google" transform="translate(401.000000, 860.000000)">
-                                <path d="M9.82727273,24 C9.82727273,22.4757333 10.0804318,21.0144 10.5322727,19.6437333 L2.62345455,13.6042667 C1.08206818,16.7338667 0.213636364,20.2602667 0.213636364,24 C0.213636364,27.7365333 1.081,31.2608 2.62025,34.3882667 L10.5247955,28.3370667 C10.0772273,26.9728 9.82727273,25.5168 9.82727273,24" id="Fill-1" fill="#FBBC05"></path>
-                                <path d="M23.7136364,10.1333333 C27.025,10.1333333 30.0159091,11.3066667 32.3659091,13.2266667 L39.2022727,6.4 C35.0363636,2.77333333 29.6954545,0.533333333 23.7136364,0.533333333 C14.4268636,0.533333333 6.44540909,5.84426667 2.62345455,13.6042667 L10.5322727,19.6437333 C12.3545909,14.112 17.5491591,10.1333333 23.7136364,10.1333333" id="Fill-2" fill="#EB4335"></path>
-                                <path d="M23.7136364,37.8666667 C17.5491591,37.8666667 12.3545909,33.888 10.5322727,28.3562667 L2.62345455,34.3946667 C6.44540909,42.1557333 14.4268636,47.4666667 23.7136364,47.4666667 C29.4455,47.4666667 34.9177955,45.4314667 39.0249545,41.6181333 L31.5177727,35.8144 C29.3995682,37.1488 26.7323182,37.8666667 23.7136364,37.8666667" id="Fill-3" fill="#34A853"></path>
-                                <path d="M46.1454545,24 C46.1454545,22.6133333 45.9318182,21.12 45.6113636,19.7333333 L23.7136364,19.7333333 L23.7136364,28.8 L36.3181818,28.8 C35.6879545,31.8912 33.9724545,34.2677333 31.5177727,35.8144 L39.0249545,41.6181333 C43.3393409,37.6138667 46.1454545,31.6490667 46.1454545,24" id="Fill-4" fill="#4285F4"></path>
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-                <span class="text-dark">Continue with Google</span>
-            </a>
-        </div>
-
-
-
-
-    </form>
-</x-guest-layout>
