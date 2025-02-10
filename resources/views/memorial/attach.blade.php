@@ -143,6 +143,52 @@
         .dropzone .dz-preview .dz-remove {
             margin-top: 10px;
         }
+
+
+        .drag-area {
+            height: 250px;
+            border: 1.4px dashed #6c757d;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 10px auto;
+        }
+
+        .drag-area .icon {
+            font-size: 50px;
+            color: #fefefe;
+        }
+
+        .drag-area .header {
+            font-size: 20px;
+            font-weight: 500;
+            color: #a4a4a4;
+        }
+
+        .drag-area .support {
+            font-size: 12px;
+            color: gray;
+            margin: 10px 0 15px 0;
+        }
+
+        .drag-area .button {
+            font-size: 20px;
+            font-weight: 500;
+            color: #ebebeb;
+            cursor: pointer;
+        }
+
+        .drag-area.active {
+            border: 1px solid #787878;
+        }
+
+        .drag-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 @endsection
 
@@ -180,6 +226,17 @@
         </div>
     </div>
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
 
     <form action="{{ route('memorial.save') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -199,8 +256,9 @@
                         <div class="row">
                             <div class="mb-35">
                                 <label for="fullName" class="form-label text-white">Teljes név</label>
-                                <input name="name" type="text" class="form-control bg-dark text-white border-secondary py-2"
-                                    id="fullName" placeholder="Teljes név">
+                                <input name="name" type="text"
+                                    class="form-control bg-dark text-white border-secondary py-2" id="fullName"
+                                    placeholder="Teljes név">
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="birth_date" class="form-label text-white">Születési dátum</label>
@@ -210,8 +268,9 @@
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="death_date" class="form-label text-white">Elhalálozás dátuma</label>
-                                <input name="death_date" type="text" class="form-control bg-dark text-white border-secondary py-2"
-                                    id="death_date" placeholder="00.00.0000">
+                                <input name="death_date" type="text"
+                                    class="form-control bg-dark text-white border-secondary py-2" id="death_date"
+                                    placeholder="00.00.0000">
                             </div>
                             <div class="mt-30">
                                 <label for="story" class="form-label text-white">Emlékezés, tiszteletadás</label>
@@ -222,6 +281,39 @@
                 </div>
 
 
+
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+
+
+                <div class="col-12 col-md-3 p-4 mt-50">
+                    <h3>Fő emlékkép</h3>
+                    <p class="mt-2">Ez a fénykép fog elsőként megjelenni az emlékoldalon.</p>
+                </div>
+
+                <div class="col-12 col-md-7 p-3 mt-50">
+                    <div class="container">
+                        <div class="row">
+                            <div class="container">
+                                <label for="biography" class="form-label text-white">Fő emlékkép feltöltése</label>
+                                <div class="drag-area bg-dark text-white border-secondary">
+                                    <div class="icon">
+                                        <i class="fas fa-images"></i>
+                                    </div>
+
+                                    <span class="header">Húzza ide a fényképet</span>
+                                    <span class="header">vagy nyissa meg a <span class="button">böngészőben</span></span>
+                                    <input type="file" hidden />
+                                    <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -251,7 +343,7 @@
             </div>
         </div>
 
-        <div class="container mt-100 mb-50">
+        {{-- <div class="container mt-100 mb-50">
 
             <!--Avatar-->
             <div>
@@ -263,13 +355,13 @@
                 <div class="d-flex justify-content-center">
                     <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
                         <label class="form-label text-white m-1" for="customFile2">Choose file</label>
-                        <input name="image" type="file" class="form-control d-none" id="customFile2"
+                        <input name="photo" type="file" class="form-control d-none" id="customFile2"
                             onchange="displaySelectedImage(event, 'selectedAvatar')" />
                     </div>
                 </div>
             </div>
-    
-        </div>
+
+        </div> --}}
 
         {{-- <div class="container">
         <div class="row d-flex justify-content-center mt-4 mb-50">
@@ -309,19 +401,71 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript">
-        function displaySelectedImage(event, elementId) {
-            const selectedImage = document.getElementById(elementId);
-            const fileInput = event.target;
+    <script>
+        const dropArea = document.querySelector('.drag-area');
+        const dragText = document.querySelector('.header');
 
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
+        let button = dropArea.querySelector('.button');
+        let input = dropArea.querySelector('input');
 
-                reader.onload = function(e) {
-                    selectedImage.src = e.target.result;
+        let file;
+
+        button.onclick = () => {
+            input.click();
+        };
+
+        // when browse
+        input.addEventListener('change', function() {
+            file = this.files[0];
+            dropArea.classList.add('active');
+            displayFile();
+        });
+
+        // when file is inside drag area
+        dropArea.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropArea.classList.add('active');
+            dragText.textContent = 'Release to Upload';
+            // console.log('File is inside the drag area');
+        });
+
+        // when file leave the drag area
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.classList.remove('active');
+            // console.log('File left the drag area');
+            dragText.textContent = 'Drag & Drop';
+        });
+
+        // when file is dropped
+        dropArea.addEventListener('drop', (event) => {
+            event.preventDefault();
+            // console.log('File is dropped in drag area');
+
+            file = event.dataTransfer.files[0]; // grab single file even of user selects multiple files
+            // console.log(file);
+            displayFile();
+        });
+
+        function displayFile() {
+            let fileType = file.type;
+            // console.log(fileType);
+
+            let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+
+            if (validExtensions.includes(fileType)) {
+                // console.log('This is an image file');
+                let fileReader = new FileReader();
+
+                fileReader.onload = () => {
+                    let fileURL = fileReader.result;
+                    // console.log(fileURL);
+                    let imgTag = `<img src="${fileURL}" alt="">`;
+                    dropArea.innerHTML = imgTag;
                 };
-
-                reader.readAsDataURL(fileInput.files[0]);
+                fileReader.readAsDataURL(file);
+            } else {
+                alert('This is not an Image File');
+                dropArea.classList.remove('active');
             }
         }
     </script>
