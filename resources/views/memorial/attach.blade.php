@@ -146,14 +146,14 @@
 
 
         .drag-area {
-            height: 250px;
+            height: 290px;
             border: 1.4px dashed #6c757d;
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            margin: 10px auto;
+            margin: 1px auto;
         }
 
         .drag-area .icon {
@@ -162,7 +162,7 @@
         }
 
         .drag-area .header {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 500;
             color: #a4a4a4;
         }
@@ -174,10 +174,11 @@
         }
 
         .drag-area .button {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 500;
-            color: #ebebeb;
+            color: #fafafa;
             cursor: pointer;
+            background-color: #5b5e60;
         }
 
         .drag-area.active {
@@ -272,10 +273,10 @@
                                     class="form-control bg-dark text-white border-secondary py-2" id="death_date"
                                     placeholder="00.00.0000">
                             </div>
-                            <div class="mt-30">
+                            {{-- <div class="mt-30">
                                 <label for="story" class="form-label text-white">Emlékezés, tiszteletadás</label>
                                 <textarea name="story" class="form-control bg-dark text-white border-secondary" id="story" rows="3"></textarea>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -306,8 +307,13 @@
                                     </div>
 
                                     <span class="header">Húzza ide a fényképet</span>
-                                    <span class="header">vagy nyissa meg a <span class="button">böngészőben</span></span>
-                                    <input type="file" hidden />
+                                    <span class="header">vagy nyissa meg a </span>
+
+                                    <div class="text-center mb-10 mt-10">
+                                        <span class="button butn butn-md butn-bord butn-rounded">böngészőben</span>
+                                    </div>
+
+                                    <input name="photo" type="file" hidden/>
                                     <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
                                 </div>
                             </div>
@@ -334,7 +340,7 @@
                         <div class="row">
                             <div class="mt-30">
                                 <label for="biography" class="form-label text-white">Életrajz</label>
-                                <textarea name="biography" class="form-control bg-dark text-white border-secondary" id="biography" rows="8"></textarea>
+                                <textarea name="biography" class="form-control bg-dark text-white border-secondary" id="biography" rows="12"></textarea>
                             </div>
                         </div>
                     </div>
@@ -342,6 +348,12 @@
 
             </div>
         </div>
+
+
+
+
+
+
 
         {{-- <div class="container mt-100 mb-50">
 
@@ -458,9 +470,25 @@
 
                 fileReader.onload = () => {
                     let fileURL = fileReader.result;
-                    // console.log(fileURL);
-                    let imgTag = `<img src="${fileURL}" alt="">`;
-                    dropArea.innerHTML = imgTag;
+                    dropArea.innerHTML = `
+                    <img src="${fileURL}" alt="">
+                        <span class="button"></span>
+                    <input name="photo" type="file" hidden />
+                `;
+
+                    // Переназначаем элементы после обновления HTML
+                    button = dropArea.querySelector('.button');
+                    input = dropArea.querySelector('input');
+
+                    // Переназначаем обработчики событий
+                    button.onclick = () => {
+                        input.click();
+                    };
+
+                    // Устанавливаем файл в новый input
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    input.files = dataTransfer.files;
                 };
                 fileReader.readAsDataURL(file);
             } else {

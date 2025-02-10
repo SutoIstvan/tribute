@@ -25,11 +25,12 @@ class MemorialController extends Controller
 
     public function saveMemorial(Request $request)
     {
+        // dd($request);
         $request->validate([
             'name' => 'required|string|min:3|max:255',
             'birth_date' => 'required|string|min:3|max:255',
             'death_date' => 'required|string|min:3|max:255',
-            'story' => 'required|string|min:3|max:1255',
+            // 'story' => 'required|string|min:3|max:1255',
             'biography' => 'required|string|min:3|max:2255',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -65,7 +66,7 @@ class MemorialController extends Controller
             $memorial->save(); // Сохраняем обновленную модель с фото
         }
     
-        return redirect()->route('memorial.images', ['id' => $memorial->id]);
+        return redirect()->route('dashboard', ['id' => $memorial->id]);
     }
     
     
