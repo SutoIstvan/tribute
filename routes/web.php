@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 // use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\MemorialController;
 use App\Http\Controllers\QrCodeController;
+use App\Models\Memorial;
 use App\Models\QrCodes;
 use Illuminate\Support\Facades\Artisan;
 
@@ -22,8 +23,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    
-    return view('dashboard');
+    $admin_id = Auth::user()->id;
+
+    $memorials = Memorial::with(['admin'])
+        ->where('admin_id', $admin_id)
+        ->get();
+    return view('dashboard', compact('memorials'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -35,14 +40,20 @@ Route::post('/run-seed', function () {
 
 Route::get('/memorials', [MemorialController::class, 'showall'])->name('memorial.showall');
 
-Route::get('/memorial/{id}', [MemorialController::class, 'show'])->name('memorial.show');
 
 Route::post('/images/store', [ImageController::class, 'store'])->name('image.store');
 
 Route::post('/images/upload-temp', [ImageController::class, 'uploadTempImage'])->name('image.uploadTempImage');
 
+
+Route::get('/memorial/attach/{token}', [QrCodeController::class, 'showAttachForm'])->name('memorial.attach.form');
+
+
+Route::get('/memorial/{id}', [MemorialController::class, 'show'])->name('memorial.show');
+
+
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('/memorial/attach/{token}', [QrCodeController::class, 'showAttachForm'])->name('memorial.attach.form');
     Route::post('/memorial/attach', [QrCodeController::class, 'attach'])->name('memorial.attach');
     Route::post('/memorial/save', [MemorialController::class, 'saveMemorial'])->name('memorial.save');
     Route::get('/memorial/images/{id}', [MemorialController::class, 'imagesMemorial'])->name('memorial.images');

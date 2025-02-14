@@ -5,52 +5,78 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\QrCodes;
 use App\Models\Memorial;
+use Illuminate\Support\Facades\Auth;
 
 class QrCodeController extends Controller
 {
-    public function showAttachForm($token)
+
+    public function showAttachForm(string $token)
     {
         $qr = QrCodes::where('token', $token)->firstOrFail();
-
-        if ($qr->memorial_id) {
-            return redirect()->route('memorial.show', $qr->memorial_id);
+    
+        if (!$qr->memorial_id) {
+            if (!Auth::check()) {
+                session(['qr_token' => $token]);
+                
+                // Сохраняем текущий URL в сессии перед редиректом
+                session(['url.intended' => url()->current()]);
+                
+                return redirect()
+                    ->route('login')
+                    ->with('message', 'Пожалуйста, войдите для привязки QR-кода');
+            }
+            
+            return view('memorial.attach', compact('token'));
         }
-
-        return view('memorial.attach', compact('token'));
+    
+        return redirect()->route('memorial.show', $qr->memorial_id);
     }
 
-    public function attach(Request $request)
-    {
-        //  dd($request);
 
-        $request->validate([
-            'token' => 'required|exists:qr_codes,token',
-            'name' => 'required|string',
-            'birth_date' => 'nullable|date',
-            'death_date' => 'nullable|date',
-            'photo' => 'nullable|image|max:2048',
-            'biography' => 'nullable|string|max:10000',
-            'history' => 'nullable|string|max:10000',
-            'story' => 'nullable|string|max:10000', 
-        ]);
 
-        $photoPath = $request->file('photo') ? $request->file('photo')->store('photos', 'public') : null;
+    // public function showAttachForm($token)
+    // {
+    //     $qr = QrCodes::where('token', $token)->firstOrFail();
 
-        // Создаем мемориал
-        $memorial = Memorial::create([
-            'name' => $request->name,
-            'birth_date' => $request->birth_date,
-            'death_date' => $request->death_date,
-            'photo' => $photoPath,
-            'biography' => $request->biography,
-            'history' => $request->history,
-            'story' => $request->story,
-        ]);
+    //     if ($qr->memorial_id) {
+    //         return redirect()->route('memorial.show', $qr->memorial_id);
+    //     }
 
-        // Привязываем QR-код
-        QrCodes::where('token', $request->token)->update(['memorial_id' => $memorial->id]);
+    //     return view('memorial.attach', compact('token'));
+    // }
 
-        return redirect()->route('memorial.show', $memorial->id);
-    }
+    // public function attach(Request $request)
+    // {
+    //     //  dd($request);
+
+    //     $request->validate([
+    //         'token' => 'required|exists:qr_codes,token',
+    //         'name' => 'required|string',
+    //         'birth_date' => 'nullable|date',
+    //         'death_date' => 'nullable|date',
+    //         'photo' => 'nullable|image|max:2048',
+    //         'biography' => 'nullable|string|max:10000',
+    //         'history' => 'nullable|string|max:10000',
+    //         'story' => 'nullable|string|max:10000', 
+    //     ]);
+
+    //     $photoPath = $request->file('photo') ? $request->file('photo')->store('photos', 'public') : null;
+
+    //     // Создаем мемориал
+    //     $memorial = Memorial::create([
+    //         'name' => $request->name,
+    //         'birth_date' => $request->birth_date,
+    //         'death_date' => $request->death_date,
+    //         'photo' => $photoPath,
+    //         'biography' => $request->biography,
+    //         'history' => $request->history,
+    //         'story' => $request->story,
+
+    //     ]);
+
+    //     // Привязываем QR-код
+    //     QrCodes::where('token', $request->token)->update(['memorial_id' => $memorial->id]);
+
+    //     return redirect()->route('memorial.show', $memorial->id);
+    // }
 }
-

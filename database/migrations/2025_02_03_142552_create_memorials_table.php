@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('memorials', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->string('name');
             $table->date('birth_date')->nullable();
             $table->date('death_date')->nullable();
@@ -25,8 +25,8 @@ return new class extends Migration
             $table->text('testimonials')->nullable();
             $table->text('comments')->nullable();
             $table->text('gift')->nullable();
-            $table->text('qr_code')->nullable();
-            $table->text('users')->nullable();
+            $table->string('qr_code')->unique(); // Уникальный QR-код
+            $table->foreignId('admin_id')->constrained('users'); // Администратор страницы            $table->text('users')->nullable();
             $table->timestamps();
         });
     }

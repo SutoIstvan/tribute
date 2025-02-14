@@ -16,7 +16,7 @@
     </head>
     <body class="font-sans antialiased " >
         <div class="bg-dark min-h-screen bg-gray-100 dark:bg-gray-900" >
-            @include('layouts.navigation')
+            {{-- @include('layouts.navigation') --}}
             <!-- Page Content -->
             <main data-bs-theme="dark">
                 {{ $slot }}

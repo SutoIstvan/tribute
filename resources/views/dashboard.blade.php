@@ -1,4 +1,5 @@
-@extends('layouts.home')
+@extends('layouts.admin')
+
 @section('css')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -8,53 +9,53 @@
 
     <style>
         /*
-        @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700,700i');
+            @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700,700i');
 
 
-        *,
-        *:before,
-        *:after {
-          margin: 0;
-          padding: 0;
-          word-break: break-all;
-          box-sizing: border-box;
-          scroll-behavior: smooth;
-        } */
+            *,
+            *:before,
+            *:after {
+              margin: 0;
+              padding: 0;
+              word-break: break-all;
+              box-sizing: border-box;
+              scroll-behavior: smooth;
+            } */
 
         /* html {
-          font-size: 10px;
-        } */
+              font-size: 10px;
+            } */
 
         /* body {
-          font-family: 'Ubuntu', sans-serif;
-          color: #6e6e6e;
-          font-size: 1.6rem;
-          background: black;
-        } */
+              font-family: 'Ubuntu', sans-serif;
+              color: #6e6e6e;
+              font-size: 1.6rem;
+              background: black;
+            } */
 
         /* header,
-        footer {
-          display: block;
-        }
+            footer {
+              display: block;
+            }
 
-        a,
-        a:link,
-        a:visited {
-          text-decoration: none;
-        }
+            a,
+            a:link,
+            a:visited {
+              text-decoration: none;
+            }
 
-        img {
-          border: 0;
-        }
+            img {
+              border: 0;
+            }
 
-        ul {
-          list-style: none;
-        } */
+            ul {
+              list-style: none;
+            } */
 
         /* .center {
-          width: 1170px;
-          margin: 20px auto 0;
-        } */
+              width: 1170px;
+              margin: 20px auto 0;
+            } */
 
 
         :before,
@@ -199,10 +200,120 @@
         .dropzone .dz-preview .dz-remove {
             margin-top: 10px;
         }
+
+        .card-memorial {
+            padding: 15px;
+            width: 350px;
+            background: #222;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.7);
+            user-select: none;
+        }
+
+        .cover-photo {
+            position: relative;
+            /* background: url(https://i.imgur.com/jxyuizJ.jpeg); */
+            background-size: cover;
+            /* height: 180px; */
+            border-radius: 5px 5px 0 0;
+        }
+
+        .profile {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            /* Добавьте фиксированную высоту */
+
+            bottom: -60px;
+            left: 15px;
+            border-radius: 50%;
+            border: 2px solid #222;
+            background: #222;
+            padding: 5px;
+            object-fit: cover;
+            /* Вместо image-size */
+
+        }
+
+        .profile-name {
+            font-size: 25px;
+            margin: 5px 0 0 120px;
+            color: #fff;
+        }
+
+        .about {
+            margin-top: 30px;
+            line-height: 1.6;
+        }
+
+        /* .btn {
+        margin: 30px 15px;
+        background: #7ce3ff;
+        padding: 10px 25px;
+        border-radius: 3px;
+        border: 1px solid #7ce3ff;
+        font-weight: bold;
+        font-family: Montserrat;
+        cursor: pointer;
+        color: #222;
+        transition: 0.2s;
+    } */
+
+        /* .btn:last-of-type {
+        background: transparent;
+        border-color: #7ce3ff;
+        color: #7ce3ff;
+    }
+
+    .btn:hover {
+        background: #7ce3ff;
+        color: #222;
+    } */
+
+        /* .icons {
+        width: 180px;
+        margin: 0 auto 10px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .icons i {
+        cursor: pointer;
+        padding: 5px;
+        font-size: 18px;
+        transition: 0.2s;
+    }
+
+    .icons i:hover {
+        color: #7ce3ff;
+    } */
+
+        .pricing-pg .item {
+            padding: 45px;
+            background: var(--bg-color);
+        }
+
+        .fit-img img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: center center;
+            object-position: center center;
+        }
+
+        img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
     </style>
 @endsection
 
-@section('title', 'Bejelentkezés - mbook.hu')
+@section('title', 'Irányítópult - mbook.hu')
 
 @section('content')
 
@@ -210,12 +321,12 @@
 
 
     <div class="container">
-        <div class=" text-secondary text-center">
+        <div class="section-padding text-secondary text-center">
 
 
 
-            <div class="py-5">
-                <div class="d-flex justify-content-center">
+            <div class="">
+                {{-- <div class="d-flex justify-content-center">
                     <div class="holder">
                         <div class="candle">
                             <div class="blinking-glow"></div>
@@ -224,16 +335,15 @@
                             <div class="flame"></div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <h4>
-                    <span class="sub-color inline">Köszönjük, hogy minket választott.</span>
+                    <span class="sub-color inline">Az irányítópultban</span>
                 </h4>
 
-                <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1>
+                {{-- <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1> --}}
                 <div class="col-lg-6 mx-auto">
                     <p class="fs-5 mt-4 mb-4">
-                        Az alábbiakban rögzítheti az elhunyt adatait, amelyeket később bármikor módosíthat vagy kiegészíthet.
-                         Töltse fel a fő fotót és néhány emlékezetes fényképét.
+                         szerkesztheti a meglévő emlékoldalakat és új oldalakat adhat hozzá elhunyt szeretteinek.
                     </p>
                 </div>
             </div>
@@ -241,101 +351,92 @@
     </div>
 
 
-    <div class="container">
+    <section class="pricing-pg mb-100">
+        <div class="container">
+            <div class="row">
+                @foreach ($memorials as $memorial)
+                    <div class="col-lg-4 mb-30">
+                        <div class="item md-mb50">
+                            <div class="head text-center">
+                                <h6 class="text-u fz-20 mb-40">{{ $memorial->name }}</h6>
+                                <div class="img img-fit">
+                                    <img src="{{ asset('images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
+                                        class="img img-fit">
+                                </div>
+                                {{-- <span class="sub-color"></span> --}}
+                            </div>
+                            {{-- <div class="list mt-40">
+                                <ul class="rest">
+                                    <li>Adipiscing elit sed do.</li>
+                                    <li>Eusmod tempor incididunt ut.</li>
+                                    <li>labore et dolore magna.</li>
+                                </ul>
+                            </div> --}}
+                            <div class="text-center mt-40">
+                                <a href="#" class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
+                                    <div class="d-flex align-items-center">
+                                        <span>Szerkesztes</span>
+                                    </div>
+                                </a>
+                                <a href="{{ route('memorial.show', $memorial->id) }}"
+                                    class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
+                                    <div class="d-flex align-items-center">
+                                        <span>Megnyitom</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+
+    {{-- <div class="container">
+
+
+
+
         <div class="row d-flex justify-content-center">
 
 
-            <div class="col-12 col-md-3 p-4">
-                <h3>Elhunyt adatai</h3>
-                <p class="mt-2">Kérjük, tüntesd fel a következő információkat: Teljes név, Születési dátum, Elhalálozás dátum.</p>
-            </div>
+            <div class="col-12 p-3">
+                @foreach ($memorials as $memorial)
 
-            <div class="col-12 col-md-7 p-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="mb-35">
-                            <label for="fullName" class="form-label text-white">Teljes név</label>
-                            <input type="text" class="form-control bg-dark text-white border-secondary py-2"
-                                id="fullName" placeholder="Teljes név">
+                    <div class="card-memorial mb-60">
+                        <div class="cover-photo">
+                            <img src="{{ asset('images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" class="profile">
                         </div>
-                        <div class="col-12 col-md-6 mb-3">
-                            <label for="birthDate" class="form-label text-white">Születési dátum</label>
-                            <input type="text" class="form-control bg-dark text-white border-secondary py-2 datepicker"
-                                id="birthDate" placeholder="00.00.0000">
-                        </div>
-                        <div class="col-12 col-md-6 mb-3">
-                            <label for="deathDate" class="form-label text-white">Elhalálozás dátuma</label>
-                            <input type="text" class="form-control bg-dark text-white border-secondary py-2"
-                                id="deathDate" placeholder="00.00.0000">
-                        </div>
-                        <div class="mt-30">
-                            <label for="memorial" class="form-label text-white">Emlékezés, tiszteletadás</label>
-                            <textarea class="form-control bg-dark text-white border-secondary" id="memorial" rows="3"></textarea>
+                        <h3 class="profile-name">{{ $memorial->name }}</h3>
+                        <a href="#" class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
+                            <div class="d-flex align-items-center">
+                                <span>Szerkesztes</span>
+                            </div>
+                        </a>
+                        <a href="{{ route('memorial.show', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
+                            <div class="d-flex align-items-center">
+                                <span>Megnyitom</span>
+                            </div>
+                        </a>
+                        <div class="icons">
+                            <i class="fa-brands fa-linkedin"></i>
+                            <i class="fa-brands fa-github"></i>
+                            <i class="fa-brands fa-youtube"></i>
+                            <i class="fa-brands fa-twitter"></i>
                         </div>
                     </div>
-                </div>
+                @endforeach
+            
+
             </div>
 
 
 
         </div>
-    </div>
+    </div> --}}
 
 
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-
-
-            <div class="col-12 col-md-3 p-4 mt-50">
-                <h3>Életrajz</h3>
-                <p class="mt-2">Oszd meg velünk kedves emlékeidet, a számára fontos pillanatokat vagy azt, amit szerettél benne a legjobban.</p>
-            </div>
-
-            <div class="col-12 col-md-7 p-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="mt-30">
-                            <label for="memorial" class="form-label text-white">Emlékezés, tiszteletadás</label>
-                            <textarea class="form-control bg-dark text-white border-secondary" id="memorial" rows="8"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-
-    <div class="container">
-        <div class="row d-flex justify-content-center mt-4 mb-50">
-            <div class="col-12 col-md-3 p-4">
-                <h3 class="text-white">Fényképek</h3>
-                <p class="mt-2 text-white-50">Töltsön fel néhány fényképet, később dátumot és további adatokat is megadhat.</p>
-            </div>
-
-            <div class="col-12 col-md-7 p-3 ">
-                <div class="container">
-                    <div class="card bg-dark border-warning">
-                        <form method="post" action="{{url('images/store')}}" enctype="multipart/form-data"
-                            class="dropzone bg-dark text-white" id="dropzone">
-                            @csrf
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="text-center mb-70">
-        <a href="../inner_pages/about.html" class="butn butn-md butn-bord butn-rounded">
-            <div class="d-flex align-items-center">
-                <span>Adatok mentése</span>
-                <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
-            </div>
-        </a>
-    </div>
 
     </html>
 
@@ -343,33 +444,5 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript">
-        Dropzone.options.dropzone = {
-            maxFilesize: 10,
-            renameFile: function(file) {
-                var dt = new Date();
-                var time = dt.getTime();
-                return time + file.name;
-            },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            addRemoveLinks: true,
-            timeout: 60000,
-            success: function(file, response) {
-                console.log(response);
-            },
-            error: function(file, response) {
-                return false;
-            },
-            dictDefaultMessage: "Kattints ide vagy húzd ide a képeket a feltöltéshez",
-            dictFallbackMessage: "A böngésződ nem támogatja a fájlok feltöltését.",
-            dictFallbackText: "Kérlek, használd az alábbi tartalék űrlapot a fájlok feltöltésére.",
-            dictFileTooBig: "A fájl túl nagy ( MB). A maximális méret:  MB.",
-            dictInvalidFileType: "Nem tölthetsz fel ilyen típusú fájlt.",
-            dictResponseError: "A szerver hibás választ adott ().",
-            dictCancelUpload: "Feltöltés megszakítása",
-            dictCancelUploadConfirmation: "Biztosan megszakítod a feltöltést?",
-            dictRemoveFile: "Fájl törlése",
-            dictMaxFilesExceeded: "Nem tölthetsz fel több fájlt.",
-        };
-    </script>
+
 @endsection

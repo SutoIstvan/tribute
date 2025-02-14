@@ -146,6 +146,7 @@
 
 
         .drag-area {
+            position: relative;
             height: 290px;
             border: 1.4px dashed #6c757d;
             border-radius: 4px;
@@ -188,7 +189,22 @@
         .drag-area img {
             width: 100%;
             height: 100%;
+            border-radius: 4px;
             object-fit: cover;
+        }
+
+        .deleteBtn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 0, 0, 0.7); /* Полупрозрачный красный фон */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
         }
     </style>
 @endsection
@@ -239,7 +255,7 @@
 
 
 
-    <form action="{{ route('memorial.save') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('memorial.save') }}" method="POST" enctype="multipart/form-data" id="form">
         @csrf
 
         <div class="container">
@@ -313,7 +329,7 @@
                                         <span class="button butn butn-md butn-bord butn-rounded">böngészőben</span>
                                     </div>
 
-                                    <input name="photo" type="file" hidden/>
+                                    <input name="photo" type="file" hidden />
                                     <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
                                 </div>
                             </div>
@@ -349,7 +365,7 @@
             </div>
         </div>
 
-
+        <input name="token" value="{{ $token }}" hidden>
 
 
 
@@ -396,14 +412,15 @@
     </div> --}}
 
 
-        <div class="text-center mb-70 mt-40">
-            <button type="submit" class="butn butn-md butn-bord butn-rounded">
-                <div class="d-flex align-items-center">
-                    <span>Adatok mentése</span>
-                    <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
-                </div>
-            </button>
-        </div>
+    <div class="text-center mb-70 mt-40">
+        <button type="submit" class="butn butn-md butn-bord butn-rounded" id="submitBtn">
+            <div class="d-flex align-items-center">
+                <span id="btnText">Adatok mentése</span>
+                <span class="icon pe-7s-angle-right ml-10 fz-30" id="btnIcon"></span>
+                <span class="spinner-border spinner-border-sm ml-10 d-none" id="btnSpinner"></span>
+            </div>
+        </button>
+    </div>
 
     </form>
 
@@ -414,6 +431,138 @@
 
 @section('js')
     <script>
+        const dropArea = document.querySelector('.drag-area');
+        const dragText = document.querySelector('.header');
+
+        let button = dropArea.querySelector('.button');
+        let input = dropArea.querySelector('input');
+
+        let file;
+
+        // Функция инициализации всех обработчиков событий
+        function initializeEventListeners() {
+            button = dropArea.querySelector('.button');
+            input = dropArea.querySelector('input');
+
+            button.onclick = () => {
+                input.click();
+            };
+
+            input.addEventListener('change', function() {
+                file = this.files[0];
+                dropArea.classList.add('active');
+                displayFile();
+            });
+
+            dropArea.addEventListener('dragover', (event) => {
+                event.preventDefault();
+                dropArea.classList.add('active');
+                dragText.textContent = 'Release to Upload';
+            });
+
+            dropArea.addEventListener('dragleave', () => {
+                dropArea.classList.remove('active');
+                dragText.textContent = 'Drag & Drop';
+            });
+
+            dropArea.addEventListener('drop', (event) => {
+                event.preventDefault();
+                file = event.dataTransfer.files[0];
+                displayFile();
+            });
+        }
+
+        // Инициализируем обработчики при загрузке страницы
+        initializeEventListeners();
+
+        function displayFile() {
+            let fileType = file.type;
+            let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+
+            if (validExtensions.includes(fileType)) {
+                let fileReader = new FileReader();
+
+                fileReader.onload = () => {
+                    let fileURL = fileReader.result;
+                    dropArea.innerHTML = `
+                        <img src="${fileURL}" alt="">
+                            <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded">
+                                Kép törlése
+                            </button>
+                        <span class="button"></span>
+                        <input name="photo" type="file" hidden />
+                    `;
+
+                    // Переназначаем элементы
+                    button = dropArea.querySelector('.button');
+                    input = dropArea.querySelector('input');
+                    const deleteBtn = dropArea.querySelector('.deleteBtn');
+
+                    // Обработчик для кнопки удаления
+                    deleteBtn.addEventListener('click', () => {
+                        // Возвращаем начальный HTML для drag-area
+                        dropArea.innerHTML = `
+                            <div class="icon">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <span class="header">Húzza ide a fényképet</span>
+                            <span class="header">vagy nyissa meg a </span>
+                            <div class="text-center mb-10 mt-10">
+                                <span class="button butn butn-md butn-bord butn-rounded">böngészőben</span>
+                            </div>
+                            <input name="photo" type="file" hidden/>
+                            <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
+                        `;
+
+                        // Переназначаем элементы после сброса
+                        button = dropArea.querySelector('.button');
+                        input = dropArea.querySelector('input');
+
+                        // Восстанавливаем обработчик клика для кнопки выбора файла
+                        button.onclick = () => {
+                            input.click();
+                        };
+
+                        // Удаляем класс active
+                        dropArea.classList.remove('active');
+
+                        // Заново инициализируем все обработчики событий
+                        initializeEventListeners();
+                    });
+
+                    // Восстанавливаем обработчик для кнопки выбора файла
+                    button.onclick = () => {
+                        input.click();
+                    };
+
+                    // Устанавливаем файл в input
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    input.files = dataTransfer.files;
+                };
+                fileReader.readAsDataURL(file);
+            } else {
+                alert('This is not an Image File');
+                dropArea.classList.remove('active');
+            }
+        }
+
+
+        document.getElementById("form").addEventListener("submit", function(event) {
+            let button = document.getElementById("submitBtn");
+            let btnIcon = document.getElementById("btnIcon");
+            let btnSpinner = document.getElementById("btnSpinner");
+
+            // Отключаем кнопку
+            button.disabled = true;
+
+            // Скрываем стрелку, показываем спиннер
+            btnIcon.classList.add("d-none");
+            btnSpinner.classList.remove("d-none");
+        });
+
+    </script>
+    {{-- <script>
         const dropArea = document.querySelector('.drag-area');
         const dragText = document.querySelector('.header');
 
@@ -460,32 +609,65 @@
 
         function displayFile() {
             let fileType = file.type;
-            // console.log(fileType);
-
             let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
 
             if (validExtensions.includes(fileType)) {
-                // console.log('This is an image file');
                 let fileReader = new FileReader();
 
                 fileReader.onload = () => {
                     let fileURL = fileReader.result;
+                    // Добавляем кнопку удаления (deleteBtn) в HTML
                     dropArea.innerHTML = `
-                    <img src="${fileURL}" alt="">
-                        <span class="button"></span>
-                    <input name="photo" type="file" hidden />
-                `;
+                <img src="${fileURL}" alt="">
+                <div class="mt-3">
+                    <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded">
+                        Удалить фото
+                    </button>
+                </div>
+                <span class="button"></span>
+                <input name="photo" type="file" hidden />
+            `;
 
-                    // Переназначаем элементы после обновления HTML
+                    // Переназначаем элементы
                     button = dropArea.querySelector('.button');
                     input = dropArea.querySelector('input');
+                    const deleteBtn = dropArea.querySelector('.deleteBtn');
 
-                    // Переназначаем обработчики событий
+                    // Обработчик для кнопки удаления
+                    deleteBtn.addEventListener('click', () => {
+                        // Возвращаем начальный HTML для drag-area
+                        dropArea.innerHTML = `
+                    <div class="icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <span class="header">Húzza ide a fényképet</span>
+                    <span class="header">vagy nyissa meg a </span>
+                    <div class="text-center mb-10 mt-10">
+                        <span class="button butn butn-md butn-bord butn-rounded">böngészőben</span>
+                    </div>
+                    <input name="photo" type="file" hidden/>
+                    <span class="support">Fényképformátum: JPEG, JPG, PNG</span>
+                `;
+
+                        // Переназначаем элементы после сброса
+                        button = dropArea.querySelector('.button');
+                        input = dropArea.querySelector('input');
+
+                        // Восстанавливаем обработчик клика для кнопки выбора файла
+                        button.onclick = () => {
+                            input.click();
+                        };
+
+                        // Удаляем класс active
+                        dropArea.classList.remove('active');
+                    });
+
+                    // Восстанавливаем обработчик для кнопки выбора файла
                     button.onclick = () => {
                         input.click();
                     };
 
-                    // Устанавливаем файл в новый input
+                    // Устанавливаем файл в input
                     const dataTransfer = new DataTransfer();
                     dataTransfer.items.add(file);
                     input.files = dataTransfer.files;
@@ -496,5 +678,5 @@
                 dropArea.classList.remove('active');
             }
         }
-    </script>
+    </script> --}}
 @endsection

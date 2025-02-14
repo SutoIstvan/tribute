@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Memorial;
 use App\Models\QrCodes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 // use App\Models\Image;
 use Intervention\Image\Laravel\Facades\Image;
@@ -34,14 +35,19 @@ class MemorialController extends Controller
             'biography' => 'required|string|min:3|max:2255',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $admin_id = Auth::user()->id;
+
     
         $memorial = new Memorial();
+        $memorial->id = $request->token;
         $memorial->name = $request->name;
         $memorial->birth_date = $request->birth_date;
         $memorial->death_date = $request->death_date;
         $memorial->story = $request->story;
         $memorial->biography = $request->biography;
-    
+        $memorial->qr_code = $request->token;
+        $memorial->admin_id = $admin_id;
         // Сначала сохраняем мемориал чтобы получить ID
         $memorial->save();
     
@@ -64,8 +70,11 @@ class MemorialController extends Controller
             
             $memorial->photo = $filename;
             $memorial->save(); // Сохраняем обновленную модель с фото
+
         }
     
+        QrCodes::where('token', $request->token)->update(['memorial_id' => $memorial->id]);
+
         return redirect()->route('dashboard', ['id' => $memorial->id]);
     }
     

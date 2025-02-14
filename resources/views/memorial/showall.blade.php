@@ -48,7 +48,9 @@
                                                     <td><img src="{{ asset('storage/' . $memorial->qr_code) }}"
                                                             height="150"></td>
                                                     <td>{{ $memorial->token }}</td>
-                                                    <td>{{ $memorial->status }}</td>
+                                                    <td>
+                                                        <a href="/memorial/attach/{{ $memorial->token }}">Mobile scan</a>
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach
