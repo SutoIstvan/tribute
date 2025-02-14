@@ -35,4 +35,9 @@ class Memorial extends Model
     public function admin() {
         return $this->belongsTo(User::class, 'admin_id');
     }
+
+    public function memorialimages()
+    {
+        return $this->hasMany(MemorialImage::class);
+    }
 }

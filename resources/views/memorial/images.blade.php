@@ -1,4 +1,4 @@
-@extends('layouts.attach')
+@extends('layouts.admin')
 
 @section('css')
 
@@ -18,7 +18,7 @@
         }
 
         .holder {
-            background-image: url('../../circle.png');
+            background-image: url('circle.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -43,7 +43,7 @@
         .candle {
             bottom: 243px;
             width: 150px;
-            /* background-image: url('circle.png'); */
+            background-image: url('circle.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -143,77 +143,112 @@
         .dropzone .dz-preview .dz-remove {
             margin-top: 10px;
         }
+
+        .card-memorial {
+            padding: 15px;
+            width: 350px;
+            background: #222;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.7);
+            user-select: none;
+        }
+
+        .cover-photo {
+            position: relative;
+            background-size: cover;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .profile {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            bottom: -60px;
+            left: 15px;
+            border-radius: 50%;
+            border: 2px solid #222;
+            background: #222;
+            padding: 5px;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-size: 25px;
+            margin: 5px 0 0 120px;
+            color: #fff;
+        }
+
+        .about {
+            margin-top: 30px;
+            line-height: 1.6;
+        }
+
+        .pricing-pg .item {
+            padding: 45px;
+            background: var(--bg-color);
+        }
+
+        .fit-img img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: center center;
+            object-position: center center;
+        }
+
+        img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
     </style>
 @endsection
 
-@section('title', 'Adat mentés - mbook.hu')
+@section('title', 'Irányítópult - mbook.hu')
 
 @section('content')
 
 
 
 
-
-
-
-
-
-
-
-    <div class="container mt-100 mb-50">
-
-        <!--Avatar-->
-        <div>
-            <div class="d-flex justify-content-center mt-100 mb-50">
-                <img id="selectedAvatar" src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                    class="rounded-circle" style="width: 200px; height: 200px; object-fit: cover;"
-                    alt="example placeholder" />
-            </div>
-            <div class="d-flex justify-content-center">
-                <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
-                    <label class="form-label text-white m-1" for="customFile2">Choose file</label>
-                    <input type="file" class="form-control d-none" id="customFile2"
-                        onchange="displaySelectedImage(event, 'selectedAvatar')" />
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
-
-
     <div class="container">
-        <div class="row d-flex justify-content-center mt-4 mb-50">
-            <div class="col-12 col-md-3 p-4">
-                <h3 class="text-white">Fényképek</h3>
-                <p class="mt-2 text-white-50">Töltsön fel néhány fényképet, később dátumot és további adatokat is megadhat.
-                </p>
-            </div>
+        <div class="section-padding text-secondary text-center">
 
-            <div class="col-12 col-md-7 p-3 ">
-                <div class="container">
-                    <div class="card bg-dark border-warning">
-                        <form method="post" action="{{ url('images/store') }}" enctype="multipart/form-data"
-                            class="dropzone bg-dark text-white" id="dropzone">
-                            <input name="id" type="hidden" value="{{ $id }}">
-                            @csrf
-                        </form>
-                    </div>
+
+
+            <div class="">
+
+                <h4>
+                    <span class="sub-color inline">Az irányítópultban</span>
+                </h4>
+
+                {{-- <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1> --}}
+                <div class="col-lg-6 mx-auto">
+                    <p class="fs-5 mt-4 mb-4">
+                         szerkesztheti a meglévő emlékoldalakat és új oldalakat adhat hozzá elhunyt szeretteinek.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <div class="text-center mb-70">
-        <a href="../inner_pages/about.html" class="butn butn-md butn-bord butn-rounded">
-            <div class="d-flex align-items-center">
-                <span>Open memorial page</span>
-                <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
+    <section class="pricing-pg mb-100">
+        <div class="container">
+            <div class="row">
+                <form action="{{ route('memorial.imagesstore') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="text" name="title" placeholder="Название">
+                    <input type="file" name="images[]" multiple>
+                    <button type="submit">Создать</button>
+                </form>
+                
             </div>
-        </a>
-    </div>
+        </div>
+    </section>
 
 
 
@@ -223,49 +258,5 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript">
-        Dropzone.options.dropzone = {
-            maxFilesize: 10,
-            renameFile: function(file) {
-                var dt = new Date();
-                var time = dt.getTime();
-                return time + file.name;
-            },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            addRemoveLinks: true,
-            timeout: 60000,
-            success: function(file, response) {
-                console.log(response);
-            },
-            error: function(file, response) {
-                return false;
-            },
-            dictDefaultMessage: "Kattints ide vagy húzd ide a képeket a feltöltéshez",
-            dictFallbackMessage: "A böngésződ nem támogatja a fájlok feltöltését.",
-            dictFallbackText: "Kérlek, használd az alábbi tartalék űrlapot a fájlok feltöltésére.",
-            dictFileTooBig: "A fájl túl nagy ( MB). A maximális méret:  MB.",
-            dictInvalidFileType: "Nem tölthetsz fel ilyen típusú fájlt.",
-            dictResponseError: "A szerver hibás választ adott ().",
-            dictCancelUpload: "Feltöltés megszakítása",
-            dictCancelUploadConfirmation: "Biztosan megszakítod a feltöltést?",
-            dictRemoveFile: "Fájl törlése",
-            dictMaxFilesExceeded: "Nem tölthetsz fel több fájlt.",
-        };
 
-        function displaySelectedImage(event, elementId) {
-            const selectedImage = document.getElementById(elementId);
-            const fileInput = event.target;
-
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    selectedImage.src = e.target.result;
-                };
-
-                reader.readAsDataURL(fileInput.files[0]);
-            }
-        }
-
-    </script>
 @endsection

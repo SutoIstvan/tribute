@@ -12,11 +12,11 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      */
- 
-     public function index()
-     {
+
+    public function index()
+    {
         //  return view('image');
-     }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -43,9 +43,11 @@ class ImageController extends Controller
         $imageUpload->filename = $imagePath;
         $imageUpload->memorial_id = $memorial_id;
         $imageUpload->save();
-    
+
         return response()->json(['success' => $imageName]);
     }
+
+
 
     // public function uploadTempImage(Request $request)
     // {
@@ -53,23 +55,23 @@ class ImageController extends Controller
     //     $request->validate([
     //         'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
     //     ]);
-    
+
     //     $image = $request->file('file');
     //     $imageName = time() . '_' . $image->getClientOriginalName();
     //     $path = '/images/temp/';
-    
+
     //     // Используем только один метод сохранения
     //     Storage::disk('public')->putFileAs($path, $image, $imageName);
-    
+
     //     // Сохраняем имя файла в сессии
     //     $tempImages = session()->get('temp_images', []);
     //     $tempImages[] = $imageName;
     //     session()->put('temp_images', $tempImages);
-    
+
     //     return response()->json(['success' => $imageName, 'temp' => true]);
     // }
-    
-    
+
+
 
     /**
      * Display the specified resource.

@@ -56,7 +56,18 @@ Route::get('/memorial/{id}', [MemorialController::class, 'show'])->name('memoria
 Route::middleware(['auth'])->group(function () {
     Route::post('/memorial/attach', [QrCodeController::class, 'attach'])->name('memorial.attach');
     Route::post('/memorial/save', [MemorialController::class, 'saveMemorial'])->name('memorial.save');
-    Route::get('/memorial/images/{id}', [MemorialController::class, 'imagesMemorial'])->name('memorial.images');
+
+    Route::get('/dashboard/memorial/images', [MemorialController::class, 'images'])->name('memorial.images');
+
+
+    // Редактирование информации
+    Route::get('/dashboard/memorial/{id}/edit', [MemorialController::class, 'edit'])->name('memorial.edit');
+    Route::put('/dashboard/memorial/{id}', [MemorialController::class, 'update'])->name('memorial.update');
+
+    // Редактирование изображений
+    Route::get('/dashboard/memorial/{id}/images', [MemorialController::class, 'editImages'])->name('memorial.images.edit');
+    Route::post('/dashboard/memorial/{id}/images', [MemorialController::class, 'uploadImages'])->name('memorial.images.upload');
+    Route::delete('/dashboard/memorial/image/{id}', [MemorialController::class, 'deleteImage'])->name('memorial.image.delete');
 
     
 });

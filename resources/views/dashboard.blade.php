@@ -373,7 +373,7 @@
                                 </ul>
                             </div> --}}
                             <div class="text-center mt-40">
-                                <a href="#" class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
+                                <a href="{{ route('memorial.edit', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
                                     <div class="d-flex align-items-center">
                                         <span>Szerkesztes</span>
                                     </div>

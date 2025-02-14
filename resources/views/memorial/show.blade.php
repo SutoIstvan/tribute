@@ -19,11 +19,27 @@
                                     <img src="{{ asset('assets/imgs/header/circle-badge4.png') }}" alt="">
                                 </div>
                             </div>
+                            {{-- <div class="img fit-img radius-30 mt-50">
+                                <img src="{{ asset('images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
+                                    alt="">
+                            </div> --}}
+
                             <div class="img fit-img radius-30 mt-50">
-                                <img src="{{ asset('images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" alt="">
+                                @if ($images->isNotEmpty())
+                                    <!-- Используем первую картинку из массива $images -->
+                                    <img src="{{ asset('storage/' . $images->first()->image_path) }}"
+                                        alt="Изображение мемориала">
+                                @elseif ($memorial->photo)
+                                    <!-- Если массив $images пустой, используем изображение из $memorial->photo -->
+                                    <img src="{{ asset('images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
+                                        alt="Изображение мемориала">
+                                @else
+                                    <!-- Если нет ни одной картинки, выводим заглушку -->
+                                    <img src="{{ asset('path/to/default/image.jpg') }}" alt="Нет изображения">
+                                @endif
                             </div>
 
-                            {{-- @if($memorial->photo)
+                            {{-- @if ($memorial->photo)
                             <img src="{{ asset('storage/' . $memorial->photo) }}" alt="Фото">
                         @endif --}}
 
@@ -98,18 +114,100 @@
 
     <!-- ==================== Start Portfolio ==================== -->
 
+
     <section class="works-dm section-padding">
+        <div class="container">
+            <div class="gallery row md-marg">
+                <!-- Первый блок (первая картинка из $images) -->
+                @if ($images->isNotEmpty())
+                    <div class="items col-lg-6 order-md-2">
+                        <div class="item">
+                            <div class="img">
+                                <img src="{{ asset('storage/' . $images->first()->image_path) }}"
+                                    alt="Изображение мемориала">
+                            </div>
+                            <div class="cont mt-30">
+                                <div class="info sub-color mb-10">
+                                    @if ($images->isNotEmpty())
+                                        <div class="info sub-color mb-10">
+                                            @if ($images->first()->image_date)
+                                                <span>{{ $images->first()->image_date }}</span>
+                                                <span class="dot"></span>
+                                            @endif
+                                            @if ($images->first()->image_description)
+                                                <span>{{ $images->first()->image_description }}</span>
+                                            @endif
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Заголовок (статический) -->
+                    <div class="items col-lg-6 order-md-1">
+                        <div class="sec-head">
+                            <h6 class="sub-head mb-15">Fényképek az elhunytról</h6>
+                            <h2 class="fz-50">Vessen egy pillantást<br> a fényképekre</h2>
+                        </div>
+                    </div>
+
+                    <!-- Остальные картинки (начиная со второй) -->
+                    @if ($images->count() > 1)
+                        @foreach ($images->slice(1) as $image)
+                            <div class="items col-lg-6 order-md-2">
+                                <div class="item">
+                                    <div class="img">
+                                        <img src="{{ asset('storage/' . $image->image_path) }}"
+                                            alt="Изображение мемориала">
+                                    </div>
+                                    <div class="cont mt-30">
+                                        <div class="info sub-color mb-10">
+                                            @if ($images->isNotEmpty())
+                                                <div class="info sub-color mb-10">
+                                                    @if ($images->first()->image_date)
+                                                        <span>{{ $images->first()->image_date }}</span>
+                                                        <span class="dot"></span>
+                                                    @endif
+                                                    @if ($images->first()->image_description)
+                                                        <span>{{ $images->first()->image_description }}</span>
+                                                    @endif
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+
+                    <!-- Кнопка (статическая) -->
+                    <div class="items col-lg-6 order-md-2">
+                        <a href="../inner_pages/portfolio-gallery.html" class="crv-butn mt-100">
+                            <div class="d-flex">
+                                <span class="text">Tekintse meg az összes fényképet</span>
+                                <span class="icon">
+                                    <img src="assets/common/imgs/icons/arrow-top-right.svg" alt="">
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+
+                @endif
+            </div>
+        </div>
+    </section>
+
+
+    {{-- <section class="works-dm section-padding">
         <div class="container">
             <div class="gallery row md-marg">
                 <div class="items col-lg-6 order-md-2">
                     <div class="item">
                         <div class="img">
                             <img src="{{ asset('assets/imgs/works/6.png') }}" alt="">
-                            <!-- <div class="tags">
-                                                    <a href="#0">Development</a>
-                                                    <a href="#0">UI/UX</a>
-                                                    <a href="#0">illustration</a>
-                                                </div> -->
+
                         </div>
                         <div class="cont mt-30">
                             <div class="info sub-color mb-10">
@@ -117,9 +215,7 @@
                                 <span class="dot"></span>
                                 <span>A szülővárosomban</span>
                             </div>
-                            {{-- <h6>
-                                <a href="../inner_pages/project-details.html">Archin Architecture Studio</a>
-                            </h6> --}}
+
                         </div>
                     </div>
                 </div>
@@ -134,11 +230,7 @@
                     <div class="item">
                         <div class="img">
                             <img src="{{ asset('assets/imgs/works/5.jpg') }}" alt="">
-                            <!-- <div class="tags">
-                                                    <a href="#0">Development</a>
-                                                    <a href="#0">UI/UX</a>
-                                                    <a href="#0">illustration</a>
-                                                </div> -->
+
                         </div>
                         <div class="cont mt-30">
                             <div class="info sub-color mb-10">
@@ -146,10 +238,7 @@
                                 <span class="dot"></span>
                                 <span>Kirándulás Párizsba</span>
                             </div>
-                            <!-- <h6>
-                                                    <a href="../inner_pages/project-details.html">Unerio Residential Complex
-                                                        Landing page</a>
-                                                </h6> -->
+
                         </div>
                     </div>
                 </div>
@@ -157,11 +246,7 @@
                     <div class="item">
                         <div class="img">
                             <img src="assets/imgs/works/6.jpg" alt="">
-                            <!-- <div class="tags">
-                                                    <a href="#0">Development</a>
-                                                    <a href="#0">UI/UX</a>
-                                                    <a href="#0">illustration</a>
-                                                </div> -->
+
                         </div>
                         <div class="cont mt-30">
                             <div class="info sub-color mb-10">
@@ -169,10 +254,7 @@
                                 <span class="dot"></span>
                                 <span>Kedvenc hely</span>
                             </div>
-                            <!-- <h6>
-                                                    <a href="../inner_pages/project-details.html">Jorger Clarkson - Architect
-                                                        Personal Portfolio</a>
-                                                </h6> -->
+
                         </div>
                     </div>
                 </div>
@@ -180,11 +262,7 @@
                     <div class="item">
                         <div class="img">
                             <img src="assets/imgs/works/8.jpg" alt="">
-                            <!-- <div class="tags">
-                                                    <a href="#0">Development</a>
-                                                    <a href="#0">UI/UX</a>
-                                                    <a href="#0">illustration</a>
-                                                </div> -->
+
                         </div>
                         <div class="cont mt-30">
                             <div class="info sub-color mb-10">
@@ -192,9 +270,7 @@
                                 <span class="dot"></span>
                                 <span>Munkahely az irodában</span>
                             </div>
-                            <!-- <h6>
-                                                    <a href="../inner_pages/project-details.html">Newz - Magazine Site</a>
-                                                </h6> -->
+
                         </div>
                     </div>
                 </div>
@@ -210,7 +286,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- ==================== End Portfolio ==================== -->
 
@@ -291,12 +367,12 @@
                             <div class="d-flex mt-30">
                                 <span class="sub-color">Aaron Beck</span>
                                 <!-- <div class="stars ml-auto">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div> -->
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                            </div> -->
                             </div>
                         </div>
                     </div>
@@ -316,12 +392,12 @@
                             <div class="d-flex mt-30">
                                 <span class="sub-color">Aaron Beck</span>
                                 <!-- <div class="stars ml-auto">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div> -->
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                            </div> -->
                             </div>
                         </div>
                     </div>
@@ -341,12 +417,12 @@
                             <div class="d-flex mt-30">
                                 <span class="sub-color">Aaron Beck</span>
                                 <!-- <div class="stars ml-auto">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div> -->
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                            </div> -->
                             </div>
                         </div>
                     </div>
@@ -366,12 +442,12 @@
                             <div class="d-flex mt-30">
                                 <span class="sub-color">Aaron Beck</span>
                                 <!-- <div class="stars ml-auto">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div> -->
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                            </div> -->
                             </div>
                         </div>
                     </div>
@@ -391,12 +467,12 @@
                             <div class="d-flex mt-30">
                                 <span class="sub-color">Aaron Beck</span>
                                 <!-- <div class="stars ml-auto">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div> -->
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                            </div> -->
                             </div>
                         </div>
                     </div>
