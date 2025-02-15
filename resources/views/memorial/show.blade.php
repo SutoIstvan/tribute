@@ -1,6 +1,6 @@
 @extends('layouts.home')
 
-@section('title', 'mbook.hu')
+@section('title', $memorial->name . ' - mbook.hu')
 
 @section('content')
     <!-- ==================== Start Header ==================== -->

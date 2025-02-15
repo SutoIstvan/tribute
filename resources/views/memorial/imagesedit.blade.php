@@ -197,7 +197,8 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(255, 0, 0, 0.7); /* Полупрозрачный красный фон */
+            background: rgba(255, 0, 0, 0.7);
+            /* Полупрозрачный красный фон */
             color: white;
             border: none;
             padding: 5px 10px;
@@ -206,10 +207,32 @@
             cursor: pointer;
             transition: background 0.3s;
         }
+
+        .item .img {
+            border-radius: 15px;
+            height: 255px;
+            overflow: hidden;
+        }
+
+        .fit-img img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: center center;
+            object-position: center center;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+
     </style>
 @endsection
 
-@section('title', 'Adatok szerkesztése - mbook.hu')
+@section('title', 'Képek szerkesztése - mbook.hu')
 
 @section('content')
 
@@ -219,13 +242,14 @@
             <div class="">
 
                 <h4>
-                    <span class="sub-color inline">Kepek szerkesztése</span>
+                    <span class="sub-color inline">Képek szerkesztése</span>
                 </h4>
 
-                <h1 class="display-5 fw-bold text-white mt-15">{{ $memorial->name }}</h1>
+                {{-- <h1 class="display-5 fw-bold text-white mt-15">{{ $memorial->name }}</h1> --}}
                 <div class="col-lg-6 mx-auto">
                     <p class="fs-5 mt-4 mb-4">
-                        Ezen az oldalon módosíthatja szerettei adatait. A mentéshez kattintson a módosítások mentése gombra az oldal alján.
+                        Ezen az oldalon fényképeket tölthet fel, dátumot és megjegyzést fűzhet a fotóhoz. A mentéshez kattintson a módosítások mentése gombra
+                        az oldal alján.
                     </p>
                 </div>
             </div>
@@ -242,35 +266,67 @@
         </div>
     @endif
 
+    
+
 
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <h1>Редактирование Изображений</h1>
 
-            @if(session('success'))
+            @if (session('success'))
                 <p style="color: green;">{{ session('success') }}</p>
             @endif
 
-            <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
-                <label>Добавить новые изображения:</label>
                 <input type="file" name="images[]" multiple>
                 <button type="submit">Загрузить</button>
             </form>
 
             <h2>Текущие изображения</h2>
-            @foreach($memorial->memorialimages as $image)
-                <div style="display: inline-block; margin: 10px;">
-                    <img src="{{ asset('storage/' . $image->image_path) }}" width="200">
-                    <form action="{{ route('memorial.image.delete', $image->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Удалить</button>
-                    </form>
-                </div>
-                <a href="{{ route('memorial.edit', $memorial->id) }}">Редактировать информацию</a> |
 
-            @endforeach
+
+
+
+            <div class="container">
+                <div class="row xlg-marg mb-100">
+                    @foreach ($memorial->memorialimages as $image)
+                        <div class="col-lg-4 bord mt-20">
+                            <div class="item">
+                                <div class="info d-flex align-items-center">
+                                    {{-- <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="author-img fit-img">
+                                            <img src="assets/imgs/blogs/blog1/a1.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="author-info ml-10">
+                                        <span>M Moussa</span>
+                                        <span class="sub-color">editor</span>
+                                    </div>
+                                </div>
+                                <div class="date ml-auto">
+                                    <span class="sub-color"><i class="fa-regular fa-clock mr-15 opacity-7"></i> 12 hours
+                                        ago</span>
+                                </div> --}}
+                                </div>
+                                <div class="img fit-img mt-30">
+                                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="">
+                                </div>
+                                <div class="cont mt-30">
+                                    <div class="date ml-auto">
+                                        <span class="sub-color"><i class="fa-regular fa-clock mr-15 opacity-7"></i> 12 hours
+                                            ago</span>
+                                    </div>
+                                    <h6>
+                                        <a href="#0">We’re winner SOTY at CSS Award 2023</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
         </div>
     </div>
@@ -285,7 +341,7 @@
 @endsection
 
 @section('js')
-{{-- <script>
+    {{-- <script>
     const dropArea = document.querySelector('.drag-area');
     const dragText = document.querySelector('.header');
     let button = dropArea.querySelector('.button');
