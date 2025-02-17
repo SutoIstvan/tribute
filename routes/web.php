@@ -112,7 +112,7 @@ Route::get('/auth/google/callback', function (Request $request) {
         if (session()->has('qr_token')) {
             $token = session('qr_token');
             session()->forget('qr_token');
-            return redirect()->route('memorial.attach', ['token' => $token]);
+            return redirect()->to(url("/memorial/attach/{$token}"));
         }
 
         $previousUrl = url()->previous();
