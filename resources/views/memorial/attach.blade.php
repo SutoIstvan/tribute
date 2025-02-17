@@ -428,7 +428,7 @@
                                     class="form-control bg-dark text-white border-secondary py-2" id="fullName"
                                     placeholder="Teljes név">
                             </div>
-                            {{-- <div class="col-12 col-md-6 mb-3">
+                            <div class="col-12 col-md-6 mb-3">
                                 <label for="birth_date" class="form-label text-white">Születési dátum</label>
                                 <input name="birth_date" type="text"
                                     class="form-control bg-dark text-white border-secondary py-2 datepicker" id="birth_date"
@@ -439,10 +439,10 @@
                                 <input name="death_date" type="text"
                                     class="form-control bg-dark text-white border-secondary py-2" id="death_date"
                                     placeholder="nn.hh.eeee">
-                            </div> --}}
+                            </div>
 
 
-                            <div class="col-12 col-md-6 mb-3">
+                            {{-- <div class="col-12 col-md-6 mb-3">
                                 <div class="form-group" data-bs-theme="dark">
                                     <label for="birth_date" class="form-label text-white">Születési dátum</label>
 
@@ -466,7 +466,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             {{-- <input id="datepicker" class="form-control bg-dark text-white border-secondary py-2 datepicker" data-bs-theme="dark" placeholder="nn.hh.éééé"/> --}}
 
