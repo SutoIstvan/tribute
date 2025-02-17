@@ -344,8 +344,7 @@
                         <div class="row">
                             <div class="mt-30">
                                 <label for="biography" class="form-label text-white">Életrajz</label>
-                                <textarea name="biography"  class="form-control bg-dark text-white border-secondary" id="biography" rows="12">
-                                    {{ old('biography', $memorial->biography) }}
+                                <textarea name="biography"  class="form-control bg-dark text-white border-secondary" id="biography" rows="12">{{ old('biography', $memorial->biography) }}
                                 </textarea>
                             </div>
                         </div>
