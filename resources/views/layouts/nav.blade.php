@@ -27,37 +27,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Hozzászólások</a>
                 </li>
-            </ul>
-        </div>
-        <div class="topnav d-flex align-items-center">
-            @guest
-                {{-- Показываем только кнопку входа для гостей --}}
-                <a href="{{ route('login') }}" class="butn butn-rounded">
-                    <div class="d-flex align-items-center">
-                        <span>{{ __('Login') }}</span>
-                        <span class="icon ml-10">
-                            <img src="assets/common/imgs/icons/arrow-top-right.svg" alt="">
-                        </span>
-                    </div>
-                </a>
-            @else
-                {{-- Показываем кнопки профиля и выхода для авторизованных пользователей --}}
-                <div class="text-end me-2">
-                    <button type="button" class="butn butn-rounded" onclick="window.location.href='{{ route('profile.edit') }}'">
+                <li class="nav-item">
+                    <a href="{{ route('profile.edit') }}" class="nav-link">
                         {{ __('Profile') }}
-                    </button>
-                </div>
-        
-                <div class="text-end">
+                    </a>
+                </li>
+                <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="button" class="butn butn-rounded" style="background-color: #ffbebe" onclick="event.preventDefault(); this.closest('form').submit();">
+                        <button type="submit" class="nav-link"  style="background-color: #0e0f11; border: none;">
                             {{ __('Log Out') }}
                         </button>
                     </form>
-                </div>
-            @endguest
-        
+                </li>
+            </ul>
+        </div>
+        <div class="topnav d-flex align-items-center">
             <div class="menu-icon cursor-pointer d-md-none">
                 <span class="icon ti-align-right"></span>
             </div>
