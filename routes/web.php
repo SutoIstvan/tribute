@@ -115,7 +115,10 @@ Route::get('/auth/google/callback', function (Request $request) {
             return redirect()->route('memorial.attach', ['token' => $token]);
         }
 
-        return redirect()->route('home');
+        $previousUrl = url()->previous();
+        return redirect($previousUrl);
+
+        // return redirect()->route('home');
     } catch (\Exception $e) {
         return redirect()->route('login')->withErrors(['error' => 'Failed to sign in with Google']);
     }
