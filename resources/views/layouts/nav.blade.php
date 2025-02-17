@@ -10,7 +10,7 @@
         </a>
 
         <!-- navbar links -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 300px;">
+        <div class="topnav d-none d-lg-flex align-items-center">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Címlap</a>
@@ -28,9 +28,7 @@
                     <a class="nav-link" href="#">Hozzászólások</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('profile.edit') }}" class="nav-link">
-                        {{ __('Profile') }}
-                    </a>
+                    <a class="nav-link active" href="{{ route('dashboard') }}">Irányítópult</a>
                 </li>
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
@@ -42,7 +40,7 @@
                 </li>
             </ul>
         </div>
-        <div class="topnav d-flex align-items-center">
+        <div class="menu-icon cursor-pointer d-lg-none">
             <div class="menu-icon cursor-pointer d-md-none">
                 <span class="icon ti-align-right"></span>
             </div>
