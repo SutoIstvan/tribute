@@ -42,13 +42,13 @@
                 </a>
             @else
                 {{-- Показываем кнопки профиля и выхода для авторизованных пользователей --}}
-                <div class="text-end me-2">
+                <div class="text-end me-2 d-none d-sm-block">
                     <button type="button" class="butn butn-rounded" style="background-color: #0e0f11; color:#e9e9e9" onclick="window.location.href='{{ route('profile.edit') }}'">
                         {{ __('Profile') }}
                     </button>
                 </div>
         
-                <div class="text-end">
+                <div class="text-end d-none d-sm-block">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="button" class="butn butn-rounded" style="background-color: #e9e9e9" onclick="event.preventDefault(); this.closest('form').submit();">
