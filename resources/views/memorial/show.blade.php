@@ -31,7 +31,7 @@
                                         alt="Изображение мемориала">
                                 @elseif ($memorial->photo)
                                     <!-- Если массив $images пустой, используем изображение из $memorial->photo -->
-                                    <img src="{{ asset('images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
+                                    <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
                                         alt="Изображение мемориала">
                                 @else
                                     <!-- Если нет ни одной картинки, выводим заглушку -->
