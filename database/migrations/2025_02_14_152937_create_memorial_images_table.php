@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('memorial_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('memorial_id')->constrained()->onDelete('cascade');
             $table->string('image_path');
             $table->string('image_date')->nullable();
             $table->string('image_description')->nullable();
+            $table->string('memorial_id')->nullable();
             $table->timestamps();
+            $table->foreign('memorial_id')
+                  ->references('id')
+                  ->on('memorials')
+                  ->onDelete('cascade');
         });
     }
 
