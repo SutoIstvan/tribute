@@ -14,8 +14,12 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('filename');
-            $table->foreignId('memorial_id')->constrained()->onDelete('cascade');
+            $table->string('memorial_id')->nullable();
             $table->timestamps();
+            $table->foreign('memorial_id')
+                  ->references('id')
+                  ->on('memorials')
+                  ->onDelete('cascade');
         });
     }
 
