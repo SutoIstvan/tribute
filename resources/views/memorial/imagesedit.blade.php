@@ -280,10 +280,10 @@
                 enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="images[]" multiple>
-                <button type="submit">Загрузить</button>
+                <button type="submit">Upload</button>
             </form>
 
-            <h2>Текущие изображения</h2>
+            <h2>images list</h2>
 
 
 
