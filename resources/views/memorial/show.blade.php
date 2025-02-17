@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="mimg fit-img">
-                <img src="{{ asset('images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" alt="">
+                <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" alt="">
                 <div class="text">
                     <span class="fz-14 text-u mb-10">{{ $memorial->birth_date }} - {{ $memorial->death_date }}</span>
                     <p style="margin-left: 25px;">Míg éltél szerettünk<br> míg élünk nem feledünk!</p>
