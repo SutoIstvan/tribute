@@ -2,7 +2,7 @@
     <div class="container">
 
         <!-- Logo -->
-        <a class="logo" href="#">
+        <a class="logo" href="{{ route('welcome') }}">
             <img src="{{ asset('assets/imgs/logo-mbook.png') }}" alt="logo" style="height: 18px;">
             
             <!-- Tribute Hub -->
@@ -13,31 +13,34 @@
         <div class="topnav d-none d-lg-flex align-items-center">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Címlap</a>
+                    <a class="nav-link active" href="{{ route('welcome') }}">Címlap</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Életrajz</a>
+                    <a class="nav-link" href="http://tribute.test/memorials">Qr code</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Fényképek</a>
+                    <a class="nav-link" href="#">Árak</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Kapcsolatok</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Videó</a>
+                    @auth
+                        <a class="nav-link" href="{{ route('dashboard') }}">Irányítópult</a>
+                    @else
+                        <a class="nav-link" href="{{ route('login') }}">Belépés</a>
+                    @endauth
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Hozzászólások</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('dashboard') }}">Irányítópult</a>
-                </li>
-                <li class="nav-item">
+                
+                {{-- <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="nav-link"  style="background-color: #0e0f11; border: none;">
                             {{ __('Log Out') }}
                         </button>
                     </form>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <div class="menu-icon cursor-pointer d-lg-none">

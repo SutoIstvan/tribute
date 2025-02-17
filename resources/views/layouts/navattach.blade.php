@@ -2,7 +2,7 @@
     <div class="container">
 
         <!-- Logo -->
-        <a class="logo" href="#">
+        <a class="logo" href="{{ route('welcome') }}">
             <img src="{{ asset('assets/imgs/logo-mbook.png') }}" alt="logo" style="height: 18px;">
             
             <!-- Tribute Hub -->

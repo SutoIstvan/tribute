@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Response;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     $admin_id = Auth::user()->id;

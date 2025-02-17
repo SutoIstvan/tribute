@@ -2,6 +2,138 @@
 
 @section('title', 'mbook.hu')
 
+@section('css')
+    <style>
+                :before,
+        :after {
+            margin: 0;
+            padding: 0;
+            word-break: break-all;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        .holder {
+            background-image: url('../../circle.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .holder {
+            margin: 0rem auto 0;
+            width: 150px;
+            height: 200px;
+            position: relative;
+        }
+
+        .holder *,
+        .holder *:before,
+        .holder *:after {
+            position: absolute;
+            content: "";
+        }
+
+        .candle {
+            bottom: 243px;
+            width: 150px;
+            /* background-image: url('circle.png'); */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .flame {
+            width: 11px;
+            height: 30px;
+            left: 50%;
+            transform-origin: 50% 100%;
+            transform: translateX(-50%);
+            bottom: -125px;
+            border-radius: 50% 50% 20% 20%;
+            background: rgba(255, 255, 255, 1);
+            background: linear-gradient(white 80%, transparent);
+            animation: moveFlame 6s linear infinite, enlargeFlame 5s linear infinite;
+        }
+
+        .flame:before {
+            left: 1%;
+            width: 100%;
+            height: 100%;
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 15px 0 rgba(132, 66, 25, 0.4), 0 -6px 4px 0 rgba(247, 128, 0, .7);
+        }
+
+        @keyframes moveFlame {
+
+            0%,
+            100% {
+                transform: translateX(-50%) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateX(-50%) rotate(2deg);
+            }
+        }
+
+        @keyframes enlargeFlame {
+
+            0%,
+            100% {
+                height: 44px;
+            }
+
+            50% {
+                height: 55px;
+            }
+        }
+
+        .glow {
+            width: 11px;
+            height: 49px;
+            border-radius: 50% 50% 35% 35%;
+            left: 50%;
+            bottom: -130px;
+            transform: translateX(-50%);
+            background: rgba(0, 132, 255, 0.207);
+            box-shadow: 0 -40px 30px 0 #dc8a0c, 0 40px 50px 0 #dc8a0c, inset 3px 0 2px 0 rgba(0, 133, 255, .6), inset -3px 0 2px 0 rgba(0, 133, 255, .6);
+        }
+
+        .glow:before {
+            width: 70%;
+            height: 60%;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            border-radius: 50%;
+            background: rgba(199, 11, 11, 0.35);
+        }
+
+        .blinking-glow {
+            width: 100px;
+            height: 180px;
+            left: 50%;
+            top: -55%;
+            transform: translate(-50%, 20%);
+
+            border-radius: 50%;
+            background: #ff62008b;
+            filter: blur(60px);
+            animation: blinkIt .1s infinite;
+        }
+
+        @keyframes blinkIt {
+            50% {
+                opacity: .8;
+            }
+        }
+
+
+    </style>
+@endsection
+
 @section('content')
     <!-- ==================== Start Header ==================== -->
 
@@ -16,8 +148,16 @@
                         <div class="col-lg-6 imgs-cube">
                             <div class="imgs">
                                 <div class="circle">
-                                    <img src="assets/imgs/header/circle-badge4.png" alt="">
-                                </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="holder">
+                                            <div class="candle">
+                                                <div class="blinking-glow"></div>
+                                                <div class="thread"></div>
+                                                <div class="glow"></div>
+                                                <div class="flame"></div>
+                                            </div>
+                                        </div>
+                                    </div>                                </div>
                             </div>
                             <div class="img fit-img radius-30 mt-50">
                                 <img src="assets/imgs/header/5.jpg" alt="">
@@ -85,7 +225,7 @@
 
             </div>
             <div class="text-center mt-80">
-                <a href="../inner_pages/about.html" class="butn butn-md butn-bord butn-rounded">
+                <a href="#" class="butn butn-md butn-bord butn-rounded">
                     <div class="d-flex align-items-center">
                         <span>Bővebben az életrajzról</span>
                         <span class="icon pe-7s-angle-right ml-10 fz-30"></span>

@@ -70,6 +70,7 @@
     right: -100px; }
     .header-dm .imgs-cube .imgs .circle {
       width: 200px;
+      height: 200px;
       position: relative;
       z-index: 4; }
       .header-dm .imgs-cube .imgs .circle:after {
