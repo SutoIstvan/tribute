@@ -360,10 +360,10 @@
                             <div class="head text-center">
                                 <h6 class="text-u fz-20 mb-40">{{ $memorial->name }}</h6>
                                 <div class="img img-fit">
-                                    <img src="{{ asset('images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
+                                    <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"
                                         class="img img-fit">
                                 </div>
-                                {{-- <span class="sub-color"></span> --}}
+                                {{-- <span class="sub-color"></span> --}} 
                             </div>
                             {{-- <div class="list mt-40">
                                 <ul class="rest">
