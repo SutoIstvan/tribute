@@ -301,7 +301,7 @@
                                 <div class="drag-area bg-dark text-white border-secondary">
                                     <!-- Если фото существует, отображаем его -->
                                     @if(isset($memorial->photo) && $memorial->photo)
-                                        <img src="{{ asset('images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" alt="Фото">
+                                        <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" alt="Фото">
                                         <button type="button" class="deleteBtn butn butn-md butn-danger butn-rounded">
                                             Kép törlése
                                         </button>
