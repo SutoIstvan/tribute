@@ -109,10 +109,10 @@ Route::get('/auth/google/callback', function (Request $request) {
         Auth::login($user);
 
         // Проверяем наличие предыдущего URL
-        if (session()->has('previous_url')) {
-            $previousUrl = session('previous_url');
-            session()->forget('previous_url');
-            return redirect($previousUrl);
+        if (session()->has('qr_token')) {
+            $token = session('qr_token');
+            session()->forget('qr_token');
+            return redirect()->route('memorial.attach', ['token' => $token]);
         }
 
         return redirect()->route('home');
