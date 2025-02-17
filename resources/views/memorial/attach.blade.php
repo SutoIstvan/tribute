@@ -428,7 +428,7 @@
                                     class="form-control bg-dark text-white border-secondary py-2" id="fullName"
                                     placeholder="Teljes név">
                             </div>
-                            <div class="col-12 col-md-6 mb-3">
+                            {{-- <div class="col-12 col-md-6 mb-3">
                                 <label for="birth_date" class="form-label text-white">Születési dátum</label>
                                 <input name="birth_date" type="text"
                                     class="form-control bg-dark text-white border-secondary py-2 datepicker" id="birth_date"
@@ -439,7 +439,7 @@
                                 <input name="death_date" type="text"
                                     class="form-control bg-dark text-white border-secondary py-2" id="death_date"
                                     placeholder="nn.hh.eeee">
-                            </div>
+                            </div> --}}
 
 
                             <div class="col-12 col-md-6 mb-3">
@@ -447,7 +447,7 @@
                                     <label for="birth_date" class="form-label text-white">Születési dátum</label>
 
                                     <div class="input-group date" id="datetimepicker10" data-target-input="nearest">
-                                        <input name="birth_date" type="text" class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker" data-target="#datetimepicker10"  placeholder="éééé.hh.nn"/>
+                                        <input name="birth_date" type="text" class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker" data-target="#datetimepicker10"  placeholder="éééé-hh-nn"/>
                                         <div class="input-group-append" data-target="#datetimepicker10" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar" style="line-height: 1.8 !important;"></i></div>
                                         </div>
@@ -460,7 +460,7 @@
                                     <label for="death_date" class="form-label text-white">Elhalálozás dátuma</label>
 
                                     <div class="input-group date" id="datetimepicker11" data-target-input="nearest">
-                                        <input name="death_date" type="text" class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker" data-target="#datetimepicker11"  placeholder="éééé.hh.nn"/>
+                                        <input name="death_date" type="text" class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker" data-target="#datetimepicker11"  placeholder="éééé-hh-nn"/>
                                         <div class="input-group-append" data-target="#datetimepicker11" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar" style="line-height: 1.8 !important;"></i></div>
                                         </div>
@@ -625,7 +625,7 @@
         $(function () {
             $('#datetimepicker10').datetimepicker({
                 viewMode: 'years',
-                format: 'YYYY/MM/DD',
+                format: 'YYYY-MM-DD',
                 display: {
                     theme: 'dark'  // Устанавливает тёмную тему
                 }
@@ -635,7 +635,7 @@
         $(function () {
             $('#datetimepicker11').datetimepicker({
                 viewMode: 'years',
-                format: 'YYYY/MM/DD',
+                format: 'YYYY-MM-DD',
                 display: {
                     theme: 'dark'  // Устанавливает тёмную тему
                 }
