@@ -192,7 +192,8 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(255, 0, 0, 0.7); /* Полупрозрачный красный фон */
+            background: rgba(255, 0, 0, 0.7);
+            /* Полупрозрачный красный фон */
             color: white;
             border: none;
             padding: 5px 10px;
@@ -202,8 +203,8 @@
             transition: background 0.3s;
         }
 
-         /* Темная тема для датапикера */
-         .gj-datepicker-bootstrap [role="right-icon"] button {
+        /* Темная тема для датапикера */
+        .gj-datepicker-bootstrap [role="right-icon"] button {
             background-color: #343a40 !important;
             border-color: #212529 !important;
         }
@@ -262,101 +263,123 @@
         }
 
 
-/* Измените фон виджета */
-.bootstrap-datetimepicker-widget {
-    background-color: #343a40; /* Цвет фона виджета */
-    color: #ffffff; /* Цвет текста внутри виджета */
-}
+        /* Измените фон виджета */
+        .bootstrap-datetimepicker-widget {
+            background-color: #343a40;
+            /* Цвет фона виджета */
+            color: #ffffff;
+            /* Цвет текста внутри виджета */
+        }
 
-/* Измените цвет фона для дней */
-.bootstrap-datetimepicker-widget table {
-    background-color: #343a40; /* Цвет фона таблицы */
-}
+        /* Измените цвет фона для дней */
+        .bootstrap-datetimepicker-widget table {
+            background-color: #343a40;
+            /* Цвет фона таблицы */
+        }
 
-/* Измените цвет фона для ячеек дней */
-.bootstrap-datetimepicker-widget table td {
-    background-color: #495057; /* Цвет фона ячеек */
-    color: #ffffff; /* Цвет текста в ячейках */
-}
+        /* Измените цвет фона для ячеек дней */
+        .bootstrap-datetimepicker-widget table td {
+            background-color: #495057;
+            /* Цвет фона ячеек */
+            color: #ffffff;
+            /* Цвет текста в ячейках */
+        }
 
-.bootstrap-datetimepicker-widget table td:hover {
-    background-color: #6c757d; /* Цвет фона при наведении на ячейку */
-}
+        .bootstrap-datetimepicker-widget table td:hover {
+            background-color: #6c757d;
+            /* Цвет фона при наведении на ячейку */
+        }
 
-/* Измените цвет фона для активной ячейки */
-.bootstrap-datetimepicker-widget table td.active {
-    background-color: #007bff; /* Цвет фона для активной ячейки */
-    color: #ffffff; /* Цвет текста для активной ячейки */
-}
+        /* Измените цвет фона для активной ячейки */
+        .bootstrap-datetimepicker-widget table td.active {
+            background-color: #007bff;
+            /* Цвет фона для активной ячейки */
+            color: #ffffff;
+            /* Цвет текста для активной ячейки */
+        }
 
-/* Измените цвет фона для текущего дня */
-.bootstrap-datetimepicker-widget table td.today {
-    background-color: #28a745; /* Цвет фона для текущего дня */
-    color: #ffffff; /* Цвет текста для текущего дня */
-}
+        /* Измените цвет фона для текущего дня */
+        .bootstrap-datetimepicker-widget table td.today {
+            background-color: #28a745;
+            /* Цвет фона для текущего дня */
+            color: #ffffff;
+            /* Цвет текста для текущего дня */
+        }
 
-/* Измените фон кнопок и их цвет текста */
-.bootstrap-datetimepicker-widget .btn {
-    background-color: #007bff; /* Цвет фона */
-    color: #535353; /* Цвет текста */
-}
+        /* Измените фон кнопок и их цвет текста */
+        .bootstrap-datetimepicker-widget .btn {
+            background-color: #007bff;
+            /* Цвет фона */
+            color: #535353;
+            /* Цвет текста */
+        }
 
-.bootstrap-datetimepicker-widget .btn:hover {
-    background-color: #0056b3; /* Цвет фона при наведении */
-    color: #b4b4b4; /* Цвет текста при наведении */
-}
+        .bootstrap-datetimepicker-widget .btn:hover {
+            background-color: #0056b3;
+            /* Цвет фона при наведении */
+            color: #b4b4b4;
+            /* Цвет текста при наведении */
+        }
 
-/* Измените цвет активного дня */
-.bootstrap-datetimepicker-widget table td.active,
-.bootstrap-datetimepicker-widget table td.active:hover {
-    background-color: #28a745; /* Цвет фона активного дня */
-    color: #fff; /* Цвет текста активного дня */
-}
+        /* Измените цвет активного дня */
+        .bootstrap-datetimepicker-widget table td.active,
+        .bootstrap-datetimepicker-widget table td.active:hover {
+            background-color: #28a745;
+            /* Цвет фона активного дня */
+            color: #fff;
+            /* Цвет текста активного дня */
+        }
 
-/* Измените цвет для текущего дня */
-.bootstrap-datetimepicker-widget table td.today:before {
-    border-bottom-color: #ffc107; /* Цвет для текущего дня */
-}
+        /* Измените цвет для текущего дня */
+        .bootstrap-datetimepicker-widget table td.today:before {
+            border-bottom-color: #ffc107;
+            /* Цвет для текущего дня */
+        }
 
-/* Измените цвет заголовков */
-.bootstrap-datetimepicker-widget table th {
-    background-color: #343a40; /* Цвет фона заголовков */
-    color: #fff; /* Цвет текста заголовков */
-}
+        /* Измените цвет заголовков */
+        .bootstrap-datetimepicker-widget table th {
+            background-color: #343a40;
+            /* Цвет фона заголовков */
+            color: #fff;
+            /* Цвет текста заголовков */
+        }
 
-/* Измените цвет текста в неактивных днях */
-.bootstrap-datetimepicker-widget table td.disabled,
-.bootstrap-datetimepicker-widget table td.disabled:hover {
-    color: #6c757d; /* Цвет текста неактивных дней */
-}
+        /* Измените цвет текста в неактивных днях */
+        .bootstrap-datetimepicker-widget table td.disabled,
+        .bootstrap-datetimepicker-widget table td.disabled:hover {
+            color: #6c757d;
+            /* Цвет текста неактивных дней */
+        }
 
-/* Измените цвет фона для дней при наведении */
-.bootstrap-datetimepicker-widget table td:hover {
-    background-color: #495057; /* Цвет фона при наведении */
-}
-/* Увеличение высоты заголовка */
-.bootstrap-datetimepicker-widget .picker-switch {
-    line-height: 60px;
-}
+        /* Измените цвет фона для дней при наведении */
+        .bootstrap-datetimepicker-widget table td:hover {
+            background-color: #495057;
+            /* Цвет фона при наведении */
+        }
 
-/* Увеличьте высоту кнопок в заголовке */
+        /* Увеличение высоты заголовка */
+        .bootstrap-datetimepicker-widget .picker-switch {
+            line-height: 60px;
+        }
+
+        /* Увеличьте высоту кнопок в заголовке */
 
 
 
-.input-group-text {
-    display: flex;
-    align-items: center;
-    padding: .375rem .75rem;
-    font-size: 16px !important;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #c0c0c0;
-    text-align: center;
-    white-space: nowrap;
-    background-color: #212529 !important;
-    border: 1px solid #6c757d !important;
-    border-radius: .25rem;
-}
+        .input-group-text {
+            display: flex;
+            align-items: center;
+            padding: .375rem .75rem;
+            font-size: 16px !important;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #c0c0c0;
+            text-align: center;
+            white-space: nowrap;
+            background-color: #212529 !important;
+            border: 1px solid #6c757d !important;
+            border-radius: .25rem;
+        }
     </style>
 @endsection
 
@@ -447,9 +470,13 @@
                                     <label for="birth_date" class="form-label text-white">Születési dátum</label>
 
                                     <div class="input-group date" id="datetimepicker10" data-target-input="nearest">
-                                        <input name="birth_date" type="text" class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker" data-target="#datetimepicker10"  placeholder="éééé-hh-nn"/>
-                                        <div class="input-group-append" data-target="#datetimepicker10" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar" style="line-height: 1.8 !important;"></i></div>
+                                        <input name="birth_date" type="text"
+                                            class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker"
+                                            data-target="#datetimepicker10" placeholder="éééé-hh-nn" />
+                                        <div class="input-group-append" data-target="#datetimepicker10"
+                                            data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"
+                                                    style="line-height: 1.8 !important;"></i></div>
                                         </div>
                                     </div>
                                 </div>
@@ -460,9 +487,13 @@
                                     <label for="death_date" class="form-label text-white">Elhalálozás dátuma</label>
 
                                     <div class="input-group date" id="datetimepicker11" data-target-input="nearest">
-                                        <input name="death_date" type="text" class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker" data-target="#datetimepicker11"  placeholder="éééé-hh-nn"/>
-                                        <div class="input-group-append" data-target="#datetimepicker11" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar" style="line-height: 1.8 !important;"></i></div>
+                                        <input name="death_date" type="text"
+                                            class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker"
+                                            data-target="#datetimepicker11" placeholder="éééé-hh-nn" />
+                                        <div class="input-group-append" data-target="#datetimepicker11"
+                                            data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"
+                                                    style="line-height: 1.8 !important;"></i></div>
                                         </div>
                                     </div>
                                 </div>
@@ -470,8 +501,8 @@
 
                             {{-- <input id="datepicker" class="form-control bg-dark text-white border-secondary py-2 datepicker" data-bs-theme="dark" placeholder="nn.hh.éééé"/> --}}
 
-                            
-                            
+
+
 
                             {{-- <div class="mt-30">
                                 <label for="story" class="form-label text-white">Emlékezés, tiszteletadás</label>
@@ -500,7 +531,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="container">
-                                <label for="biography" class="form-label text-white">Fő emlékkép feltöltése</label>
+                                <label class="form-label text-white">Fő emlékkép feltöltése</label>
                                 <div class="drag-area bg-dark text-white border-secondary">
                                     <div class="icon">
                                         <i class="fas fa-images"></i>
@@ -596,15 +627,15 @@
     </div> --}}
 
 
-    <div class="text-center mb-70 mt-40">
-        <button type="submit" class="butn butn-md butn-bord butn-rounded" id="submitBtn">
-            <div class="d-flex align-items-center">
-                <span id="btnText">Adatok mentése</span>
-                <span class="icon pe-7s-angle-right ml-10 fz-30" id="btnIcon"></span>
-                <span class="spinner-border spinner-border-sm ml-10 d-none" id="btnSpinner"></span>
-            </div>
-        </button>
-    </div>
+        <div class="text-center mb-70 mt-40">
+            <button type="submit" class="butn butn-md butn-bord butn-rounded" id="submitBtn">
+                <div class="d-flex align-items-center">
+                    <span id="btnText">Adatok mentése</span>
+                    <span class="icon pe-7s-angle-right ml-10 fz-30" id="btnIcon"></span>
+                    <span class="spinner-border spinner-border-sm ml-10 d-none" id="btnSpinner"></span>
+                </div>
+            </button>
+        </div>
 
     </form>
 
@@ -615,56 +646,55 @@
 
 @section('js')
     <script>
+        // const picker = new tempusDominus.TempusDominus(document.getElementById('datepicker'), {
+        //     display: {
+        //         theme: 'dark'  // Устанавливает тёмную тему
+        //     }
+        // });
 
-    // const picker = new tempusDominus.TempusDominus(document.getElementById('datepicker'), {
-    //     display: {
-    //         theme: 'dark'  // Устанавливает тёмную тему
-    //     }
-    // });
-
-        $(function () {
+        $(function() {
             $('#datetimepicker10').datetimepicker({
                 viewMode: 'years',
                 format: 'YYYY-MM-DD',
                 display: {
-                    theme: 'dark'  // Устанавливает тёмную тему
+                    theme: 'dark' // Устанавливает тёмную тему
                 }
             });
         });
 
-        $(function () {
+        $(function() {
             $('#datetimepicker11').datetimepicker({
                 viewMode: 'years',
                 format: 'YYYY-MM-DD',
                 display: {
-                    theme: 'dark'  // Устанавливает тёмную тему
+                    theme: 'dark' // Устанавливает тёмную тему
                 }
             });
         });
 
-    // gj.core.messages['hu-hu'] = {
-    //     monthNames: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'],
-    //     monthShortNames: ['Jan', 'Feb', 'Már', 'Ápr', 'Máj', 'Jún', 'Júl', 'Aug', 'Szept', 'Okt', 'Nov', 'Dec'],
-    //     weekDaysMin: ['V', 'H', 'K', 'Sz', 'Cs', 'P', 'Szo'],
-    //     weekDaysShort: ['Vas', 'Hét', 'Ked', 'Sze', 'Csü', 'Pén', 'Szo'],
-    //     weekDays: ['Vasárnap', 'Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat'],
-    //     am: 'de.',
-    //     pm: 'du.',
-    //     ok: 'OK',
-    //     cancel: 'Mégse',
-    //     titleFormat: 'yyyy'
-    // };
+        // gj.core.messages['hu-hu'] = {
+        //     monthNames: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'],
+        //     monthShortNames: ['Jan', 'Feb', 'Már', 'Ápr', 'Máj', 'Jún', 'Júl', 'Aug', 'Szept', 'Okt', 'Nov', 'Dec'],
+        //     weekDaysMin: ['V', 'H', 'K', 'Sz', 'Cs', 'P', 'Szo'],
+        //     weekDaysShort: ['Vas', 'Hét', 'Ked', 'Sze', 'Csü', 'Pén', 'Szo'],
+        //     weekDays: ['Vasárnap', 'Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat'],
+        //     am: 'de.',
+        //     pm: 'du.',
+        //     ok: 'OK',
+        //     cancel: 'Mégse',
+        //     titleFormat: 'yyyy'
+        // };
 
-    // $('#datepicker').datepicker({
-    //     uiLibrary: 'bootstrap5',
-    //     format: 'yyyy-mm-dd',
-    //     weekStartDay: 1,
-    //     iconsLibrary: 'fontawesome',
-    //     locale: 'hu-hu',
-    //     showRightIcon: false
-    // });
+        // $('#datepicker').datepicker({
+        //     uiLibrary: 'bootstrap5',
+        //     format: 'yyyy-mm-dd',
+        //     weekStartDay: 1,
+        //     iconsLibrary: 'fontawesome',
+        //     locale: 'hu-hu',
+        //     showRightIcon: false
+        // });
 
-       
+
 
         const dropArea = document.querySelector('.drag-area');
         const dragText = document.querySelector('.header');
@@ -795,7 +825,6 @@
             btnIcon.classList.add("d-none");
             btnSpinner.classList.remove("d-none");
         });
-
     </script>
     {{-- <script>
         const dropArea = document.querySelector('.drag-area');
