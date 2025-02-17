@@ -16,8 +16,12 @@ return new class extends Migration
             $table->string('token')->unique();
             $table->string('status')->nullable();
             $table->text('qr_code')->nullable();
-            $table->foreignId('memorial_id')->nullable()->constrained('memorials')->onDelete('cascade');
+            $table->string('memorial_id')->nullable();
             $table->timestamps();
+            $table->foreign('memorial_id')
+                  ->references('id')
+                  ->on('memorials')
+                  ->onDelete('cascade');
         });
     }
 
