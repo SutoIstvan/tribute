@@ -2,11 +2,6 @@
 
 @section('css')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
-
     <style>
         :before,
         :after {
@@ -206,6 +201,162 @@
             cursor: pointer;
             transition: background 0.3s;
         }
+
+         /* Темная тема для датапикера */
+         .gj-datepicker-bootstrap [role="right-icon"] button {
+            background-color: #343a40 !important;
+            border-color: #212529 !important;
+        }
+
+        .gj-datepicker-bootstrap [role="right-icon"] button .gj-icon {
+            color: #fff !important;
+        }
+
+        .gj-picker-bootstrap {
+            background-color: #212529 !important;
+            border: 1px solid #343a40 !important;
+        }
+
+        .gj-picker-bootstrap table tr td.selected.gj-cursor-pointer div {
+            background-color: #0d6efd !important;
+            border-color: #0d6efd !important;
+            color: #fff !important;
+        }
+
+        .gj-picker-bootstrap table tr td.today div {
+            color: #0d6efd !important;
+        }
+
+        .gj-picker-bootstrap table tr th div {
+            color: #fff !important;
+        }
+
+        .gj-picker-bootstrap table tr td div {
+            color: #dee2e6 !important;
+        }
+
+        .gj-picker-bootstrap table tr td.other-month div {
+            color: #6c757d !important;
+        }
+
+        .gj-picker-bootstrap table tr td.gj-cursor-pointer div:hover {
+            background: #343a40 !important;
+            color: #fff !important;
+        }
+
+        /* Стиль для input поля */
+        .gj-textbox-md {
+            background-color: #212529 !important;
+            color: #fff !important;
+            border: 1px solid #343a40 !important;
+        }
+
+        /* Стиль для кнопок навигации */
+        .gj-picker-bootstrap [role="header"] {
+            background-color: #343a40 !important;
+            color: #fff !important;
+        }
+
+        .gj-picker-bootstrap [role="header"] div[role="period"] {
+            color: #fff !important;
+        }
+
+
+/* Измените фон виджета */
+.bootstrap-datetimepicker-widget {
+    background-color: #343a40; /* Цвет фона виджета */
+    color: #ffffff; /* Цвет текста внутри виджета */
+}
+
+/* Измените цвет фона для дней */
+.bootstrap-datetimepicker-widget table {
+    background-color: #343a40; /* Цвет фона таблицы */
+}
+
+/* Измените цвет фона для ячеек дней */
+.bootstrap-datetimepicker-widget table td {
+    background-color: #495057; /* Цвет фона ячеек */
+    color: #ffffff; /* Цвет текста в ячейках */
+}
+
+.bootstrap-datetimepicker-widget table td:hover {
+    background-color: #6c757d; /* Цвет фона при наведении на ячейку */
+}
+
+/* Измените цвет фона для активной ячейки */
+.bootstrap-datetimepicker-widget table td.active {
+    background-color: #007bff; /* Цвет фона для активной ячейки */
+    color: #ffffff; /* Цвет текста для активной ячейки */
+}
+
+/* Измените цвет фона для текущего дня */
+.bootstrap-datetimepicker-widget table td.today {
+    background-color: #28a745; /* Цвет фона для текущего дня */
+    color: #ffffff; /* Цвет текста для текущего дня */
+}
+
+/* Измените фон кнопок и их цвет текста */
+.bootstrap-datetimepicker-widget .btn {
+    background-color: #007bff; /* Цвет фона */
+    color: #535353; /* Цвет текста */
+}
+
+.bootstrap-datetimepicker-widget .btn:hover {
+    background-color: #0056b3; /* Цвет фона при наведении */
+    color: #b4b4b4; /* Цвет текста при наведении */
+}
+
+/* Измените цвет активного дня */
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+    background-color: #28a745; /* Цвет фона активного дня */
+    color: #fff; /* Цвет текста активного дня */
+}
+
+/* Измените цвет для текущего дня */
+.bootstrap-datetimepicker-widget table td.today:before {
+    border-bottom-color: #ffc107; /* Цвет для текущего дня */
+}
+
+/* Измените цвет заголовков */
+.bootstrap-datetimepicker-widget table th {
+    background-color: #343a40; /* Цвет фона заголовков */
+    color: #fff; /* Цвет текста заголовков */
+}
+
+/* Измените цвет текста в неактивных днях */
+.bootstrap-datetimepicker-widget table td.disabled,
+.bootstrap-datetimepicker-widget table td.disabled:hover {
+    color: #6c757d; /* Цвет текста неактивных дней */
+}
+
+/* Измените цвет фона для дней при наведении */
+.bootstrap-datetimepicker-widget table td:hover {
+    background-color: #495057; /* Цвет фона при наведении */
+}
+/* Увеличение высоты заголовка */
+.bootstrap-datetimepicker-widget .picker-switch {
+    line-height: 60px;
+}
+
+/* Увеличьте высоту кнопок в заголовке */
+
+
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: .375rem .75rem;
+    font-size: 16px !important;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #c0c0c0;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #212529 !important;
+    border: 1px solid #6c757d !important;
+    border-radius: .25rem;
+}
     </style>
 @endsection
 
@@ -277,7 +428,7 @@
                                     class="form-control bg-dark text-white border-secondary py-2" id="fullName"
                                     placeholder="Teljes név">
                             </div>
-                            <div class="col-12 col-md-6 mb-3">
+                            {{-- <div class="col-12 col-md-6 mb-3">
                                 <label for="birth_date" class="form-label text-white">Születési dátum</label>
                                 <input name="birth_date" type="text"
                                     class="form-control bg-dark text-white border-secondary py-2 datepicker" id="birth_date"
@@ -287,8 +438,41 @@
                                 <label for="death_date" class="form-label text-white">Elhalálozás dátuma</label>
                                 <input name="death_date" type="text"
                                     class="form-control bg-dark text-white border-secondary py-2" id="death_date"
-                                    placeholder="00.00.0000">
+                                    placeholder="nn.hh.eeee">
+                            </div> --}}
+
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <div class="form-group" data-bs-theme="dark">
+                                    <label for="birth_date" class="form-label text-white">Születési dátum</label>
+
+                                    <div class="input-group date" id="datetimepicker10" data-target-input="nearest">
+                                        <input name="birth_date" type="text" class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker" data-target="#datetimepicker10"  placeholder="nn.hh.éééé"/>
+                                        <div class="input-group-append" data-target="#datetimepicker10" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar" style="line-height: 1.8 !important;"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <div class="form-group" data-bs-theme="dark">
+                                    <label for="death_date" class="form-label text-white">Elhalálozás dátuma</label>
+
+                                    <div class="input-group date" id="datetimepicker11" data-target-input="nearest">
+                                        <input name="death_date" type="text" class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker" data-target="#datetimepicker11"  placeholder="nn.hh.éééé"/>
+                                        <div class="input-group-append" data-target="#datetimepicker11" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar" style="line-height: 1.8 !important;"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- <input id="datepicker" class="form-control bg-dark text-white border-secondary py-2 datepicker" data-bs-theme="dark" placeholder="nn.hh.éééé"/> --}}
+
+                            
+                            
+
                             {{-- <div class="mt-30">
                                 <label for="story" class="form-label text-white">Emlékezés, tiszteletadás</label>
                                 <textarea name="story" class="form-control bg-dark text-white border-secondary" id="story" rows="3"></textarea>
@@ -431,6 +615,57 @@
 
 @section('js')
     <script>
+
+    // const picker = new tempusDominus.TempusDominus(document.getElementById('datepicker'), {
+    //     display: {
+    //         theme: 'dark'  // Устанавливает тёмную тему
+    //     }
+    // });
+
+        $(function () {
+            $('#datetimepicker10').datetimepicker({
+                viewMode: 'years',
+                format: 'DD/MM/YYYY',
+                display: {
+                    theme: 'dark'  // Устанавливает тёмную тему
+                }
+            });
+        });
+
+        $(function () {
+            $('#datetimepicker11').datetimepicker({
+                viewMode: 'years',
+                format: 'DD/MM/YYYY',
+                display: {
+                    theme: 'dark'  // Устанавливает тёмную тему
+                }
+            });
+        });
+
+    // gj.core.messages['hu-hu'] = {
+    //     monthNames: ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'],
+    //     monthShortNames: ['Jan', 'Feb', 'Már', 'Ápr', 'Máj', 'Jún', 'Júl', 'Aug', 'Szept', 'Okt', 'Nov', 'Dec'],
+    //     weekDaysMin: ['V', 'H', 'K', 'Sz', 'Cs', 'P', 'Szo'],
+    //     weekDaysShort: ['Vas', 'Hét', 'Ked', 'Sze', 'Csü', 'Pén', 'Szo'],
+    //     weekDays: ['Vasárnap', 'Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat'],
+    //     am: 'de.',
+    //     pm: 'du.',
+    //     ok: 'OK',
+    //     cancel: 'Mégse',
+    //     titleFormat: 'yyyy'
+    // };
+
+    // $('#datepicker').datepicker({
+    //     uiLibrary: 'bootstrap5',
+    //     format: 'yyyy-mm-dd',
+    //     weekStartDay: 1,
+    //     iconsLibrary: 'fontawesome',
+    //     locale: 'hu-hu',
+    //     showRightIcon: false
+    // });
+
+       
+
         const dropArea = document.querySelector('.drag-area');
         const dragText = document.querySelector('.header');
 

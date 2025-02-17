@@ -27,16 +27,28 @@
     <link rel="stylesheet" href="{{ asset('assets/common/css/common_style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/home7-style.css') }}">
 
-    <!-- CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
-<!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<!-- Для локализации на венгерский -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.hu.min.js"></script>
+<!-- Bootstrap CSS -->
+{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
 
-    @yield('css')
+<!-- jQuery -->
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
+<!-- Bootstrap JS -->
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> --}}
+
+
+{{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" /> --}}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg==" crossorigin="anonymous" />
+
+
+@yield('css')
 </head>
 
 <body>
@@ -100,8 +112,8 @@
     </div>
 
     <!-- jQuery -->
-    <script src="{{ asset('assets/common/js/lib/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('assets/common/js/lib/jquery-migrate-3.4.0.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/common/js/lib/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/common/js/lib/jquery-migrate-3.4.0.min.js') }}"></script> --}}
 
     <!-- plugins -->
     <script src="{{ asset('assets/common/js/lib/plugins.js') }}"></script>
