@@ -108,6 +108,13 @@ Route::get('/auth/google/callback', function (Request $request) {
 
         Auth::login($user);
 
+        // Проверяем наличие предыдущего URL
+        if (session()->has('previous_url')) {
+            $previousUrl = session('previous_url');
+            session()->forget('previous_url');
+            return redirect($previousUrl);
+        }
+
         return redirect()->route('home');
     } catch (\Exception $e) {
         return redirect()->route('login')->withErrors(['error' => 'Failed to sign in with Google']);
