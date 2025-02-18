@@ -227,11 +227,27 @@
             width: 100%;
             height: auto;
         }
-        .form-outline i {
+
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+
+            padding-left: 44px;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            font-size: 16px;
+
+        }
+
+        .search-icon {
             position: absolute;
             top: 50%;
+            left: 15px;
             transform: translateY(-50%);
-            pointer-events: none;
+            color: #888;
         }
     </style>
 @endsection
@@ -284,15 +300,15 @@
                 <button type="submit">Upload</button>
             </form> --}}
 
-            <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
-                enctype="multipart/form-data" class="p-4 bg-dark rounded shadow mb-40" style="width: 500px;">
+            <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST" enctype="multipart/form-data"
+                class="p-4 bg-dark rounded shadow mb-40" style="width: 500px;">
                 @csrf
                 <label for="images" class="form-label text-white">Képek feltöltése</label>
                 <input type="file" name="images[]" multiple class="form-control bg-secondary text-white border-0">
-                
+
                 <button type="submit" class="btn btn-secondary mt-3 w-100">Feltöltés</button>
             </form>
-            
+
 
             {{-- <h2>images list</h2> --}}
 
@@ -317,19 +333,29 @@
                                         <img src="{{ asset('storage/' . $image->image_path) }}" alt="">
                                     </div>
                                     <div class="cont mt-30">
-                                        <div class="date ml-auto d-flex align-items-center">
+                                        {{-- <div class="date ml-auto d-flex align-items-center">
                                             <i class="fa-regular fa-clock mr-15 opacity-7"></i>
                                             <input name="images[{{ $loop->index }}][image_date]" type="text"
-                                                value="{{ $image->image_date }}" 
-                                                class="form-control bg-dark text-white border-secondary py-2" 
+                                                value="{{ $image->image_date }}"
+                                                class="form-control bg-dark text-white border-secondary py-2"
                                                 placeholder="A fénykép dátuma">
-                                        </div>
+                                        </div> --}}
                                         {{-- ------------------------------------------------------------------ --}}
 
+                                        <div class="">
+                                            <div class="search-container">
+                                                <input name="images[{{ $loop->index }}][image_date]" type="text" class="w-100 bg-dark text-white border-secondary py-2 search-input"
+                                                    placeholder="A fénykép dátuma"
+                                                    value="{{ $image->image_date }}">
+                                                <i class="fa-regular fa-clock search-icon"></i>
+                                            </div>
+                                        </div>
 
                                         <h6 class="mt-3">
                                             <input name="images[{{ $loop->index }}][image_description]" type="text"
-                                                value="{{ $image->image_description }}" class="form-control bg-dark text-white border-secondary py-2" placeholder="A fénykép leírása">
+                                                value="{{ $image->image_description }}"
+                                                class="form-control bg-dark text-white border-secondary py-2"
+                                                placeholder="A fénykép leírása">
                                         </h6>
                                     </div>
                                 </div>
