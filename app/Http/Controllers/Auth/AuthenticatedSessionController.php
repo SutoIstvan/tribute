@@ -32,7 +32,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Проверяем наличие токена QR в сессии
+        if (session()->has('qr_token')) {
+            $token = session('qr_token');
+            session()->forget('qr_token');
+            return redirect()->to(url("/memorial/attach/{$token}"));
+        }
+
+        // По умолчанию редирект в админ панель
+        return redirect()->route('admin.dashboard'); // Замените на ваш route админ панели
     }
 
     /**

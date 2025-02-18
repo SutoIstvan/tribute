@@ -44,6 +44,13 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+        
+        // Проверяем наличие токена QR в сессии
+        if (session()->has('qr_token')) {
+            $token = session('qr_token');
+            session()->forget('qr_token');
+            return redirect()->to(url("/memorial/attach/{$token}"));
+        }
 
         return redirect(route('dashboard', absolute: false));
     }
