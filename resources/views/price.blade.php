@@ -43,8 +43,6 @@
                                 <div class="d-flex align-items-center">
                                     <span>Vásárlás</span>
                                     <span class="icon invert ml-10 mb-1">
-                                        <?xml version="1.0" encoding="iso-8859-1"?>
-                                        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
                                         <svg fill="#a4a4a4" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                                              width="14px" height="14px" viewBox="0 0 490.875 490.875"
                                              xml:space="preserve">
@@ -101,8 +99,6 @@
                                 <div class="d-flex align-items-center">
                                     <span>Vásárlás</span>
                                     <span class="icon invert ml-10 mb-1">
-                                        <?xml version="1.0" encoding="iso-8859-1"?>
-                                        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
                                         <svg fill="#a4a4a4" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                                              width="14px" height="14px" viewBox="0 0 490.875 490.875"
                                              xml:space="preserve">
@@ -159,8 +155,6 @@
                                 <div class="d-flex align-items-center">
                                     <span>Vásárlás</span>
                                     <span class="icon invert ml-10 mb-1">
-                                        <?xml version="1.0" encoding="iso-8859-1"?>
-                                        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
                                         <svg fill="#a4a4a4" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                                              width="14px" height="14px" viewBox="0 0 490.875 490.875"
                                              xml:space="preserve">
