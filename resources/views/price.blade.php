@@ -12,13 +12,6 @@
 @endsection
 
 @section('content')
-    <!-- ==================== Start Header ==================== -->
-
-
-
-
-
-    <!-- ==================== Start Header ==================== -->
 
     <header class="pricing-hed">
         <div class="container section-padding bord-thin-bottom-light">
@@ -27,12 +20,6 @@
             </div>
         </div>
     </header>
-
-    <!-- ==================== End Header ==================== -->
-
-
-
-    <!-- ==================== Start Pricing ==================== -->
 
     <section class="pricing-pg section-padding">
         <div class="container">
@@ -57,7 +44,6 @@
                                     <span>Vásárlás</span>
                                     <span class="icon invert ml-10 mb-1">
                                         <?xml version="1.0" encoding="iso-8859-1"?>
-                                        <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                         <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
                                         <svg fill="#a4a4a4" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                                              width="14px" height="14px" viewBox="0 0 490.875 490.875"
@@ -116,7 +102,6 @@
                                     <span>Vásárlás</span>
                                     <span class="icon invert ml-10 mb-1">
                                         <?xml version="1.0" encoding="iso-8859-1"?>
-                                        <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                         <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
                                         <svg fill="#a4a4a4" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                                              width="14px" height="14px" viewBox="0 0 490.875 490.875"
@@ -175,7 +160,6 @@
                                     <span>Vásárlás</span>
                                     <span class="icon invert ml-10 mb-1">
                                         <?xml version="1.0" encoding="iso-8859-1"?>
-                                        <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                         <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
                                         <svg fill="#a4a4a4" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                                              width="14px" height="14px" viewBox="0 0 490.875 490.875"
@@ -217,19 +201,6 @@
             </div>
         </div>
     </section>
-
-    <!-- ==================== End Pricing ==================== -->
-
-
-
-    <!-- ==================== Start dark box ==================== -->
-
-
-
-    <!-- ==================== End dark box ==================== -->
-
-
-
 
 
 
