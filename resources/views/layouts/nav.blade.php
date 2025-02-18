@@ -16,7 +16,7 @@
                     <a class="nav-link active" href="{{ route('welcome') }}">Címlap</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://tribute.test/memorials">Qr code</a>
+                    <a class="nav-link" href="/memorials">Qr code</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Árak</a>
