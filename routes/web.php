@@ -22,6 +22,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/price', function () {
+    return view('price');
+})->name('price');
+
 Route::get('/dashboard', function () {
     $admin_id = Auth::user()->id;
 

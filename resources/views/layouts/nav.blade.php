@@ -13,13 +13,13 @@
         <div class="topnav d-none d-lg-flex align-items-center">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('welcome') }}">Címlap</a>
+                    <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}" href="{{ route('welcome') }}">Címlap</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/memorials">Qr code</a>
+                    <a class="nav-link {{ request()->routeIs('memorial.showall') ? 'active' : '' }}" href="{{ route('memorial.showall') }}">Qr code</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Árak</a>
+                    <a class="nav-link {{ request()->routeIs('price') ? 'active' : '' }}" href="{{ route('price') }}">Árak</a>
                 </li>
 
                 <li class="nav-item">
