@@ -88,9 +88,6 @@ Route::get('/auth/google/redirect', function (Request $request) {
 })->name('google.login');
  
 Route::get('/auth/google/callback', function (Request $request) {
-    // dd($request);
-    $user = Socialite::driver('google')->user();
- 
     try {
         $googleUser = Socialite::driver('google')->user();
 
@@ -108,17 +105,15 @@ Route::get('/auth/google/callback', function (Request $request) {
 
         Auth::login($user);
 
-        // Проверяем наличие предыдущего URL
+        // Проверяем наличие токена QR в сессии
         if (session()->has('qr_token')) {
             $token = session('qr_token');
             session()->forget('qr_token');
             return redirect()->to(url("/memorial/attach/{$token}"));
         }
 
-        $previousUrl = url()->previous();
-        return redirect($previousUrl);
-
-        // return redirect()->route('home');
+        // По умолчанию редирект в админ панель
+        return redirect()->route('admin.dashboard'); // Замените на ваш route админ панели
     } catch (\Exception $e) {
         return redirect()->route('login')->withErrors(['error' => 'Failed to sign in with Google']);
     }

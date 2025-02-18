@@ -13,13 +13,12 @@ class QrCodeController extends Controller
     public function showAttachForm(string $token)
     {
         $qr = QrCodes::where('token', $token)->firstOrFail();
-    
+        
+        // Если QR-код еще не привязан к мемориалу
         if (!$qr->memorial_id) {
             if (!Auth::check()) {
+                // Сохраняем токен QR-кода в сессии
                 session(['qr_token' => $token]);
-                
-                // Сохраняем текущий URL в сессии перед редиректом
-                session(['url.intended' => url()->current()]);
                 
                 return redirect()
                     ->route('login')
@@ -28,7 +27,7 @@ class QrCodeController extends Controller
             
             return view('memorial.attach', compact('token'));
         }
-    
+        
         return redirect()->route('memorial.show', $qr->memorial_id);
     }
 
