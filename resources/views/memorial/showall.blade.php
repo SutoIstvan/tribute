@@ -62,7 +62,7 @@
                                                         <td>
                                                             <input type="checkbox" name="ids[]" value="{{ $memorial->id }}" class="select-checkbox">
                                                         </td>
-                                                        <td><img src="{{ asset('storage/' . $memorial->qr_code) }}" height="150"></td>
+                                                        <td><img src="{{ asset('storage/' . $memorial->qr_code) }}" style="height: 150px !important; width: 150px !important;"></td>
                                                         <td>{{ $memorial->token }}</td>
                                                         <td>
                                                             <a href="/memorial/attach/{{ $memorial->token }}" class="text-info">Mobile scan</a>
