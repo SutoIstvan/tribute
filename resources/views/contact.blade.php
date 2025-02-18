@@ -61,7 +61,7 @@
         </div>
     </header> --}}
 
-    <section class="contact-pg section-padding mt-70">
+    <section class="contact-pg section-padding mt-50">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 valign">
