@@ -69,7 +69,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/dashboard/memorial/{id}/images', [MemorialController::class, 'uploadImages'])->name('memorial.images.upload');
     Route::delete('/dashboard/memorial/image/{id}', [MemorialController::class, 'deleteImage'])->name('memorial.image.delete');
 
-    
+    Route::post('/dashboard/memorial/{id}/images/update', [MemorialController::class, 'updateImages'])->name('memorials.images.update');
+
 });
 
 

@@ -227,8 +227,12 @@
             width: 100%;
             height: auto;
         }
-
-
+        .form-outline i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
     </style>
 @endsection
 
@@ -248,7 +252,8 @@
                 {{-- <h1 class="display-5 fw-bold text-white mt-15">{{ $memorial->name }}</h1> --}}
                 <div class="col-lg-6 mx-auto">
                     <p class="fs-5 mt-4 mb-4">
-                        Ezen az oldalon fényképeket tölthet fel, dátumot és megjegyzést fűzhet a fotóhoz. A mentéshez kattintson a módosítások mentése gombra
+                        Ezen az oldalon fényképeket tölthet fel, dátumot és megjegyzést fűzhet a fotóhoz. A mentéshez
+                        kattintson a módosítások mentése gombra
                         az oldal alján.
                     </p>
                 </div>
@@ -266,67 +271,82 @@
         </div>
     @endif
 
-    
+
 
 
     <div class="container">
         <div class="row d-flex justify-content-center">
 
-            @if (session('success'))
-                <p style="color: green;">{{ session('success') }}</p>
-            @endif
-
-            <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
+            {{-- <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="images[]" multiple>
                 <button type="submit">Upload</button>
+            </form> --}}
+
+            <form action="{{ route('memorial.images.upload', $memorial->id) }}" method="POST"
+                enctype="multipart/form-data" class="p-4 bg-dark rounded shadow mb-40" style="width: 500px;">
+                @csrf
+                <label for="images" class="form-label text-white">Képek feltöltése</label>
+                <input type="file" name="images[]" multiple class="form-control bg-secondary text-white border-0">
+                
+                <button type="submit" class="btn btn-secondary mt-3 w-100">Feltöltés</button>
             </form>
+            
 
-            <h2>images list</h2>
+            {{-- <h2>images list</h2> --}}
 
 
+            @if (session('success'))
+                <div class="alert alert-success mt-3">
+                    {{ session('success') }}
+                </div>
+            @endif
 
 
-            <div class="container">
-                <div class="row xlg-marg mb-100">
-                    @foreach ($memorial->memorialimages as $image)
-                        <div class="col-lg-4 bord mt-20">
-                            <div class="item">
-                                <div class="info d-flex align-items-center">
-                                    {{-- <div class="d-flex align-items-center">
-                                    <div>
-                                        <div class="author-img fit-img">
-                                            <img src="assets/imgs/blogs/blog1/a1.jpg" alt="">
+            <form action="{{ route('memorials.images.update', $memorial->id) }}" method="POST">
+                @csrf
+                <div class="container">
+                    <div class="row xlg-marg mb-100">
+                        @foreach ($memorial->memorialimages as $image)
+                            <input type="hidden" name="images[{{ $loop->index }}][id]" value="{{ $image->id }}">
+                            <div class="col-lg-4 bord mt-20">
+                                <div class="item">
+                                    <div class="info d-flex align-items-center"></div>
+                                    <div class="img fit-img mt-30">
+                                        <img src="{{ asset('storage/' . $image->image_path) }}" alt="">
+                                    </div>
+                                    <div class="cont mt-30">
+                                        <div class="date ml-auto d-flex align-items-center">
+                                            <i class="fa-regular fa-clock mr-15 opacity-7"></i>
+                                            <input name="images[{{ $loop->index }}][image_date]" type="text"
+                                                value="{{ $image->image_date }}" 
+                                                class="form-control bg-dark text-white border-secondary py-2" 
+                                                placeholder="A fénykép dátuma">
                                         </div>
+                                        {{-- ------------------------------------------------------------------ --}}
+
+
+                                        <h6 class="mt-3">
+                                            <input name="images[{{ $loop->index }}][image_description]" type="text"
+                                                value="{{ $image->image_description }}" class="form-control bg-dark text-white border-secondary py-2" placeholder="A fénykép leírása">
+                                        </h6>
                                     </div>
-                                    <div class="author-info ml-10">
-                                        <span>M Moussa</span>
-                                        <span class="sub-color">editor</span>
-                                    </div>
-                                </div>
-                                <div class="date ml-auto">
-                                    <span class="sub-color"><i class="fa-regular fa-clock mr-15 opacity-7"></i> 12 hours
-                                        ago</span>
-                                </div> --}}
-                                </div>
-                                <div class="img fit-img mt-30">
-                                    <img src="{{ asset('storage/' . $image->image_path) }}" alt="">
-                                </div>
-                                <div class="cont mt-30">
-                                    <div class="date ml-auto">
-                                        <span class="sub-color"><i class="fa-regular fa-clock mr-15 opacity-7"></i> 12 hours
-                                            ago</span>
-                                    </div>
-                                    <h6>
-                                        <a href="#0">We’re winner SOTY at CSS Award 2023</a>
-                                    </h6>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+                <div class="text-center mb-80">
+
+                    <button type="submit" class="butn butn-md butn-bord butn-rounded">Módosítások mentése</button>
+
+                </div>
+
+
+            </form>
+
+
 
         </div>
     </div>

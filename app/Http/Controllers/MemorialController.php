@@ -177,50 +177,50 @@ class MemorialController extends Controller
     public function uploadImages(Request $request, $id)
     {
         // Проверяем общий размер всех файлов (10MB максимум)
-        $totalSize = array_sum(array_map(function($file) {
+        $totalSize = array_sum(array_map(function ($file) {
             return $file->getSize();
         }, $request->file('images')));
-    
+
         if ($totalSize > 10 * 1024 * 1024) {
             return back()->with('error', 'Общий размер файлов не должен превышать 10MB');
         }
-    
+
         $request->validate([
             'images' => 'required|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:20048',
         ]);
-    
+
         $memorial = Memorial::findOrFail($id);
-    
+
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 // Получаем оригинальное имя и расширение
                 $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
                 $extension = $image->getClientOriginalExtension();
                 $filename = $originalName . '_' . time() . '.' . $extension;
-    
+
                 // Создаем путь с ID мемориала
                 $path = 'images/memorials/' . $memorial->id;
-    
+
                 // Обрабатываем изображение
                 $processedImage = Image::read($image)
                     ->scale(width: 1300);
-    
+
                 // Сохраняем обработанное изображение
                 Storage::disk('public')->put(
                     $path . '/' . $filename,
                     $processedImage->toJpeg()->toString()
                 );
-    
+
                 // Создаем запись в базе данных
                 $memorial->memorialimages()->create([
                     'image_path' => $path . '/' . $filename
                 ]);
             }
         }
-    
+
         return redirect()->route('memorial.images.edit', $id)
-            ->with('success', 'Изображения успешно загружены!');
+            ->with('success', 'A képek sikeresen feltöltve!');
     }
 
     public function deleteImage($id)
@@ -230,5 +230,28 @@ class MemorialController extends Controller
         $image->delete();
 
         return back()->with('success', 'Изображение удалено');
+    }
+
+    public function updateImages(Request $request, Memorial $memorial)
+    {
+        $request->validate([
+            'images' => 'array',
+            'images.*.id' => 'required|exists:memorial_images,id',
+            // 'images.*.image_date' => 'nullable|date',
+            'images.*.image_date' => 'nullable|string|max:255',
+            'images.*.image_description' => 'nullable|string|max:255',
+        ]);
+
+        foreach ($request->images as $imageData) {
+            $image = MemorialImage::find($imageData['id']);
+            if ($image) {
+                $image->update([
+                    'image_date' => $imageData['image_date'],
+                    'image_description' => $imageData['image_description'],
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'A képek leírása frissítve!');
     }
 }

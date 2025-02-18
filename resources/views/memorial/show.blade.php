@@ -95,18 +95,19 @@
             </div>
             <div>
                 <h7>
-                    {{ $memorial->biography }}
+                    {{ Str::limit($memorial->biography, 300) }}
                 </h7>
-
             </div>
-            <div class="text-center mt-80">
-                <a href="../inner_pages/about.html" class="butn butn-md butn-bord butn-rounded">
-                    <div class="d-flex align-items-center">
-                        <span>Bővebben az életrajzról</span>
-                        <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
-                    </div>
-                </a>
-            </div>
+            @if (strlen($memorial->biography) > 300)
+                <div class="text-center mt-80">
+                    <a href="#" class="butn butn-md butn-bord butn-rounded">
+                        <div class="d-flex align-items-center">
+                            <span>Bővebben az életrajzról</span>
+                            <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
+                        </div>
+                    </a>
+                </div>
+            @endif
         </div>
     </section>
 
@@ -164,16 +165,12 @@
                                     </div>
                                     <div class="cont mt-30">
                                         <div class="info sub-color mb-10">
-                                            @if ($images->isNotEmpty())
-                                                <div class="info sub-color mb-10">
-                                                    @if ($images->first()->image_date)
-                                                        <span>{{ $images->first()->image_date }}</span>
-                                                        <span class="dot"></span>
-                                                    @endif
-                                                    @if ($images->first()->image_description)
-                                                        <span>{{ $images->first()->image_description }}</span>
-                                                    @endif
-                                                </div>
+                                            @if ($image->image_date)
+                                                <span>{{ $image->image_date }}</span>
+                                                <span class="dot"></span>
+                                            @endif
+                                            @if ($image->image_description)
+                                                <span>{{ $image->image_description }}</span>
                                             @endif
                                         </div>
                                     </div>
@@ -182,7 +179,7 @@
                         @endforeach
                     @endif
 
-                    <!-- Кнопка (статическая) -->
+
                     <div class="items col-lg-6 order-md-2">
                         <a href="../inner_pages/portfolio-gallery.html" class="crv-butn mt-100">
                             <div class="d-flex">
@@ -367,12 +364,12 @@
                             <div class="d-flex mt-30">
                                 <span class="sub-color">Aaron Beck</span>
                                 <!-- <div class="stars ml-auto">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                            </div> -->
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -392,12 +389,12 @@
                             <div class="d-flex mt-30">
                                 <span class="sub-color">Aaron Beck</span>
                                 <!-- <div class="stars ml-auto">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                            </div> -->
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -417,12 +414,12 @@
                             <div class="d-flex mt-30">
                                 <span class="sub-color">Aaron Beck</span>
                                 <!-- <div class="stars ml-auto">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                            </div> -->
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -442,12 +439,12 @@
                             <div class="d-flex mt-30">
                                 <span class="sub-color">Aaron Beck</span>
                                 <!-- <div class="stars ml-auto">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                            </div> -->
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -466,13 +463,13 @@
                             <h5>“Nyomot hagyott mindazok szívében, akik ismerték. Fényes emléke tovább él...”</h5>
                             <div class="d-flex mt-30">
                                 <span class="sub-color">Aaron Beck</span>
-                                <!-- <div class="stars ml-auto">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                            </div> -->
+                                {{-- <div class="stars ml-auto">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
