@@ -138,10 +138,8 @@ Route::post('/download/bulk', function (Request $request) {
     }
 
     $zipFileName = 'qrcodes_' . time() . '.zip';
-    $zipPath = storage_path("app/public/{$zipFileName}");
+    $zipPath = storage_path("app/public/qrcodes/{$zipFileName}");
     $zip = new \ZipArchive;
-
-    dd($zipPath);
     
     if ($zip->open($zipPath, ZipArchive::CREATE) === true) {
         foreach ($memorials as $memorial) {
