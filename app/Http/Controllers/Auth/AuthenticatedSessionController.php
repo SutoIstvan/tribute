@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         // По умолчанию редирект в админ панель
-        return redirect()->route('admin.dashboard'); // Замените на ваш route админ панели
+        return redirect()->route('dashboard'); // Замените на ваш route админ панели
     }
 
     /**
