@@ -138,9 +138,9 @@ Route::post('/download/bulk', function (Request $request) {
     }
 
     $zipFileName = 'qrcodes_' . time() . '.zip';
-    $zipPath = storage_path("app/public/qrcodes/{$zipFileName}");
+    $zipPath = storage_path("app/public/{$zipFileName}");
     $zip = new \ZipArchive;
-    
+
     if ($zip->open($zipPath, ZipArchive::CREATE) === true) {
         foreach ($memorials as $memorial) {
             $filePath = storage_path("app/public/{$memorial->qr_code}");
@@ -154,7 +154,7 @@ Route::post('/download/bulk', function (Request $request) {
     }
 
     // Обновляем статус файлов
-    // QrCodes::whereIn('id', $request->ids)->update(['status' => 'downloaded']);
+    QrCodes::whereIn('id', $request->ids)->update(['status' => 'downloaded']);
 
     return redirect()->route('memorial.showall')->with('success', 'qr code download'); // Замените 'your.route.name' на нужный маршрут
 
