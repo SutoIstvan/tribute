@@ -143,20 +143,22 @@ Route::post('/download/bulk', function (Request $request) {
 
     if ($zip->open($zipPath, ZipArchive::CREATE) === true) {
         foreach ($memorials as $memorial) {
-            $filePath = storage_path("app/public/{$memorial->qr_code}");
+            // Правильный путь к файлу
+            $filePath = storage_path("app/public/qrcodes/" . basename($memorial->qr_code));
+            
             if (file_exists($filePath)) {
-                $zip->addFile($filePath, basename($filePath));
+                // Добавляем файл в архив с именем из базы данных
+                $zip->addFile($filePath, basename($memorial->qr_code));
             }
         }
         $zip->close();
-    } else {
-        return back()->with('error', 'Не удалось создать архив');
+
+        // Обновляем статус файлов
+        QrCodes::whereIn('id', $request->ids)->update(['status' => 'downloaded']);
+
+        // Возвращаем архив для скачивания
+        return response()->download($zipPath)->deleteFileAfterSend(true);
     }
 
-    // Обновляем статус файлов
-    QrCodes::whereIn('id', $request->ids)->update(['status' => 'downloaded']);
-
-    return redirect()->route('memorial.showall')->with('success', 'qr code download'); // Замените 'your.route.name' на нужный маршрут
-
-    // return Response::download($zipPath)->deleteFileAfterSend(true);
+    return back()->with('error', 'Не удалось создать архив');
 })->name('download.bulk');
