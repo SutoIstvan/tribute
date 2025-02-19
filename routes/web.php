@@ -141,6 +141,8 @@ Route::post('/download/bulk', function (Request $request) {
     $zipPath = storage_path("app/public/{$zipFileName}");
     $zip = new \ZipArchive;
 
+    dd($zipPath);
+    
     if ($zip->open($zipPath, ZipArchive::CREATE) === true) {
         foreach ($memorials as $memorial) {
             $filePath = storage_path("app/public/{$memorial->qr_code}");
