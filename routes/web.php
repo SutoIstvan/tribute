@@ -13,7 +13,7 @@ use App\Http\Controllers\QrCodeController;
 use App\Models\Memorial;
 use App\Models\QrCodes;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Log;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 
@@ -143,28 +143,22 @@ Route::post('/download/bulk', function (Request $request) {
 
     if ($zip->open($zipPath, ZipArchive::CREATE) === true) {
         foreach ($memorials as $memorial) {
-            // Правильный путь к файлу
             $filePath = storage_path("app/public/qrcodes/" . basename($memorial->qr_code));
-            
-            if (file_exists($filePath)) {
-                // Добавляем файл в архив с именем из базы данных
-                $zip->addFile($filePath, basename($memorial->qr_code));
-                // Log::error("File not found: " . $filePath);
 
+            // $filePath = storage_path("app/public/{$memorial->qr_code}");
+            if (file_exists($filePath)) {
+                $zip->addFile($filePath, basename($filePath));
             }
         }
-
-
-
-
         $zip->close();
-
-        // Обновляем статус файлов
-        QrCodes::whereIn('id', $request->ids)->update(['status' => 'downloaded']);
-
-        // Возвращаем архив для скачивания
-        return response()->download($zipPath)->deleteFileAfterSend(true);
+    } else {
+        return back()->with('error', 'Не удалось создать архив');
     }
 
-    return back()->with('error', 'Не удалось создать архив');
+    // Обновляем статус файлов
+    QrCodes::whereIn('id', $request->ids)->update(['status' => 'downloaded']);
+
+    return redirect()->route('memorial.showall')->with('success', 'qr code download'); // Замените 'your.route.name' на нужный маршрут
+
+    // return Response::download($zipPath)->deleteFileAfterSend(true);
 })->name('download.bulk');
