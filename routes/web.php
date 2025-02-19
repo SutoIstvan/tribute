@@ -13,7 +13,7 @@ use App\Http\Controllers\QrCodeController;
 use App\Models\Memorial;
 use App\Models\QrCodes;
 use Illuminate\Support\Facades\Artisan;
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 
@@ -149,8 +149,14 @@ Route::post('/download/bulk', function (Request $request) {
             if (file_exists($filePath)) {
                 // Добавляем файл в архив с именем из базы данных
                 $zip->addFile($filePath, basename($memorial->qr_code));
+                Log::error("File not found: " . $filePath);
+
             }
         }
+
+
+
+
         $zip->close();
 
         // Обновляем статус файлов
