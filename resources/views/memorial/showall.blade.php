@@ -1,106 +1,85 @@
-@extends('layouts.home')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('title', 'Qr code list - mbook.hu')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-@section('css')
-    <style>
-        .pricing-pg .item {
-            padding: 45px;
-            background: var(--bg-color);
-        }
-    </style>
-@endsection
+</head>
 
-@section('content')
-    <!-- ==================== Start Header ==================== -->
+<body>
+    <div class="container mt-4">
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
-
-
-
-
-    <!-- ==================== Start Header ==================== -->
-
-    <header class="pricing-hed">
-        <div class="container section-padding">
-            <div class="caption text-center">
-                <h1>Qr code list</h1>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Qr code list - Qty:{{ count($memorials) }}</h4>
             </div>
-        </div>
-    </header>
-
-    <!-- ==================== End Header ==================== -->
-
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-
-
-    <!-- ==================== Start Pricing ==================== -->
-
-    <section class="pricing-pg ">
-        <div class="container">
-            <div class="card bg-dark text-white border-secondary">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">QR Code List - Qty: {{ count($memorials) }}</h4>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('download.bulk') }}" method="POST">
-                        @csrf
-                        <div class="container mt-4">
-                            <div class="card bg-dark text-white border-secondary">
-                                <div class="card-body">
-                                    <table class="table table-bordered table-dark border-secondary">
-                                        <thead>
-                                            <tr>
-                                                <th><input type="checkbox" id="select-all"></th>
-                                                <th>QR Code</th>
-                                                <th>Token</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($memorials as $memorial)
-                                                @if ($memorial->status !== 'downloaded')
-                                                    <tr>
-                                                        <td>
-                                                            <input type="checkbox" name="ids[]" value="{{ $memorial->id }}" class="select-checkbox">
-                                                        </td>
-                                                        <td><img src="{{ asset('storage/' . $memorial->qr_code) }}" style="height: 150px !important; width: 150px !important;"></td>
-                                                        <td>{{ $memorial->token }}</td>
-                                                        <td>
-                                                            <a href="/memorial/attach/{{ $memorial->token }}" class="text-info">Mobile scan</a>
-                                                        </td>
-                                                    </tr>
-                                                @endif
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                    <button type="submit" class="btn btn-outline-light mt-3">Download Selected QR Codes</button>
-                                </div>
+            <div class="card-body">
+                <form action="{{ route('download.bulk') }}" method="POST">
+                    @csrf
+                    <div class="container mt-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" id="select-all"></th>
+                                            <th>QR Code</th>
+                                            <th>Token</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($memorials as $memorial)
+                                            @if ($memorial->status !== 'downloaded')
+                                                <!-- Проверяем статус -->
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="ids[]"
+                                                            value="{{ $memorial->id }}" class="select-checkbox">
+                                                    </td>
+                                                    <td><img src="{{ asset('storage/' . $memorial->qr_code) }}"
+                                                            height="50"></td>
+                                                            height="150"></td>
+                                                    <td>{{ $memorial->token }}</td>
+                                                    <td>{{ $memorial->status }}</td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-primary mt-3">Download select qr code</button>
                             </div>
                         </div>
-                    </form>
-            
-                    <form action="{{ route('run.seed') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-outline-light mt-2">Generate 10 QR Codes - DB Seed</button>
-                    </form>
-                </div>
-            </div>
-            
-        </div>
-    </section>
-@endsection
+                    </div>
+                </form>
 
-@section('js')
-<script>
-    document.getElementById('select-all').addEventListener('change', function () {
-        let checkboxes = document.querySelectorAll('.select-checkbox');
-        checkboxes.forEach(checkbox => checkbox.checked = this.checked);
-    });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-@endsection
+
+                <form action="{{ route('run.seed') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-primary mt-2">Generate 10 qr code - DB Seed</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('select-all').addEventListener('change', function () {
+            let checkboxes = document.querySelectorAll('.select-checkbox');
+            checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
