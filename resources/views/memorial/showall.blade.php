@@ -41,7 +41,7 @@
     <!-- ==================== Start Pricing ==================== -->
 
     <section class="pricing-pg ">
-        <div class="container">
+        <div class="container mb-100">
             <div class="card bg-dark text-white border-secondary">
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0">QR Code List - Qty: {{ count($memorials) }}</h4>
@@ -78,15 +78,15 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <button type="submit" class="btn btn-outline-light mt-3">Download Selected QR Codes</button>
+                                    <button type="submit" class="btn btn-outline-light mt-8">Download Selected QR Codes</button>
                                 </div>
                             </div>
                         </div>
                     </form>
             
-                    <form action="{{ route('run.seed') }}" method="POST">
+                    <form action="{{ route('run.seed') }}" method="POST" class="mt-10 text-center">
                         @csrf
-                        <button type="submit" class="btn btn-outline-light mt-2">Generate 10 QR Codes - DB Seed</button>
+                        <button type="submit" class="btn btn-outline-light mt-3">Generate 10 QR Codes - DB Seed</button>
                     </form>
                 </div>
             </div>
