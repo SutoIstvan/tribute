@@ -254,4 +254,13 @@ class MemorialController extends Controller
 
         return redirect()->back()->with('success', 'A képek leírása frissítve!');
     }
+
+
+    public function destroy(Memorial $memorial)
+    {
+        $memorial->delete();
+
+        return redirect()->route('dashboard')
+            ->with('success', 'Emlékoldal sikeresen törölve.');
+    }
 }

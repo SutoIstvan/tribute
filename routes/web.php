@@ -71,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
     // Редактирование информации
     Route::get('/dashboard/memorial/{id}/edit', [MemorialController::class, 'edit'])->name('memorial.edit');
     Route::put('/dashboard/memorial/{id}', [MemorialController::class, 'update'])->name('memorial.update');
+    Route::delete('/dashboard/memorials/{memorial}', [MemorialController::class, 'destroy'])->name('memorial.destroy');
 
     // Редактирование изображений
     Route::get('/dashboard/memorial/{id}/images', [MemorialController::class, 'editImages'])->name('memorial.images.edit');

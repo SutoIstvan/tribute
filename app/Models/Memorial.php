@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Memorial extends Model
 {
+    use SoftDeletes;
+
     public $incrementing = false; // Отключаем автоинкремент
     protected $keyType = 'string'; // Указываем, что ID строковый
 

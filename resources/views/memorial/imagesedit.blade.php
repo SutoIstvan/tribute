@@ -363,11 +363,12 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="text-center mb-80">
-
-                    <button type="submit" class="butn butn-md butn-bord butn-rounded">Módosítások mentése</button>
-
-                </div>
+                @if ($memorial->memorialimages->isNotEmpty())
+                    <div class="text-center mb-80">
+                        <button type="submit" class="butn butn-md butn-bord butn-rounded">Módosítások mentése</button>
+                    </div>
+                @endif
+                
 
 
             </form>

@@ -25,8 +25,9 @@ return new class extends Migration
             $table->text('testimonials')->nullable();
             $table->text('comments')->nullable();
             $table->text('gift')->nullable();
-            $table->string('qr_code')->unique(); // Уникальный QR-код
-            $table->foreignId('admin_id')->constrained('users'); // Администратор страницы            $table->text('users')->nullable();
+            $table->string('qr_code')->unique();
+            $table->foreignId('admin_id')->constrained('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

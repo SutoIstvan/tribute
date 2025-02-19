@@ -9,8 +9,8 @@
         <div class="container-xl position-re">
             <div class="row">
                 <div class="col-lg-9">
-                    <div class="caption">
-                        <h1>{{ $memorial->name }}</h1>
+                    <div class="caption" style="mix-blend-mode: difference;">
+                        <h1 style="font-size: 50px">{{ $memorial->name }}</h1>
                     </div>
                     <div class="row md-hide">
                         <div class="col-lg-6 imgs-cube">
@@ -35,7 +35,7 @@
                                         alt="Изображение мемориала">
                                 @else
                                     <!-- Если нет ни одной картинки, выводим заглушку -->
-                                    <img src="{{ asset('path/to/default/image.jpg') }}" alt="Нет изображения">
+                                    <img src="{{ asset('path/to/default/image.jpg') }}" alt="">
                                 @endif
                             </div>
 
@@ -48,6 +48,8 @@
                 </div>
             </div>
             <div class="mimg fit-img">
+
+            {{-- <div class="mimg fit-img" style="filter: grayscale(100%);"> --}}
                 <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" alt="">
                 <div class="text">
                     <span class="fz-14 text-u mb-10">{{ $memorial->birth_date }} - {{ $memorial->death_date }}</span>
