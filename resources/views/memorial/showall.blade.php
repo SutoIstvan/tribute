@@ -36,11 +36,7 @@
         </div>
     @endif
 
-    @if(session('download_url'))
-        <script>
-            window.location.href = '{{ session('download_url') }}';
-        </script>
-    @endif
+
 
     <!-- ==================== Start Pricing ==================== -->
 
@@ -97,6 +93,17 @@
             
         </div>
     </section>
+
+    @if(session('download_url'))
+    <iframe id="downloadFrame" src="{{ session('download_url') }}" style="display:none;"></iframe>
+        <script>
+            // После загрузки iframe перенаправляем на нужную страницу
+            document.getElementById('downloadFrame').onload = function() {
+                window.location.href = '{{ route('memorial.showall') }}';
+            };
+        </script>
+    @endif
+
 @endsection
 
 @section('js')
