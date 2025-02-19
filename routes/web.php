@@ -149,7 +149,7 @@ Route::post('/download/bulk', function (Request $request) {
             if (file_exists($filePath)) {
                 // Добавляем файл в архив с именем из базы данных
                 $zip->addFile($filePath, basename($memorial->qr_code));
-                Log::error("File not found: " . $filePath);
+                // Log::error("File not found: " . $filePath);
 
             }
         }
