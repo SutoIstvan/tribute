@@ -46,9 +46,8 @@ class MemorialController extends Controller
             'name' => 'required|string|min:3|max:255',
             'birth_date' => 'required|string|min:3|max:255',
             'death_date' => 'required|string|min:3|max:255',
-            // 'story' => 'required|string|min:3|max:1255',
             'biography' => 'required|string|min:3|max:2255',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:22048',
         ]);
 
         $admin_id = Auth::user()->id;
@@ -71,23 +70,27 @@ class MemorialController extends Controller
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-            $extension = $photo->getClientOriginalExtension();
-            $filename = $originalName . '_' . time() . '.' . $extension;
+            $slugName = Str::slug($originalName); // Делаем имя безопасным
+            $filename = $slugName . '_' . time() . '.webp'; // Устанавливаем WebP
 
             // Создаем путь с ID мемориала
             $path = 'images/memorials/' . $memorial->id;
 
             $image = Image::read($photo)
-                ->scale(width: 1300);
+            ->scale(width: 1300)
+            ->toWebp(90);
 
-            Storage::disk('public')->put(
-                $path . '/' . $filename,
-                $image->toJpeg()->toString()
-            );
+            // Удаляем старое фото, если оно есть
+            if ($memorial->photo) {
+                Storage::disk('public')->delete($path . '/' . $memorial->photo);
+            }
+
+            // Сохраняем новое фото
+            Storage::disk('public')->put($path . '/' . $filename, $image->toString());
+
 
             $memorial->photo = $filename;
-            $memorial->save(); // Сохраняем обновленную модель с фото
-
+            $memorial->save();
         }
 
         QrCodes::where('token', $request->token)->update(['memorial_id' => $memorial->id]);
@@ -198,6 +201,7 @@ class MemorialController extends Controller
 
     public function uploadImages(Request $request, $id)
     {
+        dd($request);
         // Проверяем общий размер всех файлов (10MB максимум)
         $totalSize = array_sum(array_map(function ($file) {
             return $file->getSize();
