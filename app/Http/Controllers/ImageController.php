@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Models\Memorial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
@@ -32,19 +33,28 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $image = $request->file('file');
-        $imageName = time() . '_' . $image->getClientOriginalName();
+
+        $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+        $slugName = Str::slug($originalName); // Делаем имя безопасным
+        $filename = $slugName . '_' . time() . '.webp'; // Устанавливаем WebP
 
         $memorial_id = $request->id;
         $path = 'images/memorials/' . $memorial_id;
 
-        $imagePath = Storage::disk('public')->putFileAs($path, $image, $imageName);
+        $photo = Image::read($image)
+        ->scale(width: 1300)
+        ->toWebp(90);
+
+        Storage::disk('public')->put($path . '/' . $filename, $photo->toString());
+
+        // $imagePath = Storage::disk('public')->putFileAs($path, $image, $imageName);
 
         $imageUpload = new Image();
-        $imageUpload->filename = $imagePath;
+        $imageUpload->filename = $filename;
         $imageUpload->memorial_id = $memorial_id;
         $imageUpload->save();
 
-        return response()->json(['success' => $imageName]);
+        return response()->json(['success' => $filename]);
     }
 
 
