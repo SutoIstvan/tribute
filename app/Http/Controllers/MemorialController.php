@@ -161,8 +161,8 @@ class MemorialController extends Controller
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-            $extension = $photo->getClientOriginalExtension();
-            $filename = $originalName . '_' . time() . '.' . $extension;
+            $slugName = Str::slug($originalName); // Делаем имя безопасным
+            $filename = $slugName . '_' . time() . '.webp'; // Устанавливаем WebP
 
             // Создаем путь с ID мемориала
             $path = 'images/memorials/' . $memorial->id;
