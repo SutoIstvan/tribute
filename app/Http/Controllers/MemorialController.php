@@ -10,16 +10,28 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 // use App\Models\Image;
 use Intervention\Image\Laravel\Facades\Image;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+
 
 class MemorialController extends Controller
 {
-    public function show($id)
+    public function show($slugOrId)
     {
-        $memorial = Memorial::findOrFail($id);
+        $memorial = Memorial::where('slug', $slugOrId)
+            ->orWhere('id', $slugOrId)
+            ->firstOrFail();
+    
         $images = $memorial->memorialimages;
-
+    
+        // Если входной параметр совпадает с id, а в модели присутствует slug, делаем редирект
+        if ((string) $memorial->id === (string) $slugOrId && $memorial->slug) {
+            return redirect()->route('memorial.show', $memorial->slug)->setStatusCode(301);
+        }
+    
         return view('memorial.show', compact('memorial', 'images'));
     }
+    
 
     public function showall()
     {
@@ -45,13 +57,15 @@ class MemorialController extends Controller
         $memorial = new Memorial();
         $memorial->id = $request->token;
         $memorial->name = $request->name;
+        $slug = Str::slug($request->name);
+        $count = Memorial::where('slug', 'LIKE', "{$slug}%")->count();
+        $memorial->slug = $count ? "{$slug}-{$count}" : $slug;
         $memorial->birth_date = $request->birth_date;
         $memorial->death_date = $request->death_date;
         $memorial->story = $request->story;
         $memorial->biography = $request->biography;
         $memorial->qr_code = $request->token;
         $memorial->admin_id = $admin_id;
-        // Сначала сохраняем мемориал чтобы получить ID
         $memorial->save();
 
         if ($request->hasFile('photo')) {
@@ -126,9 +140,15 @@ class MemorialController extends Controller
             'death_date' => 'required|string|min:3|max:255',
             'biography' => 'required|string|min:3|max:2255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'slug' => [
+                'nullable',
+                'regex:/^[a-z0-9-]+$/',
+                Rule::unique('memorials', 'slug')->ignore($memorial->id ?? null),
+            ],
         ]);
 
         $memorial = Memorial::findOrFail($id);
+        $memorial->slug = $request->slug;
         $memorial->name = $request->name;
         $memorial->birth_date = $request->birth_date;
         $memorial->death_date = $request->death_date;

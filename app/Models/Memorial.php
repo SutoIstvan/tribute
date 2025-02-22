@@ -14,6 +14,7 @@ class Memorial extends Model
 
     protected $fillable = [
         'id',
+        'slug',
         'name',
         'birth_date',
         'death_date',
@@ -27,6 +28,7 @@ class Memorial extends Model
         'comments',
         'gift',
         'qr_code',
+        'virtual_code',
         'users',
     ];
 
@@ -42,5 +44,16 @@ class Memorial extends Model
     public function memorialimages()
     {
         return $this->hasMany(MemorialImage::class);
+    }
+
+    public function getRouteKey()
+    {
+        return $this->slug ?? $this->id;
+    }
+
+    // Метод для получения параметра в URL
+    public function getRouteKeyName()
+    {
+        return $this->slug ? 'slug' : 'id';
     }
 }

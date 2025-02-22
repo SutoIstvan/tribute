@@ -372,7 +372,7 @@
                                         <span>Szerkesztes</span>
                                     </div>
                                 </a>
-                                <a href="{{ route('memorial.show', $memorial->id) }}" target="_blank"
+                                <a href="{{ route('memorial.show', $memorial->slug) }}" target="_blank"
                                     class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                     <div class="d-flex align-items-center">
                                         <span>Megnyitom</span>

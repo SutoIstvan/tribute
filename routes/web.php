@@ -57,8 +57,7 @@ Route::post('/images/upload-temp', [ImageController::class, 'uploadTempImage'])-
 Route::get('/memorial/attach/{token}', [QrCodeController::class, 'showAttachForm'])->name('memorial.attach.form');
 
 
-Route::get('/memorial/{id}', [MemorialController::class, 'show'])->name('memorial.show');
-
+Route::get('/memorial/{memorial}', [MemorialController::class, 'show'])->name('memorial.show');
 
 
 Route::middleware(['auth'])->group(function () {

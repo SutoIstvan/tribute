@@ -7,9 +7,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="HTML5 Template Hubfolio Multi-Purpose themeforest">
-    <meta name="description" content="Hubfolio - Multi-Purpose HTML5 Template">
-    <meta name="author" content="">
+    <meta name="keywords" content="emlékoldal, virtuális emlékmű, elhunytak emléke, emlékmű online, emlékhely, MBook, mbook, mbook.hu">
+    <meta name="description" content="mbook.hu mbook – online emlékoldalak szeretteik emlékének megörökítésére. Készítsen virtuális emlékműveket, ossza meg emlékeit és fotóit.">
+
 
     <!-- Title  -->
     <title>@yield('title', 'Adatok szerkesztése - mbook.hu')</title>

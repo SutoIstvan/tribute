@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('memorials', function (Blueprint $table) {
             $table->string('id')->primary();
+            $table->string('slug')->nullable()->unique();
             $table->string('name');
             $table->date('birth_date')->nullable();
             $table->date('death_date')->nullable();
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->text('comments')->nullable();
             $table->text('gift')->nullable();
             $table->string('qr_code')->unique();
+            $table->string('virtual_code')->nullable()->unique();
             $table->foreignId('admin_id')->constrained('users');
             $table->softDeletes();
             $table->timestamps();

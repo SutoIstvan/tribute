@@ -12,23 +12,37 @@ class QrCodeController extends Controller
 
     public function showAttachForm(string $token)
     {
+        // Ищем QR-код по токену
         $qr = QrCodes::where('token', $token)->firstOrFail();
         
-        // Если QR-код еще не привязан к мемориалу
-        if (!$qr->memorial_id) {
-            if (!Auth::check()) {
-                // Сохраняем токен QR-кода в сессии
-                session(['qr_token' => $token]);
-                
-                return redirect()
-                    ->route('login')
-                    ->with('message', 'Пожалуйста, войдите для привязки QR-кода');
+        // Если QR-код уже привязан к мемориалу
+        if ($qr->memorial_id) {
+            // Находим мемориал
+            $memorial = Memorial::findOrFail($qr->memorial_id);
+            
+            // Если у мемориала есть slug, делаем редирект на страницу со slug
+            if ($memorial->slug) {
+                // return redirect()->route('memorial.show', $memorial->slug, 301);
+
+                return redirect()->route('memorial.show', $memorial->slug)->setStatusCode(301);
             }
             
-            return view('memorial.attach', compact('token'));
+            // Если slug нет, редиректим по ID
+            return redirect()->route('memorial.show', $qr->memorial_id);
         }
         
-        return redirect()->route('memorial.show', $qr->memorial_id);
+        // Если QR-код еще не привязан
+        if (!Auth::check()) {
+            // Сохраняем токен QR-кода в сессии
+            session(['qr_token' => $token]);
+            
+            return redirect()
+                ->route('login')
+                ->with('message', 'Пожалуйста, войдите для привязки QR-кода');
+        }
+        
+        // Показываем форму привязки
+        return view('memorial.attach', compact('token'));
     }
 
 

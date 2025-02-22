@@ -354,6 +354,35 @@
             </div>
         </div>
 
+
+
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+
+
+                <div class="col-12 col-md-3 p-4 mt-50">
+                    <h3>Permalink</h3>
+                    <p class="mt-2">Permalink egyedi URL</p>
+                </div>
+
+                <div class="col-12 col-md-7 p-3">
+                    <div class="container">
+                        <div class="row">
+                            <div class="mt-50">
+                                <label for="biography" class="form-label text-white">Permalink egyedi URL</label>
+                                <input type="text" name="slug" id="slug" class="form-control bg-dark text-white border-secondary py-2" value="{{ $memorial->slug }}">
+                                <small class="text-muted">Az azonosító használatához hagyja üresen</small>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
         {{-- <input name="token" value="{{ $token }}" hidden> --}}
 
     <div class="text-center mb-70 mt-40">
