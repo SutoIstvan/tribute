@@ -165,7 +165,8 @@ class MemorialController extends Controller
             $path = 'images/memorials/' . $memorial->id;
 
             $image = Image::read($photo)
-                ->scale(width: 1300);
+            ->scale(width: 1300)
+            ->toWebp(90);
 
             // Удаляем старое фото, если оно есть
             if ($memorial->photo) {
@@ -173,17 +174,15 @@ class MemorialController extends Controller
             }
 
             // Сохраняем новое фото
-            Storage::disk('public')->put(
-                $path . '/' . $filename,
-                $image->toJpeg()->toString()
-            );
+            Storage::disk('public')->put($path . '/' . $filename, $image->toString());
+
 
             $memorial->photo = $filename;
         }
 
         $memorial->save();
 
-        return redirect()->route('memorial.edit', $id)->with('success', 'Информация обновлена!');
+        return redirect()->route('memorial.edit', $id)->with('success', 'Információ frissítve!');
     }
 
 
