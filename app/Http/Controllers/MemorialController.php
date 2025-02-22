@@ -219,24 +219,23 @@ class MemorialController extends Controller
         $memorial = Memorial::findOrFail($id);
 
         if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
+            foreach ($request->file('images') as $photo) {
                 // Получаем оригинальное имя и расширение
-                $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                $extension = $image->getClientOriginalExtension();
-                $filename = $originalName . '_' . time() . '.' . $extension;
+                $originalName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                $slugName = Str::slug($originalName); // Делаем имя безопасным
+                $filename = $slugName . '_' . time() . '.webp'; // Устанавливаем WebP
 
                 // Создаем путь с ID мемориала
                 $path = 'images/memorials/' . $memorial->id;
 
                 // Обрабатываем изображение
-                $processedImage = Image::read($image)
-                    ->scale(width: 1300);
+                $image = Image::read($photo)
+                    ->scale(width: 1300)
+                    ->toWebp(90);
 
                 // Сохраняем обработанное изображение
-                Storage::disk('public')->put(
-                    $path . '/' . $filename,
-                    $processedImage->toJpeg()->toString()
-                );
+                Storage::disk('public')->put($path . '/' . $filename, $image->toString());
+
 
                 // Создаем запись в базе данных
                 $memorial->memorialimages()->create([
