@@ -31,7 +31,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard') }}">Hozzászólások</a>
+                    <a class="nav-link {{ Route::is('memorial.comments') ? 'active' : '' }}" href="{{ route('memorial.comments', ['id' => $memorial->id]) }}">Hozzászólások</a>
                 </li>
 
 

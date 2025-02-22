@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -78,6 +79,25 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/dashboard/memorial/image/{id}', [MemorialController::class, 'deleteImage'])->name('memorial.image.delete');
 
     Route::post('/dashboard/memorial/{id}/images/update', [MemorialController::class, 'updateImages'])->name('memorials.images.update');
+
+
+
+    Route::post('/memorial/{slug}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+    // Route::post('/memorials/{memorial}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+    Route::patch('/comments/{comment}/approve', [CommentController::class, 'approve'])->name('comments.approve');
+    Route::patch('/comments/{comment}/reject', [CommentController::class, 'reject'])->name('comments.reject');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+    // Route::get('/admin/comments', [CommentController::class, 'index'])->name('admin.comments.index');
+    Route::get('/dashboard/memorial/{id}/comments', [CommentController::class, 'comments'])->name('memorial.comments');
+
+    Route::get('/memorials/{memorial}/comments', [CommentController::class, 'index'])->name('comments.index');
+
+
+
+    Route::get('/memorial/{slug}/comments/create', [CommentController::class, 'create'])->name('comments.create');
 
 });
 

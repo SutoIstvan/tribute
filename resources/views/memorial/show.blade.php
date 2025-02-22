@@ -49,7 +49,7 @@
             </div>
             <div class="mimg fit-img">
 
-            {{-- <div class="mimg fit-img" style="filter: grayscale(100%);"> --}}
+                {{-- <div class="mimg fit-img" style="filter: grayscale(100%);"> --}}
                 <img src="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" alt="">
                 <div class="text">
                     <span class="fz-14 text-u mb-10">{{ $memorial->birth_date }} - {{ $memorial->death_date }}</span>
@@ -183,7 +183,7 @@
 
 
                     <div class="items col-lg-6 order-md-2">
-                        <a href="../inner_pages/portfolio-gallery.html" class="crv-butn mt-100">
+                        <a href="#" class="crv-butn mt-100">
                             <div class="d-flex">
                                 <span class="text">Tekintse meg az összes fényképet</span>
                                 <span class="icon">
@@ -331,8 +331,12 @@
     <!-- ==================== End Intro-vid ==================== -->
 
 
-
     <!-- ==================== Start Testimonials ==================== -->
+
+
+
+
+
 
     <section class="testimonials-dm section-padding pb-80 ">
         <div class="container">
@@ -350,134 +354,52 @@
             </div>
             <div class="swiper process-swiper swiper-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="item">
-                            <div class="d-flex mb-30">
-                                <div class="img">
-                                    <div class="fit-img">
-                                        <img src="{{ asset('assets/imgs/header/circle-badge4.png') }}" alt="">
+
+
+                    @forelse($comments as $comment)
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <div class="d-flex mb-30">
+                                    <div class="img">
+                                        <div class="fit-img">
+                                            <img src="{{ asset('assets/imgs/header/circle-badge4.png') }}"
+                                                alt="">
+                                        </div>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <span class="sub-color"></span>
                                     </div>
                                 </div>
-                                <div class="ml-auto">
-                                    <span class="sub-color"></span>
+                                <h5>“{{ $comment->content }}”</h5>
+                                <div class="d-flex mt-30">
+                                    <span class="sub-color">{{ $comment->name }}</span>
+
+                                    <span class="sub-color">{{ $comment->created_at }}</span>
+
                                 </div>
-                            </div>
-                            <h5>“Fényes emléke tovább él... Jósága és bölcsessége örökre a szívünkben marad.”</h5>
-                            <div class="d-flex mt-30">
-                                <span class="sub-color">Aaron Beck</span>
-                                <!-- <div class="stars ml-auto">
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                </div> -->
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="item">
-                            <div class="d-flex mb-30">
-                                <div class="img">
-                                    <div class="fit-img">
-                                        <img src="{{ asset('assets/imgs/header/circle-badge4.png') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="ml-auto">
-                                    <span class="sub-color"></span>
-                                </div>
-                            </div>
-                            <h5>“Elment, de melegséget és fényt hagyott maga után. Nyugodjék békében.”</h5>
-                            <div class="d-flex mt-30">
-                                <span class="sub-color">Aaron Beck</span>
-                                <!-- <div class="stars ml-auto">
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                </div> -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="item">
-                            <div class="d-flex mb-30">
-                                <div class="img">
-                                    <div class="fit-img">
-                                        <img src="{{ asset('assets/imgs/header/circle-badge4.png') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="ml-auto">
-                                    <span class="sub-color"></span>
-                                </div>
-                            </div>
-                            <h5>“Gyászolunk... Távozása helytelenség mindazok számára, akik ismerték.”</h5>
-                            <div class="d-flex mt-30">
-                                <span class="sub-color">Aaron Beck</span>
-                                <!-- <div class="stars ml-auto">
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                </div> -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="item">
-                            <div class="d-flex mb-30">
-                                <div class="img">
-                                    <div class="fit-img">
-                                        <img src="{{ asset('assets/imgs/header/circle-badge4.png') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="ml-auto">
-                                    <span class="sub-color"></span>
-                                </div>
-                            </div>
-                            <h5>“Részvétünk... Élete példa volt sokak számára. Nyugodjék békében.”</h5>
-                            <div class="d-flex mt-30">
-                                <span class="sub-color">Aaron Beck</span>
-                                <!-- <div class="stars ml-auto">
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                </div> -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="item">
-                            <div class="d-flex mb-30">
-                                <div class="img">
-                                    <div class="fit-img">
-                                        <img src="{{ asset('assets/imgs/header/circle-badge4.png') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="ml-auto">
-                                    <span class="sub-color"></span>
-                                </div>
-                            </div>
-                            <h5>“Nyomot hagyott mindazok szívében, akik ismerték. Fényes emléke tovább él...”</h5>
-                            <div class="d-flex mt-30">
-                                <span class="sub-color">Aaron Beck</span>
-                                {{-- <div class="stars ml-auto">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div> --}}
-                            </div>
-                        </div>
-                    </div>
+                    @empty
+                        <p class="text-gray-500">Még nincsenek hozzászólások</p>
+                    @endforelse
+
+
+
+
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
+
+            <div class="text-center mt-40">
+
+                <a href="{{ route('comments.create', $memorial->id) }}"
+                    class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
+                    <div class="d-flex align-items-center">
+                        <span>Szólj hozzá</span>
+                    </div>
+                </a>
+            </div>
+
         </div>
     </section>
 

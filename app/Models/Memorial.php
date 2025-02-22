@@ -56,4 +56,9 @@ class Memorial extends Model
     {
         return $this->slug ? 'slug' : 'id';
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
