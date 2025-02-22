@@ -383,6 +383,32 @@
 
 
 
+
+
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 col-md-3 p-4 mt-50">
+                    <h3>Videó link</h3>
+                    <p class="mt-2">Videó egyedi YouTube URL</p>
+                </div>
+        
+                <div class="col-12 col-md-7 p-3">
+                    <div class="container">
+                        <div class="row">
+                            <div class="mt-50">
+                                <label for="video" class="form-label text-white">Videó egyedi URL</label>
+                                <input type="text" name="video" id="video" class="form-control bg-dark text-white border-secondary py-2" value="{{ $memorial->video }}">
+                                <small class="text-muted">Ha üresen hagyja, akkor a videó nem lesz megjelenítve</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+
         {{-- <input name="token" value="{{ $token }}" hidden> --}}
 
     <div class="text-center mb-70 mt-40">

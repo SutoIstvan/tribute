@@ -41,7 +41,7 @@ class CommentController extends Controller
         
         $comment->update(['status' => 'approved']);
         
-        return response()->json(['message' => 'Комментарий одобрен']);
+        return redirect()->back()->with('success', 'A komment elfogadásra került');
     }
 
     public function reject(Comment $comment)
@@ -59,7 +59,7 @@ class CommentController extends Controller
         
         $comment->delete();
         
-        return response()->json(['message' => 'Комментарий удален']);
+        return redirect()->back()->with('success', 'A komment törölve');
     }
 
     public function comments($id)

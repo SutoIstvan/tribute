@@ -199,135 +199,44 @@
     </section>
 
 
-    {{-- <section class="works-dm section-padding">
-        <div class="container">
-            <div class="gallery row md-marg">
-                <div class="items col-lg-6 order-md-2">
-                    <div class="item">
-                        <div class="img">
-                            <img src="{{ asset('assets/imgs/works/6.png') }}" alt="">
-
-                        </div>
-                        <div class="cont mt-30">
-                            <div class="info sub-color mb-10">
-                                <span>2023</span>
-                                <span class="dot"></span>
-                                <span>A szülővárosomban</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="items col-lg-6 order-md-1">
-                    <div class="sec-head">
-                        <h6 class="sub-head mb-15">Fényképek az elhunytról</h6>
-                        <h2 class="fz-50">Vessen egy pillantást<br> a
-                            fényképekre</h2>
-                    </div>
-                </div>
-                <div class="items col-lg-6 order-md-2">
-                    <div class="item">
-                        <div class="img">
-                            <img src="{{ asset('assets/imgs/works/5.jpg') }}" alt="">
-
-                        </div>
-                        <div class="cont mt-30">
-                            <div class="info sub-color mb-10">
-                                <span>2023</span>
-                                <span class="dot"></span>
-                                <span>Kirándulás Párizsba</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="items col-lg-6 order-md-2">
-                    <div class="item">
-                        <div class="img">
-                            <img src="assets/imgs/works/6.jpg" alt="">
-
-                        </div>
-                        <div class="cont mt-30">
-                            <div class="info sub-color mb-10">
-                                <span>2023</span>
-                                <span class="dot"></span>
-                                <span>Kedvenc hely</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="items col-lg-6 order-md-2">
-                    <div class="item">
-                        <div class="img">
-                            <img src="assets/imgs/works/8.jpg" alt="">
-
-                        </div>
-                        <div class="cont mt-30">
-                            <div class="info sub-color mb-10">
-                                <span>2023</span>
-                                <span class="dot"></span>
-                                <span>Munkahely az irodában</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="items col-lg-6 order-md-2">
-                    <a href="../inner_pages/portfolio-gallery.html" class="crv-butn mt-100">
-                        <div class="d-flex">
-                            <span class="text">Tekintse meg az összes fényképet</span>
-                            <span class="icon">
-                                <img src="assets/common/imgs/icons/arrow-top-right.svg" alt="">
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-    <!-- ==================== End Portfolio ==================== -->
-
-
-
-    <!-- ==================== Start Services ==================== -->
-
-    <section class="services-dm sub-bg radius-30 section-padding">
-        <div class="container pt-0">
-            <div class="sec-head mb-100">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <h6 class="sub-head">Videó az elhunytról</h6>
-                    </div>
-                    <div class="col-lg-5">
-                        <h3 class="text-indent md-mb15">Gyönyörű emlékezetes pillanatok az életből
-                        </h3>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== End Services ==================== -->
-
-
-
     <!-- ==================== Start Intro-vid ==================== -->
+    @if (!empty($memorial->video))
+        <section class="services-dm sub-bg radius-30 section-padding">
+            <div class="container pt-0">
+                <div class="sec-head mb-100">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h6 class="sub-head">Videó az elhunytról</h6>
+                        </div>
+                        <div class="col-lg-5">
+                            <h3 class="text-indent md-mb15">Gyönyörű emlékezetes pillanatok az életből
+                            </h3>
+                        </div>
 
-    <section class="intro-vid ontop">
-        <div class="container">
-            <div class="bg-img" data-background="assets/imgs/intro2.jpg">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="intro-vid ontop">
+            <div class="container">
+
+                {{-- <div class="bg-img" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}"> --}}
+                @if (!empty($memorial->video_img))
+                    <div class="bg-img" data-background="{{ $memorial->video_img }}">
+                    @else
+                    <div class="bg-img" data-background="{{ asset('storage/images/memorials/' . $memorial->id . '/' . $memorial->photo) }}">
+                @endif
                 <div class="play-button">
-                    <a href="https://youtu.be/AzwC6umvd1s" class="vid">
+                    <a href="{{ $memorial->video }}" class="vid">
                         <i class="fas fa-play"></i>
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
-
+            </div>
+        </section>
+    @endif
     <!-- ==================== End Intro-vid ==================== -->
 
 
@@ -361,6 +270,7 @@
                             <div class="item">
                                 <div class="d-flex mb-30">
                                     <div class="img">
+                                        {{-- <div class="fit-img"> --}}
                                         <div class="fit-img">
                                             <img src="{{ asset('assets/imgs/header/circle-badge4.png') }}"
                                                 alt="">
@@ -371,12 +281,11 @@
                                     </div>
                                 </div>
                                 <h5>“{{ $comment->content }}”</h5>
-                                <div class="d-flex mt-30">
+                                <div class="d-flex justify-content-between mt-30 w-100">
                                     <span class="sub-color">{{ $comment->name }}</span>
-
-                                    <span class="sub-color">{{ $comment->created_at }}</span>
-
+                                    <span class="sub-color">{{ $comment->created_at->format('Y.m.d') }}</span>
                                 </div>
+
                             </div>
                         </div>
                     @empty

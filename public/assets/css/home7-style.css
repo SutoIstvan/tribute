@@ -350,8 +350,8 @@
     border-radius: 15px;
     background: var(--bg-color); }
     .testimonials-dm .item .fit-img {
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%; }
     .testimonials-dm .item span.sub-color {
       font-size: 16px; }
