@@ -140,11 +140,11 @@ class MemorialController extends Controller
             'death_date' => 'required|string|min:3|max:255',
             'biography' => 'required|string|min:3|max:2255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'slug' => [
-                'nullable',
-                'regex:/^[a-z0-9-]+$/',
-                Rule::unique('memorials', 'slug')->ignore($memorial->id ?? null),
-            ],
+            'slug' =>   [
+                            'nullable',
+                            'regex:/^[a-z0-9-]+$/',
+                            Rule::unique('memorials', 'slug')->ignore($id),
+                        ],
         ]);
 
         $memorial = Memorial::findOrFail($id);
