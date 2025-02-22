@@ -148,7 +148,10 @@ class MemorialController extends Controller
         ]);
 
         $memorial = Memorial::findOrFail($id);
-        $memorial->slug = $request->slug;
+        // $memorial->slug = $request->slug;
+        if ($request->filled('slug') && $request->slug !== $memorial->slug) {
+            $memorial->slug = $request->slug;
+        }
         $memorial->name = $request->name;
         $memorial->birth_date = $request->birth_date;
         $memorial->death_date = $request->death_date;
