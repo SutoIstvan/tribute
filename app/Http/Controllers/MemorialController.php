@@ -201,7 +201,7 @@ class MemorialController extends Controller
 
     public function uploadImages(Request $request, $id)
     {
-        dd($request);
+        // dd($request);
         // Проверяем общий размер всех файлов (10MB максимум)
         $totalSize = array_sum(array_map(function ($file) {
             return $file->getSize();
