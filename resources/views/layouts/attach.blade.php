@@ -198,7 +198,7 @@
 
             <!-- ==================== Start Footer ==================== -->
 
-            @include('layouts.footer')
+            @include('layouts.partials.footer')
 
             <!-- ==================== End Footer ==================== -->
 
