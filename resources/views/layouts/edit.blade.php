@@ -106,14 +106,24 @@
     
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('memorial.comments') ? 'active' : '' }}"
+                            href="{{ route('memorial.comments', ['id' => $memorial->id]) }}">Video</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('memorial.comments') ? 'active' : '' }}"
                             href="{{ route('memorial.comments', ['id' => $memorial->id]) }}">Hozzászólások</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('memorial.comments') ? 'active' : '' }}"
+                            href="{{ route('memorial.comments', ['id' => $memorial->id]) }}">Beállítások</a>
                     </li>
     
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="nav-link" style="background-color: #0e0f11; border: none;">
-                                {{ __('Log Out') }}
+                                {{ __('memorial-admin.logout') }}
                             </button>
                         </form>
                     </li>
@@ -205,14 +215,14 @@
                         <div class="row">
                             <div class="col-lg-8">
                                 <div class="copy sub-color md-mb50">
-                                    <p>© 2024 <a href="#0">MBook.hu</a>. Minden jog fenntartva.</p>
+                                    <p><a href="#0">MBook.hu</a></p>
                                 </div>
                             </div>
                             <div class="col-lg-4 d-flex justify-content-end">
                                 <div class="links sub-color d-flex justify-content-between">
                                     <a href="#">Kezdőlap</a>
                                     <a href="#">Kapcsolatok</a>
-                                    <a href="#">Hírek</a>
+                                    <a href="#">Segítség</a>
                                 </div>
                             </div>
                         </div>
