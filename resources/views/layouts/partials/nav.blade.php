@@ -4,48 +4,46 @@
         <!-- Logo -->
         <a class="logo" href="{{ route('welcome') }}">
             <img src="{{ asset('assets/imgs/logo-mbook.png') }}" alt="logo" style="height: 18px;">
-            
-            <!-- Tribute Hub -->
-            <!-- <img src="assets/imgs/Logo-light.svg" alt="logo"> -->
         </a>
 
         <!-- navbar links -->
         <div class="topnav d-none d-lg-flex align-items-center">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('dashboard') }}">Irányítópult</a>
+                    <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}" href="{{ route('welcome') }}">Címlap</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('memorial.showall') ? 'active' : '' }}" href="{{ route('memorial.showall') }}">Qr code</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('price') ? 'active' : '' }}" href="{{ route('price') }}">Árak</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Kapcsolatok</a>
+                </li>
+                <li class="nav-item">
+                    @auth
+                        <a class="nav-link" href="{{ route('dashboard') }}">Irányítópult</a>
+                    @else
+                        <a class="nav-link" href="{{ route('login') }}">Belépés</a>
+                    @endauth
+                </li>
+                
                 {{-- <li class="nav-item">
-                    <a class="nav-link" href="#">Életrajz</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Fényképek</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Videó</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Hozzászólások</a>
-                </li> --}}
-                <li class="nav-item">
-                    <a href="{{ route('profile.edit') }}" class="nav-link">
-                        {{ __('Profile') }}
-                    </a>
-                </li>
-                <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="nav-link"  style="background-color: #0e0f11; border: none;">
                             {{ __('Log Out') }}
                         </button>
                     </form>
-                </li>
-
-
+                </li> --}}
             </ul>
         </div>
         <div class="menu-icon cursor-pointer d-lg-none">
-            <span class="icon ti-align-right"></span>
+            <div class="menu-icon cursor-pointer d-md-none">
+                <span class="icon ti-align-right"></span>
+            </div>
         </div>
     </div>
 </nav>
@@ -85,7 +83,6 @@
                                 data-text="Hozzászólások">Hozzászólások</span></a>
                     </div>
                 </li>
-                
             </ul>
         </div>
         <div class="cont-info valign">

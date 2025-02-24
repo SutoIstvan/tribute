@@ -7,8 +7,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="emlékoldal, virtuális emlékmű, elhunytak emléke, emlékmű online, emlékhely, MBook, mbook, mbook.hu">
-    <meta name="description" content="mbook.hu mbook – online emlékoldalak szeretteik emlékének megörökítésére. Készítsen virtuális emlékműveket, ossza meg emlékeit és fotóit.">
+    <meta name="keywords"
+        content="emlékoldal, virtuális emlékmű, elhunytak emléke, emlékmű online, emlékhely, MBook, mbook, mbook.hu">
+    <meta name="description"
+        content="mbook.hu mbook – online emlékoldalak szeretteik emlékének megörökítésére. Készítsen virtuális emlékműveket, ossza meg emlékeit és fotóit.">
 
 
     <!-- Title  -->
@@ -28,13 +30,15 @@
     <link rel="stylesheet" href="{{ asset('assets/css/home7-style.css') }}">
 
     <!-- CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
-<!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<!-- Для локализации на венгерский -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.hu.min.js"></script>
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <!-- Для локализации на венгерский -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.hu.min.js">
+    </script>
 
     @yield('css')
 </head>
@@ -75,8 +79,103 @@
 
     <!-- ==================== Start Navbar ==================== -->
 
-    @include('layouts.navadmin')
-
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+    
+            <!-- Logo -->
+            <a class="logo" href="{{ route('welcome') }}">
+                <img src="{{ asset('assets/imgs/logo-mbook.png') }}" alt="logo" style="height: 18px;">
+            </a>
+    
+            <!-- navbar links -->
+            <div class="topnav d-none d-lg-flex align-items-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('dashboard') }}">Irányítópult</a>
+                    </li>
+    
+                    <li class="nav-item">
+                        <a href="{{ route('profile.edit') }}" class="nav-link">
+                            {{ __('Profile') }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="nav-link" style="background-color: #0e0f11; border: none;">
+                                {{ __('Log Out') }}
+                            </button>
+                        </form>
+                    </li>
+    
+    
+                </ul>
+            </div>
+            <div class="menu-icon cursor-pointer d-lg-none">
+                <span class="icon ti-align-right"></span>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="hamenu">
+        <div class="close-menu cursor-pointer ti-close"></div>
+        <div class="container-fluid rest d-flex">
+            <div class="menu-links">
+                <ul class="main-menu rest">
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text" data-text="Címlap">Címlap</span></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text"
+                                    data-text="Életrajz">Életrajz</span></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text"
+                                    data-text="Fényképek">Fényképek</span></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text" data-text="Videó">Videó</span></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text"
+                                    data-text="Hozzászólások">Hozzászólások</span></a>
+                        </div>
+                    </li>
+    
+                </ul>
+            </div>
+            <div class="cont-info valign">
+                <div class="text-center full-width">
+                    <div class="logo">
+                        <img src="{{ asset('assets/imgs/logo-mbook.png') }}" alt="">
+                    </div>
+                    <div class="social-icon mt-40">
+                        <a href="#"> <i class="fab fa-facebook-f"></i> </a>
+                        <a href="#"> <i class="fab fa-x-twitter"></i> </a>
+                        <a href="#"> <i class="fab fa-linkedin-in"></i> </a>
+                        <a href="#"> <i class="fab fa-instagram"></i> </a>
+                    </div>
+                    <div class="item mt-30">
+                        <h5>Magyarorszag <br> Budapest, Madar utca 21</h5>
+                    </div>
+                    <div class="item mt-10">
+                        <h5><a href="#0">info@tributehub.eu</a></h5>
+                        <h5 class="underline"><a href="#0">+36 841 25 69</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- ==================== End Navbar ==================== -->
 
     <div id="smooth-wrapper">
@@ -91,7 +190,26 @@
 
             <!-- ==================== Start Footer ==================== -->
 
-            @include('layouts.footeradmin')
+            <footer class="footer-sa pb-80 ">
+                <div class="sub-footer">
+                    <div class="container pt-50">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="copy sub-color md-mb50">
+                                    <p>© 2024 <a href="#0">MBook.hu</a>. Minden jog fenntartva.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 d-flex justify-content-end">
+                                <div class="links sub-color d-flex justify-content-between">
+                                    <a href="#">Kezdőlap</a>
+                                    <a href="#">Kapcsolatok</a>
+                                    <a href="#">Hírek</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
 
             <!-- ==================== End Footer ==================== -->
 
@@ -119,7 +237,7 @@
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
 
     @yield('js')
-    
+
 </body>
 
 </html>

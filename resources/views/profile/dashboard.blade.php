@@ -9,53 +9,53 @@
 
     <style>
         /*
-                @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700,700i');
+                        @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700,700i');
 
 
-                *,
-                *:before,
-                *:after {
-                  margin: 0;
-                  padding: 0;
-                  word-break: break-all;
-                  box-sizing: border-box;
-                  scroll-behavior: smooth;
-                } */
+                        *,
+                        *:before,
+                        *:after {
+                          margin: 0;
+                          padding: 0;
+                          word-break: break-all;
+                          box-sizing: border-box;
+                          scroll-behavior: smooth;
+                        } */
 
         /* html {
-                  font-size: 10px;
-                } */
+                          font-size: 10px;
+                        } */
 
         /* body {
-                  font-family: 'Ubuntu', sans-serif;
-                  color: #6e6e6e;
-                  font-size: 1.6rem;
-                  background: black;
-                } */
+                          font-family: 'Ubuntu', sans-serif;
+                          color: #6e6e6e;
+                          font-size: 1.6rem;
+                          background: black;
+                        } */
 
         /* header,
-                footer {
-                  display: block;
-                }
+                        footer {
+                          display: block;
+                        }
 
-                a,
-                a:link,
-                a:visited {
-                  text-decoration: none;
-                }
+                        a,
+                        a:link,
+                        a:visited {
+                          text-decoration: none;
+                        }
 
-                img {
-                  border: 0;
-                }
+                        img {
+                          border: 0;
+                        }
 
-                ul {
-                  list-style: none;
-                } */
+                        ul {
+                          list-style: none;
+                        } */
 
         /* .center {
-                  width: 1170px;
-                  margin: 20px auto 0;
-                } */
+                          width: 1170px;
+                          margin: 20px auto 0;
+                        } */
 
 
         :before,
@@ -248,47 +248,47 @@
         }
 
         /* .btn {
-            margin: 30px 15px;
-            background: #7ce3ff;
-            padding: 10px 25px;
-            border-radius: 3px;
-            border: 1px solid #7ce3ff;
-            font-weight: bold;
-            font-family: Montserrat;
-            cursor: pointer;
-            color: #222;
-            transition: 0.2s;
-        } */
+                    margin: 30px 15px;
+                    background: #7ce3ff;
+                    padding: 10px 25px;
+                    border-radius: 3px;
+                    border: 1px solid #7ce3ff;
+                    font-weight: bold;
+                    font-family: Montserrat;
+                    cursor: pointer;
+                    color: #222;
+                    transition: 0.2s;
+                } */
 
         /* .btn:last-of-type {
-            background: transparent;
-            border-color: #7ce3ff;
-            color: #7ce3ff;
-        }
+                    background: transparent;
+                    border-color: #7ce3ff;
+                    color: #7ce3ff;
+                }
 
-        .btn:hover {
-            background: #7ce3ff;
-            color: #222;
-        } */
+                .btn:hover {
+                    background: #7ce3ff;
+                    color: #222;
+                } */
 
         /* .icons {
-            width: 180px;
-            margin: 0 auto 10px;
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-        }
+                    width: 180px;
+                    margin: 0 auto 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 15px;
+                }
 
-        .icons i {
-            cursor: pointer;
-            padding: 5px;
-            font-size: 18px;
-            transition: 0.2s;
-        }
+                .icons i {
+                    cursor: pointer;
+                    padding: 5px;
+                    font-size: 18px;
+                    transition: 0.2s;
+                }
 
-        .icons i:hover {
-            color: #7ce3ff;
-        } */
+                .icons i:hover {
+                    color: #7ce3ff;
+                } */
 
         .pricing-pg .item {
             padding: 45px;
@@ -317,30 +317,13 @@
 
 @section('content')
 
-
-
-
     <div class="container">
         <div class="section-padding text-secondary text-center">
-
-
-
             <div class="">
-                {{-- <div class="d-flex justify-content-center">
-                    <div class="holder">
-                        <div class="candle">
-                            <div class="blinking-glow"></div>
-                            <div class="thread"></div>
-                            <div class="glow"></div>
-                            <div class="flame"></div>
-                        </div>
-                    </div>
-                </div> --}}
+
                 <h4>
                     <span class="sub-color inline">Az irányítópultban</span>
                 </h4>
-
-                {{-- <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1> --}}
                 <div class="col-lg-6 mx-auto">
                     <p class="fs-5 mt-4 mb-4">
                         szerkesztheti a meglévő emlékoldalakat és új oldalakat adhat hozzá elhunyt szeretteinek.
@@ -349,7 +332,6 @@
             </div>
         </div>
     </div>
-
 
     <section class="pricing-pg mb-100">
         <div class="container">
@@ -378,11 +360,12 @@
                                         <span>Megnyitom</span>
                                     </div>
                                 </a>
-                                <form action="{{ route('memorial.destroy', $memorial->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('memorial.destroy', $memorial->id) }}" method="POST"
+                                    class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="butn butn-md butn-bord butn-rounded mt-30 mb-10" 
-                                            onclick="return confirm('Biztosan törölni szeretné?')">
+                                    <button type="submit" class="butn butn-md butn-bord butn-rounded mt-30 mb-10"
+                                        onclick="return confirm('Biztosan törölni szeretné?')">
                                         <div class="d-flex align-items-center">
                                             <span>Törlés</span>
                                         </div>
@@ -442,52 +425,6 @@
             </div>
         </div>
     </section>
-
-
-    {{-- <div class="container">
-
-
-
-
-        <div class="row d-flex justify-content-center">
-
-
-            <div class="col-12 p-3">
-                @foreach ($memorials as $memorial)
-
-                    <div class="card-memorial mb-60">
-                        <div class="cover-photo">
-                            <img src="{{ asset('images/memorials/' . $memorial->id . '/' . $memorial->photo) }}" class="profile">
-                        </div>
-                        <h3 class="profile-name">{{ $memorial->name }}</h3>
-                        <a href="#" class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
-                            <div class="d-flex align-items-center">
-                                <span>Szerkesztes</span>
-                            </div>
-                        </a>
-                        <a href="{{ route('memorial.show', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
-                            <div class="d-flex align-items-center">
-                                <span>Megnyitom</span>
-                            </div>
-                        </a>
-                        <div class="icons">
-                            <i class="fa-brands fa-linkedin"></i>
-                            <i class="fa-brands fa-github"></i>
-                            <i class="fa-brands fa-youtube"></i>
-                            <i class="fa-brands fa-twitter"></i>
-                        </div>
-                    </div>
-                @endforeach
-            
-
-            </div>
-
-
-
-        </div>
-    </div> --}}
-
-
 
     </html>
 

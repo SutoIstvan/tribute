@@ -7,8 +7,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="emlékoldal, virtuális emlékmű, elhunytak emléke, emlékmű online, emlékhely, MBook, mbook, mbook.hu">
-    <meta name="description" content="mbook.hu mbook – online emlékoldalak szeretteik emlékének megörökítésére. Készítsen virtuális emlékműveket, ossza meg emlékeit és fotóit.">
+    <meta name="keywords"
+        content="emlékoldal, virtuális emlékmű, elhunytak emléke, emlékmű online, emlékhely, MBook, mbook, mbook.hu">
+    <meta name="description"
+        content="mbook.hu mbook – online emlékoldalak szeretteik emlékének megörökítésére. Készítsen virtuális emlékműveket, ossza meg emlékeit és fotóit.">
 
     <link rel="canonical" href="{{ url()->current() }}">
 
@@ -29,13 +31,15 @@
     <link rel="stylesheet" href="{{ asset('assets/css/home7-style.css') }}">
 
     <!-- CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
-<!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<!-- Для локализации на венгерский -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.hu.min.js"></script>
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <!-- Для локализации на венгерский -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.hu.min.js">
+    </script>
 
     @yield('css')
 </head>
@@ -76,7 +80,7 @@
 
     <!-- ==================== Start Navbar ==================== -->
 
-    @include('layouts.nav')
+    @include('layouts.partials.nav')
 
     <!-- ==================== End Navbar ==================== -->
 
@@ -92,7 +96,7 @@
 
             <!-- ==================== Start Footer ==================== -->
 
-            @include('layouts.footer')
+            @include('layouts.partials.footer')
 
             <!-- ==================== End Footer ==================== -->
 
@@ -120,7 +124,7 @@
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
 
     @yield('js')
-    
+
 </body>
 
 </html>

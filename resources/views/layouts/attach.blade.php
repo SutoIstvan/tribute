@@ -7,8 +7,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="emlékoldal, virtuális emlékmű, elhunytak emléke, emlékmű online, emlékhely, MBook, mbook, mbook.hu">
-    <meta name="description" content="mbook.hu mbook – online emlékoldalak szeretteik emlékének megörökítésére. Készítsen virtuális emlékműveket, ossza meg emlékeit és fotóit.">
+    <meta name="keywords"
+        content="emlékoldal, virtuális emlékmű, elhunytak emléke, emlékmű online, emlékhely, MBook, mbook, mbook.hu">
+    <meta name="description"
+        content="mbook.hu mbook – online emlékoldalak szeretteik emlékének megörökítésére. Készítsen virtuális emlékműveket, ossza meg emlékeit és fotóit.">
 
 
     <!-- Title  -->
@@ -27,28 +29,18 @@
     <link rel="stylesheet" href="{{ asset('assets/common/css/common_style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/home7-style.css') }}">
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"
+        integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA=="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css"
+        integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg=="
+        crossorigin="anonymous" />
 
-<!-- Bootstrap CSS -->
-{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
-
-<!-- jQuery -->
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-
-<!-- Bootstrap JS -->
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> --}}
-
-
-{{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
-<link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" /> --}}
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA==" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg==" crossorigin="anonymous" />
-
-
-@yield('css')
+    @yield('css')
 </head>
 
 <body>
@@ -87,8 +79,111 @@
 
     <!-- ==================== Start Navbar ==================== -->
 
-    @include('layouts.navattach')
-
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+    
+            <!-- Logo -->
+            <a class="logo" href="{{ route('welcome') }}">
+                <img src="{{ asset('assets/imgs/logo-mbook.png') }}" alt="logo" style="height: 18px;">
+            </a>
+    
+            <div class="topnav d-flex align-items-center">
+                @guest
+                    {{-- Показываем только кнопку входа для гостей --}}
+                    <a href="{{ route('login') }}" class="butn butn-rounded">
+                        <div class="d-flex align-items-center">
+                            <span>{{ __('Login') }}</span>
+                            <span class="icon ml-10">
+                                <img src="assets/common/imgs/icons/arrow-top-right.svg" alt="">
+                            </span>
+                        </div>
+                    </a>
+                @else
+                    {{-- Показываем кнопки профиля и выхода для авторизованных пользователей --}}
+                    <div class="text-end me-2 d-none d-sm-block">
+                        <button type="button" class="butn butn-rounded" style="background-color: #0e0f11; color:#e9e9e9"
+                            onclick="window.location.href='{{ route('profile.edit') }}'">
+                            {{ __('Profile') }}
+                        </button>
+                    </div>
+    
+                    <div class="text-end d-none d-sm-block">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="button" class="butn butn-rounded" style="background-color: #e9e9e9"
+                                onclick="event.preventDefault(); this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </button>
+                        </form>
+                    </div>
+                @endguest
+    
+                <div class="menu-icon cursor-pointer d-md-none">
+                    <span class="icon ti-align-right"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="hamenu">
+        <div class="close-menu cursor-pointer ti-close"></div>
+        <div class="container-fluid rest d-flex">
+            <div class="menu-links">
+                <ul class="main-menu rest">
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text"
+                                    data-text="Címlap">Címlap</span></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text"
+                                    data-text="Életrajz">Életrajz</span></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text"
+                                    data-text="Fényképek">Fényképek</span></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text" data-text="Videó">Videó</span></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text"
+                                    data-text="Hozzászólások">Hozzászólások</span></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="cont-info valign">
+                <div class="text-center full-width">
+                    <div class="logo">
+                        <img src="{{ asset('assets/imgs/logo-mbook.png') }}" alt="">
+                    </div>
+                    <div class="social-icon mt-40">
+                        <a href="#"> <i class="fab fa-facebook-f"></i> </a>
+                        <a href="#"> <i class="fab fa-x-twitter"></i> </a>
+                        <a href="#"> <i class="fab fa-linkedin-in"></i> </a>
+                        <a href="#"> <i class="fab fa-instagram"></i> </a>
+                    </div>
+                    <div class="item mt-30">
+                        <h5>Magyarorszag <br> Budapest, Madar utca 21</h5>
+                    </div>
+                    <div class="item mt-10">
+                        <h5><a href="#0">info@tributehub.eu</a></h5>
+                        <h5 class="underline"><a href="#0">+36 841 25 69</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- ==================== End Navbar ==================== -->
 
     <div id="smooth-wrapper">
@@ -111,10 +206,6 @@
 
     </div>
 
-    <!-- jQuery -->
-    {{-- <script src="{{ asset('assets/common/js/lib/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('assets/common/js/lib/jquery-migrate-3.4.0.min.js') }}"></script> --}}
-
     <!-- plugins -->
     <script src="{{ asset('assets/common/js/lib/plugins.js') }}"></script>
 
@@ -131,7 +222,7 @@
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
 
     @yield('js')
-    
+
 </body>
 
 </html>
