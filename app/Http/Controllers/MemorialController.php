@@ -38,10 +38,10 @@ class MemorialController extends Controller
     }
     
 
-    public function showall()
+    public function codelist()
     {
         $memorials = QrCodes::all();
-        return view('memorial.showall', compact('memorials'));
+        return view('codelist', compact('memorials'));
     }
 
     public function saveMemorial(Request $request)

@@ -13,7 +13,7 @@
                     <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}" href="{{ route('welcome') }}">Címlap</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('memorial.showall') ? 'active' : '' }}" href="{{ route('memorial.showall') }}">Qr code</a>
+                    <a class="nav-link {{ request()->routeIs('memorial.codelist') ? 'active' : '' }}" href="{{ route('memorial.codelist') }}">Qr code list</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('price') ? 'active' : '' }}" href="{{ route('price') }}">Árak</a>

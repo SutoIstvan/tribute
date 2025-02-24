@@ -7,13 +7,9 @@ use App\Http\Controllers\MemorialController;
 use App\Http\Controllers\QrCodeController;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\Request;
-use App\Models\Memorial;
 use App\Models\QrCodes;
-use App\Models\User;
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,7 +29,7 @@ Route::post('/run-seed', function () {
 })->name('run.seed');
 
 
-Route::get('/memorials', [MemorialController::class, 'showall'])->name('memorial.showall');
+Route::get('/memorials', [MemorialController::class, 'codelist'])->name('memorial.codelist');
 
 Route::post('/images/store', [ImageController::class, 'store'])->name('image.store');
 
