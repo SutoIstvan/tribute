@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.memorial')
 
 @section('title', $memorial->name . ' - mbook.hu')
 
@@ -95,12 +95,12 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="text-center">
                 <h7>
-                    {{ Str::limit($memorial->biography, 300) }}
+                    {{ Str::limit($memorial->biography, 800) }}
                 </h7>
             </div>
-            @if (strlen($memorial->biography) > 300)
+            @if (strlen($memorial->biography) > 800)
                 <div class="text-center mt-80">
                     <a href="#" class="butn butn-md butn-bord butn-rounded">
                         <div class="d-flex align-items-center">
@@ -162,8 +162,7 @@
                             <div class="items col-lg-6 order-md-2">
                                 <div class="item">
                                     <div class="img">
-                                        <img src="{{ asset('storage/' . $image->image_path) }}"
-                                            alt="Изображение мемориала">
+                                        <img src="{{ asset('storage/' . $image->image_path) }}">
                                     </div>
                                     <div class="cont mt-30">
                                         <div class="info sub-color mb-10">
@@ -183,12 +182,14 @@
 
 
                     <div class="items col-lg-6 order-md-2">
-                        <a href="#" class="crv-butn mt-100">
+                        <a href="#" class="">
                             <div class="d-flex">
-                                <span class="text">Tekintse meg az összes fényképet</span>
-                                <span class="icon">
-                                    <img src="assets/common/imgs/icons/arrow-top-right.svg" alt="">
-                                </span>
+                                <a href="{{ route('comments.create', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded">
+                                    <div class="d-flex align-items-center">
+                                        <span>Tekintse meg az összes fényképet</span>
+                                        <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
+                                    </div>
+                                </a>
                             </div>
                         </a>
                     </div>
@@ -197,7 +198,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- ==================== Start Intro-vid ==================== -->
     @if (!empty($memorial->video))
@@ -301,12 +301,23 @@
 
             <div class="text-center mt-40">
 
-                <a href="{{ route('comments.create', $memorial->id) }}"
-                    class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
-                    <div class="d-flex align-items-center">
-                        <span>Szólj hozzá</span>
-                    </div>
-                </a>
+                <div class="text-center mt-80">
+                    <a href="{{ route('comments.create', $memorial->id) }}" class="butn butn-md butn-bord butn-rounded">
+                        <div class="d-flex align-items-center">
+                            <span>Szólj hozzá</span>
+                            <span class="icon pe-7s-angle-right ml-10 fz-30"></span>
+                        </div>
+                    </a>
+                    <a href="{{ route('comments.create', $memorial->id) }}"
+                        class="butn butn-md butn-bord butn-rounded me-3 mt-30 mb-10">
+                        <div class="d-flex align-items-center">
+                            <span>{{ $memorial->comments()->count() }}</span>
+                            <span class="icon pe-7s-chat ml-10 fz-30"></span>
+                        </div>
+                    </a>
+                </div>
+
+
             </div>
 
         </div>

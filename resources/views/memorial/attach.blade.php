@@ -416,17 +416,21 @@
             </div>
         </div>
     </div>
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-10 col-md-10 p-4">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
         </div>
-    @endif
-
+    </div>
 
 
     <form action="{{ route('memorial.save') }}" method="POST" enctype="multipart/form-data" id="form">
@@ -449,7 +453,8 @@
                                 <label for="fullName" class="form-label text-white">Teljes név</label>
                                 <input name="name" type="text"
                                     class="form-control bg-dark text-white border-secondary py-2" id="fullName"
-                                    placeholder="Teljes név">
+                                    placeholder="Teljes név"
+                                    value="{{ old('name')}}">
                             </div>
                             {{-- <div class="col-12 col-md-6 mb-3">
                                 <label for="birth_date" class="form-label text-white">Születési dátum</label>
@@ -471,6 +476,7 @@
 
                                     <div class="input-group date" id="datetimepicker10" data-target-input="nearest">
                                         <input name="birth_date" type="text"
+                                            value="{{ old('birth_date')}}"
                                             class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker"
                                             data-target="#datetimepicker10" placeholder="éééé-hh-nn" />
                                         <div class="input-group-append" data-target="#datetimepicker10"
@@ -488,6 +494,7 @@
 
                                     <div class="input-group date" id="datetimepicker11" data-target-input="nearest">
                                         <input name="death_date" type="text"
+                                            value="{{ old('death_date')}}"
                                             class="form-control datetimepicker-input bg-dark text-white border-secondary py-2 datepicker"
                                             data-target="#datetimepicker11" placeholder="éééé-hh-nn" />
                                         <div class="input-group-append" data-target="#datetimepicker11"
@@ -571,7 +578,7 @@
                         <div class="row">
                             <div class="mt-30">
                                 <label for="biography" class="form-label text-white">Életrajz</label>
-                                <textarea name="biography" class="form-control bg-dark text-white border-secondary" id="biography" rows="12"></textarea>
+                                <textarea name="biography" class="form-control bg-dark text-white border-secondary" id="biography" rows="12">{{ old('biography')}}</textarea>
                             </div>
                         </div>
                     </div>
