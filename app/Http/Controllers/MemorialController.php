@@ -451,7 +451,7 @@ class MemorialController extends Controller
         );
 
         // Обновляем мемориал с путем к QR-коду
-        $memorial->update(['qr_code' => $filePath]);
+        $memorial->update(['qr_code' => $token]);
 
         // Очищаем память
         $image->clear();
