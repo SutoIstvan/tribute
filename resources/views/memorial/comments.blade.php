@@ -252,7 +252,7 @@
     </style>
 @endsection
 
-@section('title', 'Képek szerkesztése - mbook.hu')
+@section('title', 'Hozzászólások - mbook.hu')
 
 @section('content')
 <div class="container mx-auto px-4 py-8 section-padding">

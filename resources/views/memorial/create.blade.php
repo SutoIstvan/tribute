@@ -402,10 +402,10 @@
                     </div>
                 </div>
                 <h4>
-                    <span class="sub-color inline">Köszönjük, hogy minket választott.</span>
+                    <span class="sub-color inline">Új emlékoldal hozzáadása.</span>
                 </h4>
 
-                <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1>
+                {{-- <h1 class="display-5 fw-bold text-white mt-15">Fogadja őszinte részvétünket a veszteségért.</h1> --}}
                 <div class="col-lg-6 mx-auto">
                     <p class="fs-5 mt-4 mb-4">
                         Az alábbiakban rögzítheti az elhunyt adatait, amelyeket később bármikor módosíthat vagy
