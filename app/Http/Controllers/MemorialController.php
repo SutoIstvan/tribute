@@ -369,7 +369,7 @@ class MemorialController extends Controller
         $qrCode->update([
             'memorial_id' => $memorial->id,
             'status' => 'free',
-            'qr_code' => "qrcode/{$memorial->id}.png",
+            'qr_code' => "qrcodes/{$memorial->id}.png",
         ]);
 
         return redirect()->route('dashboard', ['id' => $memorial->id])

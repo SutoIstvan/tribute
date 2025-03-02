@@ -11,6 +11,7 @@ class QrCodes extends Model
     protected $fillable = [
         'token',
         'qr_code',
+        'status',
         'memorial_id',
     ];
 }
