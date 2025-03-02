@@ -366,7 +366,11 @@ class MemorialController extends Controller
         $this->generateQRCode($token, $memorial);
 
         // Обновляем связь QR-кода с мемориалом
-        $qrCode->update(['memorial_id' => $memorial->id]);
+        $qrCode->update([
+            'memorial_id' => $memorial->id,
+            'status' => 'free',
+            'qr_code' => "qrcode/{$memorial->id}.png",
+        ]);
 
         return redirect()->route('dashboard', ['id' => $memorial->id])
                          ->with('success', 'Мемориал успешно создан и QR-код сгенерирован');
