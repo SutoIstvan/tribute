@@ -70,6 +70,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/memorial/{slug}/comments/create', [CommentController::class, 'create'])->name('comments.create');
 
+
+    Route::post('/memorial/create-with-qr', [MemorialController::class, 'saveMemorialWithQR'])->name('memorial.create-with-qr');
+    Route::get('/dashboard/memorial/create', [MemorialController::class, 'create'])->name('memorial.create');
+
 });
 
 Route::middleware('auth')->group(function () {

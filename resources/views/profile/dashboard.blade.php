@@ -389,7 +389,7 @@
                                 </div>
 
                                 <div class="text-center mt-40">
-                                    <a href="#" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
+                                    <a href="{{ route('memorial.create') }}" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                         <div class="d-flex align-items-center">
                                             <span>Új emlékoldal hozzáadása</span>
                                         </div>
@@ -409,7 +409,7 @@
 
                             <div class="text-center mt-40">
 
-                                <a href="#" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
+                                <a href="{{ route('memorial.create') }}" class="butn butn-md butn-bord butn-rounded mt-30 mb-10">
                                     <div class="d-flex align-items-center">
                                         <span>Új emlékoldal hozzáadása</span>
                                     </div>
