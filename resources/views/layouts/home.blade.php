@@ -22,13 +22,20 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
 
     <!-- Plugins -->
     <link rel="stylesheet" href="{{ asset('assets/common/css/plugins.css') }}">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css">
+
+    <link rel="stylesheet" href="{{ asset('assets/home/css/effect-material.min.css') }}">
+
     <!-- Core Style Css -->
     <link rel="stylesheet" href="{{ asset('assets/common/css/common_style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/home7-style.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/home/css/home12-style.css') }}">
 
     <!-- CSS -->
     <link rel="stylesheet"
@@ -80,7 +87,112 @@
 
     <!-- ==================== Start Navbar ==================== -->
 
-    @include('layouts.partials.nav')
+    {{-- @include('layouts.partials.nav') --}}
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+
+            <!-- Logo -->
+            <a class="logo" href="#">
+                <img src="assets/imgs/logo-mbook.png" style="height: 19px;" alt="logo">
+            </a>
+
+            <!-- navbar links -->
+
+            <div class="topnav d-flex align-items-center">
+                <!-- <a href="../inner_pages/contact.html" class="butn butn-rounded">
+                    <div class="d-flex align-items-center">
+                        <span>Start Project</span>
+                        <span class="icon ml-10">
+                            <img src="../common/imgs/icons/arrow-top-right.svg" alt="">
+                        </span>
+                    </div>
+                </a> -->
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Címlap</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Árak</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Kapcsolatok</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Bejelentkezés</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-icon cursor-pointer " >
+                    <span class="icon ti-align-right d-block d-lg-none" ></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hamenu">
+        <div class="close-menu cursor-pointer ti-close"></div>
+        <div class="container-fluid rest d-flex">
+            <div class="menu-links">
+                <ul class="main-menu rest">
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text"
+                                    data-text="Címlap">Címlap</span>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text"
+                                    data-text="Árak">Árak</span>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text"
+                                    data-text="Kapcsolatok">Kapcsolatok</span>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="o-hidden">
+                            <a href="#" class="link"><span class="fill-text"
+                                    data-text="Bejelentkezés">Bejelentkezés</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="cont-info valign">
+                <div class="text-center full-width">
+                    <div class="logo">
+                        <img src="../common/imgs/Logo-light.svg" alt="">
+                    </div>
+                    <div class="social-icon mt-40">
+                        <a href="#"> <i class="fab fa-facebook-f"></i> </a>
+                        <a href="#"> <i class="fab fa-x-twitter"></i> </a>
+                        <a href="#"> <i class="fab fa-linkedin-in"></i> </a>
+                        <a href="#"> <i class="fab fa-instagram"></i> </a>
+                    </div>
+                    <div class="item mt-30">
+                        <h5>Magyaroszag, <br> Paks</h5>
+                    </div>
+                    <div class="item mt-10">
+                        <h5><a href="#0">Hello@email.com</a></h5>
+                        <h5 class="underline"><a href="#0">+ 36 20 41 25 69</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ==================== End Navbar ==================== -->
 
@@ -96,7 +208,41 @@
 
             <!-- ==================== Start Footer ==================== -->
 
-            @include('layouts.partials.footer')
+            {{-- @include('layouts.partials.footer') --}}
+            <footer class="footer-mp  pb-0">
+                <div class="container">
+                    <div class="row">
+
+
+                    <div class="sub-footer pt-30 pb-30 mt-30 ">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="copy sub-color md-mb30">
+                                    <p>© 2024 Mbook.hu</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 d-flex justify-content-end">
+                                <div class="ml-auto ml-none">
+                                    <div class="social-icon">
+                                        <a href="#0">
+                                            <i class="fa-brands fa-x-twitter"></i>
+                                        </a>
+                                        <a href="#0">
+                                            <i class="fa-brands fa-instagram"></i>
+                                        </a>
+                                        <a href="#0">
+                                            <i class="fa-brands fa-dribbble"></i>
+                                        </a>
+                                        <a href="#0">
+                                            <i class="fa-brands fa-behance"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
 
             <!-- ==================== End Footer ==================== -->
 
